@@ -26,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${raleway.variable} antialiased`}>
+      <body
+        className={`${roboto.variable} ${raleway.variable} h-screen antialiased`}
+      >
         {children}
       </body>
     </html>
