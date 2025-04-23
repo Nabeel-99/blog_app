@@ -26,10 +26,7 @@ const Navbar = async () => {
             <Link href={"/"}>Home</Link>
           </li>
           <li>
-            <Link href={"/"}>Blogs</Link>
-          </li>
-          <li>
-            <Link href={"/"}>About</Link>
+            <Link href={"/blogs"}>Blogs</Link>
           </li>
         </ul>
         <Button className="bg-btn text-white max-sm:hidden cursor-pointer">

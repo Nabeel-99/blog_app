@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { HiOutlineBars3CenterLeft } from "react-icons/hi2";
 import { FaXmark } from "react-icons/fa6";
@@ -10,6 +10,18 @@ const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
   return (
     <>
       <Button onClick={openMenu} className="bg-white border border-[#dadada]">
@@ -28,13 +40,8 @@ const BurgerMenu = () => {
               </Link>
             </li>
             <li>
-              <Link onClick={closeMenu} href={"/"}>
+              <Link onClick={closeMenu} href={"/blogs"}>
                 Blogs
-              </Link>
-            </li>
-            <li>
-              <Link onClick={closeMenu} href={"/"}>
-                About
               </Link>
             </li>
           </ul>
