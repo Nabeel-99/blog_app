@@ -22,10 +22,13 @@ button {
 }
 @layer utilities {
   .bg-btn {
-    @apply bg-[#7c4ee4] hover:bg-[#6d3ecf] dark:bg-[#6d3ecf] dark:hover:bg-[#5f2ecb];
+    @apply bg-[#7c4ee4] hover:bg-[#6d3ecf] dark:bg-[#6d3ecf] text-white dark:hover:bg-[#5f2ecb];
   }
   .bg-background {
     @apply bg-[#7c4ee4];
+  }
+  .cloud-btn {
+    @apply text-nowrap border border-[#464646] hover:bg-[#131313] hover:text-white transition-all duration-300 py-2 px-4 rounded-lg;
   }
 }
 .markdown > * {

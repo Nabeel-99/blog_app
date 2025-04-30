@@ -16,10 +16,11 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import BurgerMenu from "./BurgerMenu";
 const Navbar = async () => {
   const session = await auth();
+  const { role } = session?.user || {};
 
   return (
     <div className="flex  items-center px-4 lg:px-20 text-lg pt-4 pb-3 justify-between">
-      <div>Logo</div>
+      <Link href={"/"}>Logo</Link>
       <div className="flex items-center max-sm:gap-5  gap-6">
         <ul className="flex items-center max-sm:hidden gap-6">
           <li>
@@ -29,9 +30,19 @@ const Navbar = async () => {
             <Link href={"/blogs"}>Blogs</Link>
           </li>
         </ul>
-        <Button className="bg-btn text-white max-sm:hidden cursor-pointer">
-          Subscribe
-        </Button>
+        {role === "ADMIN" && (
+          <Link className="" href={"/blogs/create"}>
+            <Button className="bg-btn text-white max-sm:hidden cursor-pointer">
+              Create
+            </Button>
+          </Link>
+        )}
+        {role !== "ADMIN" && (
+          <Button className="bg-btn text-white max-sm:hidden cursor-pointer">
+            Subscribe
+          </Button>
+        )}
+
         <button title="Search cursor-pointer">
           <CiSearch className="cursor-pointer text-[#5d5d5d] max-sm:size-8 size-6" />
         </button>
