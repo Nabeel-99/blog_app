@@ -43,7 +43,7 @@ const BlogForm = () => {
     formData.append("content", data.content);
     setLoading(true);
     try {
-      const response = await axios.post("/api/posts", formData);
+      const response = await axios.post("/api/blogs/posts", formData);
       if (response.status === 201) {
         form.reset();
         toast.success("Blog created successfully");
@@ -172,7 +172,7 @@ const BlogForm = () => {
           type="submit"
           disabled={loading}
           className={`${
-            loading ? "cursor-not-allowed bg-[#7c4ee4]" : "bg-btn"
+            loading ? "cursor-not-allowed bg-[#7c4ee4] text-white" : "bg-btn"
           }  py-6`}
         >
           Submit

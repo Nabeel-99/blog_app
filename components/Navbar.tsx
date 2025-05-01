@@ -11,18 +11,18 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import BurgerMenu from "./BurgerMenu";
 import Logo from "../public/vercel.svg";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { Input } from "./ui/input";
 import Form from "next/form";
 import SearchForm from "./SearchForm";
@@ -110,11 +110,21 @@ const Navbar = async () => {
                   {session.user?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="w-full">
-                  <Link href="/profile">Profile</Link>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/profile"
+                    className=" px-4 py-1 rounded-xl hover:bg-[#e8e8e8] w-full"
+                  >
+                    Profile
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/settings">Settings</Link>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/settings"
+                    className=" px-4 py-1 rounded-xl hover:bg-[#e8e8e8] w-full"
+                  >
+                    Settings
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="w-full">
@@ -123,8 +133,12 @@ const Navbar = async () => {
                       "use server";
                       await signOut();
                     }}
+                    className="w-full flex justify-start"
                   >
-                    <button type="submit" className="w-full">
+                    <button
+                      type="submit"
+                      className="w-full text-left px-4 py-1 rounded-xl hover:bg-[#e8e8e8]"
+                    >
                       Logout
                     </button>
                   </form>

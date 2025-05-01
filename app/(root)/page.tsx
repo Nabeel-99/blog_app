@@ -65,7 +65,7 @@ const Page = async () => {
               className="w-full max-sm:h-[250px] border border-[#dadada] max-sm:max-h-[400px] lg:h-[600px] object-contain rounded-2xl"
             />
             <div className="lg:absolute -bottom-32 right-0">
-              <div className="lg:border lg:border-[#dadada] lg:shadow-sm lg:bg-white max-w-4xl rounded-xl p-6 flex flex-col gap-4">
+              <div className="lg:border lg:border-[#dadada] lg:shadow-sm lg:bg-white lg:w-3xl max-w-4xl rounded-xl p-6 flex flex-col gap-4">
                 <div className="flex gap-4 items-center">
                   <p className="uppercase font-bold">
                     {featuredPost?.category}

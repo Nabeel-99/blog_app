@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import slugify from "slugify";
+import { getToken } from "next-auth/jwt";
 // cloudinary config
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -10,8 +11,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 export async function POST(req: NextRequest) {
-  const session = await auth();
-  if (!session || session.user.role !== "ADMIN") {
+  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  if (!token || token.role !== "ADMIN") {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
       );
     }
     let coverImageUrl: string = "";
+    let coverImageId: string = "";
     if (coverImage) {
       const buffer = Buffer.from(await coverImage.arrayBuffer());
       const uploadResult = await new Promise((resolve, reject) => {
@@ -47,6 +49,7 @@ export async function POST(req: NextRequest) {
           .end(buffer);
       });
       coverImageUrl = (uploadResult as any).secure_url;
+      coverImageId = (uploadResult as any).public_id;
     }
 
     const post = await prisma.post.create({
@@ -55,9 +58,10 @@ export async function POST(req: NextRequest) {
         description,
         category,
         coverImage: coverImageUrl,
+        coverImageId: coverImageId,
         content,
         slug,
-        authorId: session.user.id,
+        authorId: token.id,
       },
     });
     return NextResponse.json(post, { status: 201 });

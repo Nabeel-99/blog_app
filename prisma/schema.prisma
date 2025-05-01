@@ -30,6 +30,7 @@ model Post {
   description String
   category String?
   coverImage String
+  coverImageId String
   content String
   views Int? @default(0)
   slug String @unique

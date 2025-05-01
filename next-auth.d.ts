@@ -18,3 +18,10 @@ declare module "next-auth" {
     image: string;
   }
 }
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    role: string;
+    id: string;
+  }
+}
