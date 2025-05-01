@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Raleway, Roboto } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${roboto.variable} ${raleway.variable} h-screen antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

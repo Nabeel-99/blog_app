@@ -2324,10 +2324,12 @@ export namespace Prisma {
 
   export type PostAvgAggregateOutputType = {
     id: number | null
+    views: number | null
   }
 
   export type PostSumAggregateOutputType = {
     id: number | null
+    views: number | null
   }
 
   export type PostMinAggregateOutputType = {
@@ -2337,6 +2339,7 @@ export namespace Prisma {
     category: string | null
     coverImage: string | null
     content: string | null
+    views: number | null
     slug: string | null
     createdAt: Date | null
     authorId: string | null
@@ -2349,6 +2352,7 @@ export namespace Prisma {
     category: string | null
     coverImage: string | null
     content: string | null
+    views: number | null
     slug: string | null
     createdAt: Date | null
     authorId: string | null
@@ -2361,6 +2365,7 @@ export namespace Prisma {
     category: number
     coverImage: number
     content: number
+    views: number
     slug: number
     createdAt: number
     authorId: number
@@ -2370,10 +2375,12 @@ export namespace Prisma {
 
   export type PostAvgAggregateInputType = {
     id?: true
+    views?: true
   }
 
   export type PostSumAggregateInputType = {
     id?: true
+    views?: true
   }
 
   export type PostMinAggregateInputType = {
@@ -2383,6 +2390,7 @@ export namespace Prisma {
     category?: true
     coverImage?: true
     content?: true
+    views?: true
     slug?: true
     createdAt?: true
     authorId?: true
@@ -2395,6 +2403,7 @@ export namespace Prisma {
     category?: true
     coverImage?: true
     content?: true
+    views?: true
     slug?: true
     createdAt?: true
     authorId?: true
@@ -2407,6 +2416,7 @@ export namespace Prisma {
     category?: true
     coverImage?: true
     content?: true
+    views?: true
     slug?: true
     createdAt?: true
     authorId?: true
@@ -2506,6 +2516,7 @@ export namespace Prisma {
     category: string | null
     coverImage: string
     content: string
+    views: number | null
     slug: string
     createdAt: Date
     authorId: string
@@ -2537,6 +2548,7 @@ export namespace Prisma {
     category?: boolean
     coverImage?: boolean
     content?: boolean
+    views?: boolean
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
@@ -2552,6 +2564,7 @@ export namespace Prisma {
     category?: boolean
     coverImage?: boolean
     content?: boolean
+    views?: boolean
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
@@ -2565,6 +2578,7 @@ export namespace Prisma {
     category?: boolean
     coverImage?: boolean
     content?: boolean
+    views?: boolean
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
@@ -2578,12 +2592,13 @@ export namespace Prisma {
     category?: boolean
     coverImage?: boolean
     content?: boolean
+    views?: boolean
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "category" | "coverImage" | "content" | "slug" | "createdAt" | "authorId", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "category" | "coverImage" | "content" | "views" | "slug" | "createdAt" | "authorId", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     comments?: boolean | Post$commentsArgs<ExtArgs>
@@ -2609,6 +2624,7 @@ export namespace Prisma {
       category: string | null
       coverImage: string
       content: string
+      views: number | null
       slug: string
       createdAt: Date
       authorId: string
@@ -3043,6 +3059,7 @@ export namespace Prisma {
     readonly category: FieldRef<"Post", 'String'>
     readonly coverImage: FieldRef<"Post", 'String'>
     readonly content: FieldRef<"Post", 'String'>
+    readonly views: FieldRef<"Post", 'Int'>
     readonly slug: FieldRef<"Post", 'String'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly authorId: FieldRef<"Post", 'String'>
@@ -5623,6 +5640,7 @@ export namespace Prisma {
     category: 'category',
     coverImage: 'coverImage',
     content: 'content',
+    views: 'views',
     slug: 'slug',
     createdAt: 'createdAt',
     authorId: 'authorId'
@@ -5807,6 +5825,7 @@ export namespace Prisma {
     category?: StringNullableFilter<"Post"> | string | null
     coverImage?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    views?: IntNullableFilter<"Post"> | number | null
     slug?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     authorId?: StringFilter<"Post"> | string
@@ -5821,6 +5840,7 @@ export namespace Prisma {
     category?: SortOrderInput | SortOrder
     coverImage?: SortOrder
     content?: SortOrder
+    views?: SortOrderInput | SortOrder
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
@@ -5839,6 +5859,7 @@ export namespace Prisma {
     category?: StringNullableFilter<"Post"> | string | null
     coverImage?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    views?: IntNullableFilter<"Post"> | number | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     authorId?: StringFilter<"Post"> | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -5852,6 +5873,7 @@ export namespace Prisma {
     category?: SortOrderInput | SortOrder
     coverImage?: SortOrder
     content?: SortOrder
+    views?: SortOrderInput | SortOrder
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
@@ -5872,6 +5894,7 @@ export namespace Prisma {
     category?: StringNullableWithAggregatesFilter<"Post"> | string | null
     coverImage?: StringWithAggregatesFilter<"Post"> | string
     content?: StringWithAggregatesFilter<"Post"> | string
+    views?: IntNullableWithAggregatesFilter<"Post"> | number | null
     slug?: StringWithAggregatesFilter<"Post"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     authorId?: StringWithAggregatesFilter<"Post"> | string
@@ -6051,6 +6074,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
     author: UserCreateNestedOneWithoutPostsInput
@@ -6064,6 +6088,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
     authorId: string
@@ -6076,6 +6101,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -6089,6 +6115,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
@@ -6102,6 +6129,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
     authorId: string
@@ -6113,6 +6141,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6124,6 +6153,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
@@ -6345,6 +6375,17 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -6368,6 +6409,7 @@ export namespace Prisma {
     category?: SortOrder
     coverImage?: SortOrder
     content?: SortOrder
+    views?: SortOrder
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
@@ -6375,6 +6417,7 @@ export namespace Prisma {
 
   export type PostAvgOrderByAggregateInput = {
     id?: SortOrder
+    views?: SortOrder
   }
 
   export type PostMaxOrderByAggregateInput = {
@@ -6384,6 +6427,7 @@ export namespace Prisma {
     category?: SortOrder
     coverImage?: SortOrder
     content?: SortOrder
+    views?: SortOrder
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
@@ -6396,6 +6440,7 @@ export namespace Prisma {
     category?: SortOrder
     coverImage?: SortOrder
     content?: SortOrder
+    views?: SortOrder
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
@@ -6403,6 +6448,7 @@ export namespace Prisma {
 
   export type PostSumOrderByAggregateInput = {
     id?: SortOrder
+    views?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -6419,6 +6465,22 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -6610,6 +6672,14 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
     createMany?: CommentCreateManyPostInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -6810,6 +6880,33 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -6830,6 +6927,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -6842,6 +6940,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
@@ -6906,6 +7005,7 @@ export namespace Prisma {
     category?: StringNullableFilter<"Post"> | string | null
     coverImage?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    views?: IntNullableFilter<"Post"> | number | null
     slug?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     authorId?: StringFilter<"Post"> | string
@@ -7035,6 +7135,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
     author: UserCreateNestedOneWithoutPostsInput
@@ -7047,6 +7148,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
     authorId: string
@@ -7097,6 +7199,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -7109,6 +7212,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
@@ -7150,6 +7254,7 @@ export namespace Prisma {
     category?: string | null
     coverImage: string
     content: string
+    views?: number | null
     slug: string
     createdAt?: Date | string
   }
@@ -7167,6 +7272,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -7179,6 +7285,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
@@ -7191,6 +7298,7 @@ export namespace Prisma {
     category?: NullableStringFieldUpdateOperationsInput | string | null
     coverImage?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

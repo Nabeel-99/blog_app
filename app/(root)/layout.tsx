@@ -4,7 +4,7 @@ import React from "react";
 
 const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <main className="pb-10">
+    <main className="pb-10 w-full ">
       <Navbar />
       {children}
       <Footer />

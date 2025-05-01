@@ -16,12 +16,13 @@ import { blogPostSchema } from "@/lib/validation";
 import { z } from "zod";
 import { Textarea } from "./ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
-import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import slugify from "slugify";
-import prisma from "@/lib/prisma";
 import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 const BlogForm = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const form = useForm<z.infer<typeof blogPostSchema>>({
     resolver: zodResolver(blogPostSchema),
     defaultValues: {
@@ -34,24 +35,25 @@ const BlogForm = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof blogPostSchema>) => {
-    console.log(data);
-    const slug = slugify(data.title, { lower: true, strict: true });
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    if (data.category) formData.append("category", data.category);
+    formData.append("coverImage", data.coverImage);
+    formData.append("content", data.content);
+    setLoading(true);
     try {
-      const response = await axios.post(
-        "/api/posts",
-        {
-          ...data,
-          slug,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(response);
+      const response = await axios.post("/api/posts", formData);
+      if (response.status === 201) {
+        form.reset();
+        toast.success("Blog created successfully");
+        router.push(`/blogs/${response.data.slug}`);
+      }
     } catch (error) {
       console.log(error);
+      toast.error("Error creating blog post.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -166,7 +168,13 @@ const BlogForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-btn py-6">
+        <Button
+          type="submit"
+          disabled={loading}
+          className={`${
+            loading ? "cursor-not-allowed bg-[#7c4ee4]" : "bg-btn"
+          }  py-6`}
+        >
           Submit
         </Button>
       </form>

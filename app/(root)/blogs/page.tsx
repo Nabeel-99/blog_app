@@ -1,9 +1,12 @@
 import BlogCard from "@/components/BlogCard";
+import BlogCardSkeleton from "@/components/BlogCardSkeleton";
+import Blogs from "@/components/Blogs";
 import NewsLetter from "@/components/NewsLetter";
+import { Skeleton } from "@/components/ui/skeleton";
 import prisma from "@/lib/prisma";
-import React from "react";
+import React, { Suspense } from "react";
 
-const Page = () => {
+const Page = async () => {
   return (
     <>
       <div className="bg-[#f6f6f6]">
@@ -21,12 +24,10 @@ const Page = () => {
           </div>
         </section>
         <section>
-          <div className="px-4 lg:px-20 mt-14">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-20">
-              {Array.from({ length: 9 }).map((_, index) => (
-                <BlogCard key={index} />
-              ))}
-            </div>
+          <div className="lg:px-20 px-4 mt-10 2xl:container 2xl:w-full 2xl:mx-auto lg:mt-10">
+            <Suspense fallback={<BlogCardSkeleton />}>
+              <Blogs />
+            </Suspense>
           </div>
         </section>
         <section>

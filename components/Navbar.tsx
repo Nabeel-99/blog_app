@@ -14,13 +14,33 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import BurgerMenu from "./BurgerMenu";
+import Logo from "../public/vercel.svg";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import { Input } from "./ui/input";
+import Form from "next/form";
+import SearchForm from "./SearchForm";
 const Navbar = async () => {
   const session = await auth();
   const { role } = session?.user || {};
 
   return (
-    <div className="flex  items-center px-4 lg:px-20 text-lg pt-4 pb-3 justify-between">
-      <Link href={"/"}>Logo</Link>
+    <div className="flex  2xl:container 2xl:w-full 2xl:mx-auto  items-center px-4 lg:px-20 text-lg pt-4 pb-3 justify-between">
+      <Link href={"/"}>
+        <Image
+          src={Logo}
+          alt="logo"
+          width={50}
+          height={50}
+          className="bg-black w-[50px] h-[50px] p-4 rounded-full object-contain"
+        />
+      </Link>
       <div className="flex items-center max-sm:gap-5  gap-6">
         <ul className="flex items-center max-sm:hidden gap-6">
           <li>
@@ -42,10 +62,19 @@ const Navbar = async () => {
             Subscribe
           </Button>
         )}
-
-        <button title="Search cursor-pointer">
-          <CiSearch className="cursor-pointer text-[#5d5d5d] max-sm:size-8 size-6" />
-        </button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button title="Search cursor-pointer">
+              <CiSearch className="cursor-pointer text-[#5d5d5d] max-sm:size-8 size-6" />
+            </button>
+          </DialogTrigger>
+          <DialogContent className="bg-white  max-sm:max-w-[425px] md:max-w-2xl max-sm:top-6 top-20 max-sm:translate-y-1/2 md:translate-y-0">
+            <DialogHeader className="text-left">
+              <DialogTitle className="">Search Blogs</DialogTitle>
+            </DialogHeader>
+            <SearchForm />
+          </DialogContent>
+        </Dialog>
 
         {session && session.user ? (
           <>
@@ -81,17 +110,23 @@ const Navbar = async () => {
                   {session.user?.name}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuSeparator />
+                <DropdownMenuItem className="w-full">
+                  <Link href="/profile">Profile</Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
+                  <Link href="/settings">Settings</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="w-full">
                   <form
                     action={async () => {
                       "use server";
                       await signOut();
                     }}
                   >
-                    <button type="submit">Logout</button>
+                    <button type="submit" className="w-full">
+                      Logout
+                    </button>
                   </form>
                 </DropdownMenuItem>
               </DropdownMenuContent>
