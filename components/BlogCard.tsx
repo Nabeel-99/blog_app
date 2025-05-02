@@ -9,11 +9,11 @@ type BlogCardProps = {
 };
 const BlogCard = ({ post }: BlogCardProps) => {
   return (
-    <div className="flex flex-col max-sm:px-3 gap-4">
+    <div className="flex flex-col border border-[#dadada] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4">
       <img
         src={post.coverImage}
         alt="AI"
-        className="rounded-2xl h-[260px] lg:h-[360px] w-full object-contain"
+        className="rounded-2xl h-[260px]  lg:h-[300px] w-full object-cover border border-[#dadada]"
       />
       <div className="flex items-center justify-between ">
         <div className="flex items-center gap-4">

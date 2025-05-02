@@ -20,17 +20,30 @@ import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-const BlogForm = () => {
+import { Post } from "@/lib/generated/prisma";
+
+type BlogFormProps = {
+  post?: {
+    id: number;
+    title: string;
+    description: string;
+    category: string | null;
+    coverImage: string;
+    content: string;
+    slug: string;
+  };
+};
+const BlogForm = ({ post }: BlogFormProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof blogPostSchema>>({
     resolver: zodResolver(blogPostSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      category: "",
+      title: post?.title || "",
+      description: post?.description || "",
+      category: post?.category || "",
       coverImage: undefined,
-      content: "",
+      content: post?.content || "",
     },
   });
 
@@ -43,15 +56,21 @@ const BlogForm = () => {
     formData.append("content", data.content);
     setLoading(true);
     try {
-      const response = await axios.post("/api/blogs/posts", formData);
-      if (response.status === 201) {
+      const response = post
+        ? await axios.put(`/api/blogs/posts/${post.id}`, formData)
+        : await axios.post("/api/blogs/posts", formData);
+      if (response.status === 201 || response.status === 200) {
         form.reset();
-        toast.success("Blog created successfully");
+        toast.success(
+          post ? "Blog updated successfully" : "Blog created successfully"
+        );
         router.push(`/blogs/${response.data.slug}`);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error creating blog post.");
+      toast.error(
+        post ? "Error updating blog post." : "Error creating blog post."
+      );
     } finally {
       setLoading(false);
     }
@@ -121,11 +140,15 @@ const BlogForm = () => {
                     ref={ref}
                     className=""
                   />
-                  {form.watch("coverImage") && (
+                  {(form.watch("coverImage") || post?.coverImage) && (
                     <img
-                      src={URL.createObjectURL(
-                        form.watch("coverImage") as File
-                      )}
+                      src={
+                        form.watch("coverImage")
+                          ? URL.createObjectURL(
+                              form.watch("coverImage") as File
+                            )
+                          : post?.coverImage
+                      }
                       alt="Preview"
                       className="w-32 h-32 object-contain ml-2"
                     />
@@ -175,7 +198,7 @@ const BlogForm = () => {
             loading ? "cursor-not-allowed bg-[#7c4ee4] text-white" : "bg-btn"
           }  py-6`}
         >
-          Submit
+          {post ? "Update" : "Submit"}
         </Button>
       </form>
     </Form>

@@ -127,7 +127,7 @@ const Navbar = async () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="w-full">
+                <DropdownMenuItem asChild className="w-full">
                   <form
                     action={async () => {
                       "use server";
@@ -137,7 +137,7 @@ const Navbar = async () => {
                   >
                     <button
                       type="submit"
-                      className="w-full text-left px-4 py-1 rounded-xl hover:bg-[#e8e8e8]"
+                      className="w-full text-left px-2.5 py-1 rounded-xl hover:bg-[#e8e8e8]"
                     >
                       Logout
                     </button>

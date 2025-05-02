@@ -5,7 +5,6 @@ import { Button } from "./ui/button";
 
 const ProfileCard = async () => {
   const session = await auth();
-  console.log(session);
   return (
     <div className="flex flex-col lg:flex-row items-start  gap-6">
       <div className="flex gap-6  w-full">

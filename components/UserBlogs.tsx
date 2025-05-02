@@ -1,7 +1,9 @@
+"use client";
+
 import { Post } from "@/lib/generated/prisma";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { FaPencil } from "react-icons/fa6";
@@ -18,17 +20,27 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type UserBlogsProps = {
   post: Post;
 };
 const UserBlogs = ({ post }: UserBlogsProps) => {
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
   const handleDelete = async (id: number) => {
     try {
       const response = await axios.delete(`/api/blogs/posts/${id}`);
       console.log(response);
+      if (response.status === 200) {
+        toast.success("Blog deleted successfully");
+        router.push("/profile");
+        setOpen(false);
+      }
     } catch (error) {
       console.log(error);
+      toast.error("Error deleting blog post.");
     }
   };
 
@@ -60,16 +72,17 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
         </Button>
         <div className="flex items-center gap-2">
           <Link
-            href={"/"}
+            href={`/blogs/edit/${post.id}`}
             className="border rounded-lg px-2 py-2 text-gray-500
  border-[#dadada] hover:bg-black hover:text-white transition-all duration-300"
           >
             {" "}
             <FaPencil className="size-4 " />
           </Link>
-          <AlertDialog>
+          <AlertDialog open={open} onOpenChange={setOpen}>
             <AlertDialogTrigger asChild>
               <button
+                onClick={() => setOpen(true)}
                 className="border rounded-lg px-2 py-2 text-gray-500 border-[#dadada] hover:bg-black hover:text-white transition-all duration-300"
                 title="delete"
               >
@@ -88,9 +101,12 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
                 <AlertDialogCancel className="bg-black text-white hover:bg-black/90">
                   No
                 </AlertDialogCancel>
-                <AlertDialogAction className="border border-[#dadada] hover:bg-white/90">
+                <Button
+                  onClick={() => handleDelete(post.id)}
+                  className="border border-[#dadada] hover:bg-[#f0f0f0] px-4 py-2 rounded-md"
+                >
                   Yes
-                </AlertDialogAction>
+                </Button>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
