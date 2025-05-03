@@ -35,12 +35,12 @@ const Page = async () => {
             />
           </div>
           <div className="flex flex-col justify-between lg:w-1/2  xl:w-xl">
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col">
               <h1 className="text-xl mt-10 ">Featured Post</h1>
               <p className="text-3xl lg:text-5xl lg:leading-14 lg:mt-10 font-bold">
                 {featuredPost?.title}
               </p>
-              <p className="text-lg">{featuredPost?.description}</p>
+              <p className="text-lg mt-4">{featuredPost?.description}</p>
             </div>
 
             <Link href={`/blogs/${featuredPost?.slug}`}>
@@ -59,7 +59,7 @@ const Page = async () => {
         </div>
       </section>
       {/* random post section */}
-      <section>
+      {/* <section>
         <div className="px-4 pt-20 lg:px-20 2xl:container 2xl:w-full 2xl:mx-auto   lg:pt-30 ">
           <div className="lg:relative max-sm:border max-sm:border-[#cbcbcb]  max-sm:p-4 lg:h-[600px] max-sm:shadow-md rounded-2xl max-sm:flex max-sm:flex-col">
             <img
@@ -88,7 +88,7 @@ const Page = async () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Recent Posts */}
       <section>
         <div className="lg:px-20 flex flex-col gap-10 px-4 mt-10 2xl:container 2xl:w-full 2xl:mx-auto lg:mt-50">

@@ -13,19 +13,29 @@ const BlogCard = ({ post }: BlogCardProps) => {
       <img
         src={post.coverImage}
         alt="AI"
-        className="rounded-2xl h-[260px]  lg:h-[300px] w-full object-cover border border-[#dadada]"
+        className="rounded-2xl h-[260px]  lg:h-[200px] w-full object-cover border border-[#dadada]"
       />
       <div className="flex items-center justify-between ">
-        <div className="flex items-center gap-4">
-          {" "}
-          {post.category && (
-            <span className="font-bold uppercase">{post.category}</span>
-          )}
+        {" "}
+        {post.category.length > 0 && (
+          <div className="flex items-center text-sm">
+            <span className="text-white text-center px-2 py-1 rounded-xl bg-background">
+              {post.category[0]}
+            </span>
+
+            {post.category.length > 1 && (
+              <span className="px-2 py-1 rounded-full border bg-background text-white border-[#dadada] flex items-center justify-center">
+                +{post.category.length - 1}
+              </span>
+            )}
+          </div>
+        )}
+        <div className="flex items-center justify-end w-full gap-2">
           <span className="text-[#655f5f]">{formatDate(post.createdAt)}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <FaEye className="text-[#151515]" />
-          <span className="text-[#655f5f]">{post.views}</span>
+          <div className="flex items-center gap-1">
+            <FaEye className="text-[#151515]" />
+            <span className="text-[#655f5f]">{post.views}</span>
+          </div>
         </div>
       </div>
       <h1 className="text-xl font-bold line-clamp-1">{post.title}</h1>

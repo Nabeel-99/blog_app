@@ -2336,7 +2336,6 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
-    category: string | null
     coverImage: string | null
     coverImageId: string | null
     content: string | null
@@ -2350,7 +2349,6 @@ export namespace Prisma {
     id: number | null
     title: string | null
     description: string | null
-    category: string | null
     coverImage: string | null
     coverImageId: string | null
     content: string | null
@@ -2390,7 +2388,6 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    category?: true
     coverImage?: true
     coverImageId?: true
     content?: true
@@ -2404,7 +2401,6 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    category?: true
     coverImage?: true
     coverImageId?: true
     content?: true
@@ -2519,7 +2515,7 @@ export namespace Prisma {
     id: number
     title: string
     description: string
-    category: string | null
+    category: string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -2632,7 +2628,7 @@ export namespace Prisma {
       id: number
       title: string
       description: string
-      category: string | null
+      category: string[]
       coverImage: string
       coverImageId: string
       content: string
@@ -3068,7 +3064,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Post", 'Int'>
     readonly title: FieldRef<"Post", 'String'>
     readonly description: FieldRef<"Post", 'String'>
-    readonly category: FieldRef<"Post", 'String'>
+    readonly category: FieldRef<"Post", 'String[]'>
     readonly coverImage: FieldRef<"Post", 'String'>
     readonly coverImageId: FieldRef<"Post", 'String'>
     readonly content: FieldRef<"Post", 'String'>
@@ -5836,7 +5832,7 @@ export namespace Prisma {
     id?: IntFilter<"Post"> | number
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
-    category?: StringNullableFilter<"Post"> | string | null
+    category?: StringNullableListFilter<"Post">
     coverImage?: StringFilter<"Post"> | string
     coverImageId?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
@@ -5852,7 +5848,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    category?: SortOrderInput | SortOrder
+    category?: SortOrder
     coverImage?: SortOrder
     coverImageId?: SortOrder
     content?: SortOrder
@@ -5872,7 +5868,7 @@ export namespace Prisma {
     NOT?: PostWhereInput | PostWhereInput[]
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
-    category?: StringNullableFilter<"Post"> | string | null
+    category?: StringNullableListFilter<"Post">
     coverImage?: StringFilter<"Post"> | string
     coverImageId?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
@@ -5887,7 +5883,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    category?: SortOrderInput | SortOrder
+    category?: SortOrder
     coverImage?: SortOrder
     coverImageId?: SortOrder
     content?: SortOrder
@@ -5909,7 +5905,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Post"> | number
     title?: StringWithAggregatesFilter<"Post"> | string
     description?: StringWithAggregatesFilter<"Post"> | string
-    category?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    category?: StringNullableListFilter<"Post">
     coverImage?: StringWithAggregatesFilter<"Post"> | string
     coverImageId?: StringWithAggregatesFilter<"Post"> | string
     content?: StringWithAggregatesFilter<"Post"> | string
@@ -6090,7 +6086,7 @@ export namespace Prisma {
   export type PostCreateInput = {
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -6105,7 +6101,7 @@ export namespace Prisma {
     id?: number
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -6119,7 +6115,7 @@ export namespace Prisma {
   export type PostUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -6134,7 +6130,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -6149,7 +6145,7 @@ export namespace Prisma {
     id?: number
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -6162,7 +6158,7 @@ export namespace Prisma {
   export type PostUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -6175,7 +6171,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -6401,6 +6397,14 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -6451,7 +6455,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    category?: SortOrder
     coverImage?: SortOrder
     coverImageId?: SortOrder
     content?: SortOrder
@@ -6465,7 +6468,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    category?: SortOrder
     coverImage?: SortOrder
     coverImageId?: SortOrder
     content?: SortOrder
@@ -6683,6 +6685,10 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
+  export type PostCreatecategoryInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
@@ -6701,6 +6707,11 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutPostInput | CommentCreateOrConnectWithoutPostInput[]
     createMany?: CommentCreateManyPostInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type PostUpdatecategoryInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -6953,7 +6964,7 @@ export namespace Prisma {
   export type PostCreateWithoutAuthorInput = {
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -6967,7 +6978,7 @@ export namespace Prisma {
     id?: number
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -7033,7 +7044,7 @@ export namespace Prisma {
     id?: IntFilter<"Post"> | number
     title?: StringFilter<"Post"> | string
     description?: StringFilter<"Post"> | string
-    category?: StringNullableFilter<"Post"> | string | null
+    category?: StringNullableListFilter<"Post">
     coverImage?: StringFilter<"Post"> | string
     coverImageId?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
@@ -7164,7 +7175,7 @@ export namespace Prisma {
   export type PostCreateWithoutCommentsInput = {
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -7178,7 +7189,7 @@ export namespace Prisma {
     id?: number
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -7230,7 +7241,7 @@ export namespace Prisma {
   export type PostUpdateWithoutCommentsInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -7244,7 +7255,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -7287,7 +7298,7 @@ export namespace Prisma {
     id?: number
     title: string
     description: string
-    category?: string | null
+    category?: PostCreatecategoryInput | string[]
     coverImage: string
     coverImageId: string
     content: string
@@ -7306,7 +7317,7 @@ export namespace Prisma {
   export type PostUpdateWithoutAuthorInput = {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -7320,7 +7331,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -7334,7 +7345,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
+    category?: PostUpdatecategoryInput | string[]
     coverImage?: StringFieldUpdateOperationsInput | string
     coverImageId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string

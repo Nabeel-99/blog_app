@@ -21,13 +21,14 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Post } from "@/lib/generated/prisma";
+import { FaXmark } from "react-icons/fa6";
 
 type BlogFormProps = {
   post?: {
     id: number;
     title: string;
     description: string;
-    category: string | null;
+    category: [string] | null;
     coverImage: string;
     content: string;
     slug: string;
@@ -35,14 +36,30 @@ type BlogFormProps = {
 };
 const BlogForm = ({ post }: BlogFormProps) => {
   const [loading, setLoading] = useState(false);
+  const [cat, setCat] = useState("");
+  const [categories, setCategories] = useState<string[]>(post?.category || []);
+  const addCategory = () => {
+    if (!cat.trim()) return;
+    const updated = [...categories, cat.trim()];
+    setCategories(updated);
+    form.setValue("category", updated);
+    setCat("");
+  };
+  console.log("post", post);
+  const removeCategory = (index: number) => {
+    const newCategories = [...categories];
+    newCategories.splice(index, 1);
+    setCategories(newCategories);
+    form.setValue("category", newCategories);
+  };
   const router = useRouter();
   const form = useForm<z.infer<typeof blogPostSchema>>({
     resolver: zodResolver(blogPostSchema),
     defaultValues: {
       title: post?.title || "",
       description: post?.description || "",
-      category: post?.category || "",
-      coverImage: undefined,
+      category: post?.category || [],
+      coverImage: post?.coverImage || "",
       content: post?.content || "",
     },
   });
@@ -51,8 +68,12 @@ const BlogForm = ({ post }: BlogFormProps) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
-    if (data.category) formData.append("category", data.category);
-    formData.append("coverImage", data.coverImage);
+    if (data.category) {
+      formData.append("category", JSON.stringify(data.category || []));
+    }
+    if (data.coverImage instanceof File) {
+      formData.append("coverImage", data.coverImage);
+    }
     formData.append("content", data.content);
     setLoading(true);
     try {
@@ -80,7 +101,7 @@ const BlogForm = ({ post }: BlogFormProps) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className=" mt-10 flex flex-col gap-6 w-full max-w-2xl"
+        className=" mt-10 flex flex-col gap-6 w-full lg:max-w-2xl"
       >
         <FormField
           control={form.control}
@@ -108,19 +129,53 @@ const BlogForm = ({ post }: BlogFormProps) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className=" text-md">Category (optional)</FormLabel>
-              <FormControl>
-                <Input {...field} className="" />
-              </FormControl>
-              <FormMessage className="text-red-500" />
-            </FormItem>
-          )}
-        />
+
+        <div className="flex items-center gap-10">
+          <Input
+            className=""
+            type="text"
+            placeholder="Category"
+            value={cat}
+            onChange={(e) => setCat(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addCategory();
+              }
+            }}
+          />
+          <Button
+            onClick={addCategory}
+            type="button"
+            className="border bg-btn py-5 rounded-xl"
+          >
+            Add Category
+          </Button>
+          <input
+            type="hidden"
+            {...form.register("category")}
+            value={JSON.stringify(categories)}
+          />
+        </div>
+        {categories.length > 0 && (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            {categories.map((c, index) => (
+              <div
+                key={index}
+                className="flex  border py-1 border-[#dadada] px-2 rounded-lg items-center justify-between gap-6"
+              >
+                {c}
+                <Button
+                  type="button"
+                  className="bg-gray-50 rounded-full"
+                  onClick={() => removeCategory(index)}
+                >
+                  <FaXmark />
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
         <FormField
           control={form.control}
           name="coverImage"
@@ -143,11 +198,12 @@ const BlogForm = ({ post }: BlogFormProps) => {
                   {(form.watch("coverImage") || post?.coverImage) && (
                     <img
                       src={
-                        form.watch("coverImage")
+                        form.watch("coverImage") instanceof File
                           ? URL.createObjectURL(
                               form.watch("coverImage") as File
                             )
-                          : post?.coverImage
+                          : (form.watch("coverImage") as string) ||
+                            post?.coverImage
                       }
                       alt="Preview"
                       className="w-32 h-32 object-contain ml-2"

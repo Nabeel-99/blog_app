@@ -22,15 +22,25 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     include: { author: true },
   });
   if (!post) return notFound();
+
   const parsedContent = md.render(post?.content || "");
   return (
     <>
       <div className="bg-[#f6f6f6]">
         <section>
           <div className="px-4 pt-10 lg:px-20 lg:pt-20">
-            <div className="flex items-center justify-center gap-3 mb-8">
-              {post.category && (
-                <span className="uppercase font-black">{post.category}</span>
+            <div className="flex flex-col items-center justify-center gap-3 mb-8">
+              {post.category.length > 0 && (
+                <div className="grid grid-cols-2 md:auto-cols-max items-center gap-3">
+                  {post.category.map((category) => (
+                    <span
+                      key={category}
+                      className="text-white text-center px-2 py-1 rounded-xl bg-background"
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
               )}
               <span className="text-[#655f5f]">
                 {formatDate(post.createdAt)}
@@ -43,13 +53,13 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               <img
                 src={post.coverImage}
                 alt="AI"
-                className="w-full max-h-[600px] rounded-2xl object-contain"
+                className="w-full lg:w-4xl max-h-[600px] rounded-2xl object-cover"
               />
             </div>
             <div className="flex flex-col gap-3 max-w-5xl mt-20 text-xl pb-10 mx-auto w-full">
               {parsedContent ? (
                 <article
-                  className="markdown prose prose-lg hide-scrollbar prose-headings:font-bold prose-headings:text-black overflow-scroll  prose-p:text-gray-800 prose-ul:list-disc prose-strong:text-black prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 break-words"
+                  className="markdown prose  prose-lg hide-scrollbar prose-headings:font-bold prose-headings:text-black overflow-scroll  prose-p:text-gray-800 prose-ul:list-disc prose-strong:text-black prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 break-words"
                   dangerouslySetInnerHTML={{ __html: parsedContent }}
                 />
               ) : (
@@ -68,7 +78,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 </button>
               </div>
             </div>
-            <div className="flex  justify-end lg:sticky  lg:bottom-10 lg:right-10  gap-4 w-full    rounded-full p-3">
+            {/* <div className="flex  justify-end lg:sticky  lg:bottom-10 lg:right-10  gap-4 w-full    rounded-full p-3">
               <Suspense
                 fallback={
                   <Skeleton className="rounded-xl h-10 w-20 bg-[#6e6e6e]" />
@@ -76,7 +86,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               >
                 <Views slug={slug} />
               </Suspense>
-            </div>
+            </div> */}
           </div>
         </section>
         <section>

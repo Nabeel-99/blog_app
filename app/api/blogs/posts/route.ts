@@ -20,7 +20,10 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
-    const category = (formData.get("category") as string) || null;
+    const rawCategory = formData.get("category") as string;
+    const category: string[] = rawCategory
+      ? JSON.parse(rawCategory.toString())
+      : [];
     const coverImage = formData.get("coverImage") as File;
     const content = formData.get("content") as string;
     const slug = slugify(title, { lower: true, strict: true });

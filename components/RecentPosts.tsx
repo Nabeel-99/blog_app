@@ -10,7 +10,7 @@ const RecentPosts = async () => {
     },
   });
   return (
-    <div className="grid max-sm:gap-10 md:gap-16 md:grid-cols-2 xl:grid-cols-3 lg:gap-20 mt-10">
+    <div className="grid max-sm:gap-10 md:gap-16 md:grid-cols-2 xl:grid-cols-3 mt-10">
       {posts.map((post) => (
         <BlogCard key={post.id} post={post} />
       ))}

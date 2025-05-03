@@ -28,7 +28,7 @@ model Post {
   id           Int       @id @default(autoincrement())
   title        String
   description  String
-  category     String?
+  category     String[]
   coverImage   String
   coverImageId String
   content      String

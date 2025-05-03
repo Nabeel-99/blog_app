@@ -34,10 +34,35 @@ button {
 .markdown > * {
   all: revert;
 }
+.markdown img {
+  max-width: 400px;
+  max-height: 600px;
+  border-radius: 20px;
+  margin: 0 auto;
+  height: 500px;
+  object-fit: contain;
+}
+.markdown a {
+  color: #1822d6;
+}
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.markdown ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.markdown ol > li + li {
+  margin-top: 2rem;
+}
+.markdown ul > li + li {
+  margin-top: 2rem;
 }
