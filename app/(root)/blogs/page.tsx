@@ -1,9 +1,6 @@
-import BlogCard from "@/components/BlogCard";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import Blogs from "@/components/Blogs";
 import NewsLetter from "@/components/NewsLetter";
-import { Skeleton } from "@/components/ui/skeleton";
-import prisma from "@/lib/prisma";
 import React, { Suspense } from "react";
 
 const Page = async () => {

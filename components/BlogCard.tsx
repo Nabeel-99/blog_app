@@ -1,11 +1,15 @@
-import { Post } from "@/lib/generated/prisma";
+import { Prisma } from "@/lib/generated/prisma";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import { FaEye } from "react-icons/fa";
 
+type PostWithCategories = Prisma.PostGetPayload<{
+  include: { categories: { select: { id: true; name: true } } };
+}>;
+
 type BlogCardProps = {
-  post: Post;
+  post: PostWithCategories;
 };
 const BlogCard = ({ post }: BlogCardProps) => {
   return (
@@ -17,15 +21,15 @@ const BlogCard = ({ post }: BlogCardProps) => {
       />
       <div className="flex items-center justify-between ">
         {" "}
-        {post.category.length > 0 && (
+        {post.categories.length > 0 && (
           <div className="flex items-center text-sm">
             <span className="text-white text-center px-2 py-1 rounded-xl bg-background">
-              {post.category[0]}
+              {post.categories[0].name}
             </span>
 
-            {post.category.length > 1 && (
+            {post.categories.length > 1 && (
               <span className="px-2 py-1 rounded-full border bg-background text-white border-[#dadada] flex items-center justify-center">
-                +{post.category.length - 1}
+                +{post.categories.length - 1}
               </span>
             )}
           </div>

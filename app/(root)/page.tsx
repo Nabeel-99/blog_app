@@ -1,20 +1,19 @@
-import BlogCard from "@/components/BlogCard";
-import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import NewsLetter from "@/components/NewsLetter";
 import RecentPosts from "@/components/RecentPosts";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
-import { formatDate } from "@/lib/utils";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React from "react";
 
 const Page = async () => {
   const posts = await prisma.post.findMany({
     orderBy: {
       createdAt: "desc",
     },
+    include: { categories: { select: { id: true, name: true } } },
   });
   const featuredPost = posts[0];
+
   return (
     <>
       {/* featured post section */}
@@ -34,7 +33,7 @@ const Page = async () => {
               className="w-full -z-10 opacity-5 rotate-180 "
             />
           </div>
-          <div className="flex flex-col justify-between lg:w-1/2  xl:w-xl">
+          <div className="flex flex-col gap-6 justify-between lg:w-1/2  xl:w-xl">
             <div className="flex flex-col">
               <h1 className="text-xl mt-10 ">Featured Post</h1>
               <p className="text-3xl lg:text-5xl lg:leading-14 lg:mt-10 font-bold">

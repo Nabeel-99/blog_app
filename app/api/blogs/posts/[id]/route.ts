@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import { getToken } from "next-auth/jwt";
@@ -112,6 +111,16 @@ export async function PUT(
       coverImageUrl = (uploadResult as any).secure_url;
       coverImageId = (uploadResult as any).public_id;
     }
+    const categoryRecords = await Promise.all(
+      category.map(async (catName) => {
+        return await prisma.category.upsert({
+          where: { name: catName },
+          update: {},
+          create: { name: catName },
+        });
+      })
+    );
+
     const post = await prisma.post.update({
       where: {
         id: parseInt(id),
@@ -119,7 +128,10 @@ export async function PUT(
       data: {
         title,
         description,
-        category,
+        categories: {
+          set: [],
+          connect: categoryRecords.map((cat) => ({ id: cat.id })),
+        },
         coverImage: coverImageUrl,
         coverImageId,
         content,

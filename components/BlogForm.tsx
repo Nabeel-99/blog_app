@@ -20,7 +20,6 @@ import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Post } from "@/lib/generated/prisma";
 import { FaXmark } from "react-icons/fa6";
 
 type BlogFormProps = {
@@ -28,7 +27,7 @@ type BlogFormProps = {
     id: number;
     title: string;
     description: string;
-    category: [string] | null;
+    categories: { id: number; name: string }[];
     coverImage: string;
     content: string;
     slug: string;
@@ -37,7 +36,9 @@ type BlogFormProps = {
 const BlogForm = ({ post }: BlogFormProps) => {
   const [loading, setLoading] = useState(false);
   const [cat, setCat] = useState("");
-  const [categories, setCategories] = useState<string[]>(post?.category || []);
+  const [categories, setCategories] = useState<string[]>(
+    post?.categories.map((c) => c.name) || []
+  );
   const addCategory = () => {
     if (!cat.trim()) return;
     const updated = [...categories, cat.trim()];
@@ -45,7 +46,7 @@ const BlogForm = ({ post }: BlogFormProps) => {
     form.setValue("category", updated);
     setCat("");
   };
-  console.log("post", post);
+
   const removeCategory = (index: number) => {
     const newCategories = [...categories];
     newCategories.splice(index, 1);
@@ -58,7 +59,7 @@ const BlogForm = ({ post }: BlogFormProps) => {
     defaultValues: {
       title: post?.title || "",
       description: post?.description || "",
-      category: post?.category || [],
+      category: post?.categories.map((c) => c.name) || [],
       coverImage: post?.coverImage || "",
       content: post?.content || "",
     },

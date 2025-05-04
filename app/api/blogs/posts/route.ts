@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
@@ -54,12 +53,26 @@ export async function POST(req: NextRequest) {
       coverImageUrl = (uploadResult as any).secure_url;
       coverImageId = (uploadResult as any).public_id;
     }
-
+    const categoryRecords = await Promise.all(
+      category.map(async (cat) => {
+        return await prisma.category.upsert({
+          where: {
+            name: cat,
+          },
+          update: {},
+          create: {
+            name: cat,
+          },
+        });
+      })
+    );
     const post = await prisma.post.create({
       data: {
         title,
         description,
-        category,
+        categories: {
+          connect: categoryRecords.map((cat) => ({ id: cat.id })),
+        },
         coverImage: coverImageUrl,
         coverImageId: coverImageId,
         content,

@@ -13,10 +13,15 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
       id: true,
       title: true,
       description: true,
-      category: true,
       coverImage: true,
       content: true,
       slug: true,
+      categories: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
     },
   });
   if (!post) {

@@ -22,22 +22,42 @@ model User {
   role     String    @default("USER") // "ADMIN" for owner
   posts    Post[]
   comments Comment[]
+  likes    Like[]
+  replies  Reply[]
 }
 
 model Post {
-  id           Int       @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   title        String
   description  String
-  category     String[]
+  categories   Category[] @relation("PostCategories")
   coverImage   String
   coverImageId String
   content      String
-  views        Int?      @default(0)
-  slug         String    @unique
-  createdAt    DateTime  @default(now())
+  likes        Like[]
+  views        Int?       @default(0)
+  slug         String     @unique
+  createdAt    DateTime   @default(now())
   authorId     String
-  author       User      @relation(fields: [authorId], references: [id])
+  author       User       @relation(fields: [authorId], references: [id])
   comments     Comment[]
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  postId    Int?
+  post      Post?    @relation(fields: [postId], references: [id])
+  commentId Int?
+  comment   Comment? @relation(fields: [commentId], references: [id])
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  posts Post[] @relation("PostCategories")
 }
 
 model Comment {
@@ -46,6 +66,18 @@ model Comment {
   content   String
   post      Post     @relation(fields: [postId], references: [id])
   postId    Int
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  replies   Reply[]
+  likes     Like[]
+}
+
+model Reply {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  content   String
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId Int
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
 }

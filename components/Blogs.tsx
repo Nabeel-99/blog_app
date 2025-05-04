@@ -8,6 +8,14 @@ const Blogs = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      categories: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   });
   return (
     <div className="px-4 lg:px-20 2xl:container 2xl:w-full 2xl:mx-auto  mt-14">

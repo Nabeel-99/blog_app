@@ -43,7 +43,12 @@ export default function RootLayout({
         className={`${roboto.variable} ${raleway.variable} h-screen antialiased`}
       >
         {children}
-        <Toaster />
+        <Toaster
+          className="bg-white"
+          toastOptions={{
+            className: "!z-[9999]",
+          }}
+        />
       </body>
     </html>
   );

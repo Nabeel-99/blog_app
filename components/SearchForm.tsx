@@ -4,10 +4,13 @@ import React, { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
-import { Post } from "@/lib/generated/prisma";
+import { Prisma } from "@/lib/generated/prisma";
 import Link from "next/link";
 import { DialogClose } from "./ui/dialog";
 
+type BlogSearchProps = Prisma.PostGetPayload<{
+  include: { categories: { select: { id: true; name: true } } };
+}>;
 const SearchForm = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -20,8 +23,6 @@ const SearchForm = () => {
     return () => clearTimeout(handler);
   }, [query]);
 
-  console.log("query", query);
-  console.log("debouncedQuery", debouncedQuery);
   useEffect(() => {
     const fetchResult = async () => {
       if (!debouncedQuery.trim()) {
@@ -31,7 +32,6 @@ const SearchForm = () => {
       setLoading(true);
       try {
         const response = await axios.get(`/api/search?query=${debouncedQuery}`);
-        console.log(response.data);
         setResults(response.data);
       } catch (error) {
         console.log(error);
@@ -62,7 +62,7 @@ const SearchForm = () => {
       <p className="text-[#515151]">{loading ? "Searching..." : ""} </p>
       {results.length > 0 && (
         <ul className="mt-4   flex flex-col">
-          {results.map((post: Post) => (
+          {results.map((post: BlogSearchProps) => (
             <li
               key={post.id}
               className="hover:bg-[#f2f2f2] px-2 py-2 rounded-xl"
@@ -73,8 +73,26 @@ const SearchForm = () => {
                   className="flex items-center justify-between gap-2"
                 >
                   <span className="line-clamp-1"> {post.title}</span>
-                  <span className="uppercase text-sm border bg-btn px-4 rounded-xl font-bold">
-                    {post.category}
+                  <span className="">
+                    {post.categories.length > 0 && (
+                      <div className="flex items-center text-sm">
+                        <span className="text-white text-center px-2 py-1 rounded-xl bg-background">
+                          {query
+                            ? post.categories.find((c) =>
+                                c.name
+                                  .toLowerCase()
+                                  .includes(query.toLowerCase())
+                              )?.name ?? post.categories[0].name
+                            : post.categories[0].name}
+                        </span>
+
+                        {post.categories.length > 1 && (
+                          <span className="px-2 py-1 rounded-full border bg-background text-white border-[#dadada] flex items-center justify-center">
+                            +{post.categories.length - 1}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </span>
                 </Link>
               </DialogClose>

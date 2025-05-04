@@ -6,11 +6,17 @@ import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import RecentPosts from "@/components/RecentPosts";
-import Views from "@/components/Views";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
-import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import CommentCard from "@/components/CommentCard";
 
 const md = markdownit();
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -19,25 +25,33 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     where: {
       slug,
     },
-    include: { author: true },
+    include: {
+      author: true,
+      categories: true,
+      comments: {
+        include: {
+          author: true,
+        },
+      },
+    },
   });
   if (!post) return notFound();
-
   const parsedContent = md.render(post?.content || "");
+
   return (
     <>
       <div className="bg-[#f6f6f6]">
         <section>
           <div className="px-4 pt-10 lg:px-20 lg:pt-20">
             <div className="flex flex-col items-center justify-center gap-3 mb-8">
-              {post.category.length > 0 && (
+              {post.categories.length > 0 && (
                 <div className="grid grid-cols-2 md:auto-cols-max items-center gap-3">
-                  {post.category.map((category) => (
+                  {post.categories.map((category) => (
                     <span
-                      key={category}
+                      key={category.id}
                       className="text-white text-center px-2 py-1 rounded-xl bg-background"
                     >
-                      {category}
+                      {category.name}
                     </span>
                   ))}
                 </div>
@@ -66,16 +80,28 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 <p>No details provided.</p>
               )}
             </div>
-            <div className="flex lg:sticky lg:bottom-10 bg-white shadow-sm  gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
+            <div className="flex sticky bottom-10 bg-white shadow-sm  gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
               <div className="flex items-center gap-4">
                 <button>
                   {" "}
                   <FaRegHeart className="size-7 text-[#585858]" />
                 </button>
-                <button>
-                  {" "}
-                  <FaRegCommentDots className="size-7 text-[#585858]" />
-                </button>
+                <Sheet>
+                  <SheetTrigger asChild className="cursor-pointer">
+                    <FaRegCommentDots className="size-7 text-[#585858]" />
+                  </SheetTrigger>
+                  <SheetContent
+                    aria-describedby=""
+                    className="bg-white w-full sm:max-w-md"
+                  >
+                    <SheetHeader>
+                      <SheetTitle className="text-2xl font-bold">
+                        Comments
+                      </SheetTitle>
+                    </SheetHeader>
+                    <CommentCard post={post} />
+                  </SheetContent>
+                </Sheet>
               </div>
             </div>
             {/* <div className="flex  justify-end lg:sticky  lg:bottom-10 lg:right-10  gap-4 w-full    rounded-full p-3">

@@ -8,6 +8,14 @@ const UserBlogsList = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      categories: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   });
   return (
     <>
