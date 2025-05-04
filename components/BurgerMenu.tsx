@@ -33,18 +33,20 @@ const BurgerMenu = () => {
       </Button>
       {isOpen && (
         <div className="inset-0 top-17 absolute px-4 z-20 bg-white ">
-          <ul className="flex flex-col items-start pt-4 gap-6">
-            <li>
-              <Link onClick={closeMenu} href={"/"}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link onClick={closeMenu} href={"/blogs"}>
-                Blogs
-              </Link>
-            </li>
-          </ul>
+          <div className="flex flex-col justify-between">
+            <ul className="flex flex-col items-start pt-4 gap-6">
+              <li>
+                <Link onClick={closeMenu} href={"/"}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link onClick={closeMenu} href={"/blogs"}>
+                  Blogs
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       )}
     </>

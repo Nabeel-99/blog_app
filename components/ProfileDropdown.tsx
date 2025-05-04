@@ -12,6 +12,7 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
 import { Session } from "next-auth";
 import { signOut } from "@/auth";
+import LogoutButton from "./LogoutButton";
 
 type ProfileProps = {
   session: Session;
@@ -64,20 +65,7 @@ const ProfileDropdown = ({ session }: ProfileProps) => {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="w-full">
-          <form
-            action={async () => {
-              "use server";
-              await signOut();
-            }}
-            className="w-full flex justify-start"
-          >
-            <button
-              type="submit"
-              className="w-full text-left px-2.5 py-1 rounded-xl hover:bg-[#e8e8e8]"
-            >
-              Logout
-            </button>
-          </form>
+          <LogoutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

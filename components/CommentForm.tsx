@@ -22,9 +22,13 @@ const CommentForm = ({ post, session }: CommentFormProps) => {
     setLoading(true);
     if (!session) {
       toast.error("You must be logged in to comment");
+      setLoading(false);
       return;
     }
-    if (!comment) return;
+    if (!comment) {
+      setLoading(false);
+      return;
+    }
     try {
       const response = await axios.post("/api/blogs/comment", {
         comment,
@@ -56,7 +60,9 @@ const CommentForm = ({ post, session }: CommentFormProps) => {
             disabled={loading}
             type="submit"
             className={`${
-              loading ? "cursor-not-allowed bg-[#7c4ee4]" : "bg-btn text-white"
+              loading
+                ? "cursor-not-allowed bg-[#7c4ee4] text-white"
+                : "bg-btn text-white"
             } `}
           >
             Comment

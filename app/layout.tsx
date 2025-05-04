@@ -44,10 +44,10 @@ export default function RootLayout({
       >
         {children}
         <Toaster
-          className="bg-white"
           toastOptions={{
             className: "!z-[9999]",
           }}
+          richColors
         />
       </body>
     </html>

@@ -1,5 +1,3 @@
-"use client";
-
 import { Prisma } from "@/lib/generated/prisma";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
