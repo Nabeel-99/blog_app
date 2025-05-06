@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaRegCommentDots, FaRegHeart } from "react-icons/fa6";
+import { FaRegCommentDots, FaRegHeart, FaRegTrashCan } from "react-icons/fa6";
 import { Prisma, Reply } from "@/lib/generated/prisma";
 import UserComment from "./UserComment";
-import ReplyForm from "./ReplyForm";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { Session } from "next-auth";
+import DeleteDialog from "./DeleteDialog";
+import LikeButton from "./LikeButton";
 
 type RepliesProps = Prisma.ReplyGetPayload<{
   include: {
@@ -19,12 +17,18 @@ type NestedRepliesProps = {
   replies: RepliesProps[];
   openReply: (reply: Reply) => void;
   allReplies: RepliesProps[];
+  session: Session | null;
+  isHidden?: boolean;
+  showResponse?: () => void;
 };
 
 const NestedReplies = ({
   allReplies,
   replies,
   openReply,
+  session,
+  isHidden,
+  showResponse,
 }: NestedRepliesProps) => {
   //   console.log("nested replies", reply);
   //   const [openInput, setOpenInput] = useState(false);
@@ -81,23 +85,46 @@ const NestedReplies = ({
                 role={reply.author.role}
                 content={reply.content}
               />
-              <div className="flex items-center  gap-6">
-                <div className="flex items-center gap-1 cursor-pointer">
-                  <FaRegHeart className="size-5 " />
-                  {reply.likes.length > 0 && <span>{reply.likes.length}</span>}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-6">
+                  <LikeButton
+                    session={session}
+                    apiRoute={`/api/blogs/replies/${reply.id}/like`}
+                    likes={reply.likes}
+                  />
+                  <button
+                    onClick={showResponse}
+                    className="flex items-center gap-1 cursor-pointer"
+                  >
+                    <FaRegCommentDots className="size-5 " />
+                    {isHidden ? (
+                      "hide replies"
+                    ) : (
+                      <span>
+                        {" "}
+                        {children.length > 0 && <span>{children.length}</span>}
+                      </span>
+                    )}
+                  </button>
+                  <button onClick={() => openReply(reply)}>Reply</button>
                 </div>
-                <div className="flex items-center gap-1 cursor-pointer">
-                  <FaRegCommentDots className="size-5 " />
-                  {children.length > 0 && <span>{children.length}</span>}
-                </div>
-                <button onClick={() => openReply(reply)}>Reply</button>
+                {session?.user.role === "ADMIN" && (
+                  <DeleteDialog
+                    message="Response deleted successfully"
+                    error="Error deleting response"
+                    apiRoute={`/api/blogs/replies/${reply.id}`}
+                    refresh={true}
+                  />
+                )}
               </div>
-
-              <NestedReplies
-                replies={children}
-                allReplies={allReplies}
-                openReply={openReply}
-              />
+              {isHidden && (
+                <NestedReplies
+                  allReplies={allReplies}
+                  replies={children}
+                  openReply={openReply}
+                  session={session}
+                />
+              )}
             </div>
           );
         })}

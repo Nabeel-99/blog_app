@@ -62,7 +62,11 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
             {" "}
             <FaPencil className="size-4 " />
           </Link>
-          <DeleteDialog id={post.id} />
+          <DeleteDialog
+            message="Blog deleted Successfully"
+            error="Error deleting blog"
+            apiRoute={`/api/blogs/posts/${post.id}`}
+          />
         </div>
       </div>
       {/* <Link href={`/blogs/${post.slug}`} className="text-[#7c4ee4] underline">

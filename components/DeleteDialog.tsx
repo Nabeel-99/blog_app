@@ -18,22 +18,32 @@ import axios from "axios";
 import { toast } from "sonner";
 
 type DeleteDialogProps = {
-  id: number;
+  message?: string;
+  error?: string;
+  refresh?: boolean;
+  apiRoute?: string;
+  comments?: boolean;
+  replies?: boolean;
 };
-const DeleteDialog = ({ id }: DeleteDialogProps) => {
+const DeleteDialog = ({
+  message,
+  error,
+  refresh,
+  apiRoute,
+}: DeleteDialogProps) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const handleDelete = async (id: number) => {
+  const handleDelete = async () => {
     try {
-      const response = await axios.delete(`/api/blogs/posts/${id}`);
+      const response = await axios.delete(apiRoute || "");
       if (response.status === 200) {
-        toast.success("Blog deleted successfully");
-        router.push("/profile");
+        toast.success(message);
+        refresh ? router.refresh() : router.push("/profile");
         setOpen(false);
       }
-    } catch (error) {
-      console.log(error);
-      toast.error("Error deleting blog post.");
+    } catch (err) {
+      console.log(err);
+      toast.error(error);
     }
   };
   return (
@@ -51,8 +61,8 @@ const DeleteDialog = ({ id }: DeleteDialogProps) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the blog
-            post.
+            This action cannot be undone. This {refresh ? "comment" : ""} will
+            permanently delete the blog post.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -60,7 +70,7 @@ const DeleteDialog = ({ id }: DeleteDialogProps) => {
             No
           </AlertDialogCancel>
           <Button
-            onClick={() => handleDelete(id)}
+            onClick={handleDelete}
             className="border border-[#dadada] hover:bg-[#f0f0f0] px-4 py-2 rounded-md"
           >
             Yes

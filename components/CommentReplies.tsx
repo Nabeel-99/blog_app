@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaRegCommentDots, FaRegHeart } from "react-icons/fa6";
+import { FaRegCommentDots, FaRegHeart, FaRegTrashCan } from "react-icons/fa6";
 import { Prisma, Reply } from "@/lib/generated/prisma";
 import { toast } from "sonner";
 import axios from "axios";
@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import ReplyForm from "./ReplyForm";
 import NestedReplies from "./NestedReplies";
 import UserComment from "./UserComment";
+import DeleteDialog from "./DeleteDialog";
+import LikeButton from "./LikeButton";
 
 type RepliesWithAuthor = Prisma.ReplyGetPayload<{
   include: {
@@ -34,17 +36,21 @@ const CommentReplies = ({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [activeReplyId, setActiveReplyId] = useState<number | null>(null);
+  const [isHidden, setIsHidden] = useState(false);
   const children = allReplies.filter((child) => child.parentId === reply.id);
-  console.log("children nested", children);
+
+  const showResponse = () => {
+    setIsHidden(!isHidden);
+  };
   const openReply = (reply: Reply) => {
     setOpenInput(!openInput);
     setActiveReplyId(reply.id);
   };
-  console.log("all replies", allReplies);
+
   const closeReply = () => setOpenInput(false);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log("handle submit", comment);
+
     setLoading(true);
     if (!session) {
       toast.error("You must be logged in to reply");
@@ -74,7 +80,7 @@ const CommentReplies = ({
   };
 
   return (
-    !hide && (
+    hide && (
       <div className="flex flex-col pl-4 mt-2 gap-4">
         <UserComment
           image={reply.author.image || ""}
@@ -82,25 +88,49 @@ const CommentReplies = ({
           role={reply.author.role}
           content={reply.content}
         />
-        <div className="flex items-center gap-6">
-          <div
-            className="flex items-center gap-1 cursor-pointer
-  "
-          >
-            <FaRegHeart className="size-5 " />
-            {reply.likes.length > 0 && <span>{reply.likes.length}</span>}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <LikeButton
+              session={session}
+              apiRoute={`/api/blogs/replies/${reply.id}/like`}
+              likes={reply.likes}
+            />
+            <button
+              onClick={showResponse}
+              className="flex items-center gap-1 cursor-pointer"
+            >
+              <FaRegCommentDots className="size-5 " />
+              {isHidden ? (
+                "hide replies"
+              ) : (
+                <span>
+                  {" "}
+                  {children.length > 0 && <span>{children.length}</span>}
+                </span>
+              )}
+            </button>
+            <button onClick={() => openReply(reply)}>Reply</button>
           </div>
-          <div className="flex items-center gap-1 cursor-pointer">
-            <FaRegCommentDots className="size-5 " />
-            {children.length > 0 && <span>{children.length}</span>}
-          </div>
-          <button onClick={() => openReply(reply)}>Reply</button>
+          {session?.user.role === "ADMIN" && (
+            <DeleteDialog
+              message="Response deleted successfully"
+              error="Error deleting response"
+              refresh={true}
+              apiRoute={`/api/blogs/replies/${reply.id}`}
+            />
+          )}
         </div>
-        <NestedReplies
-          allReplies={allReplies}
-          replies={children}
-          openReply={openReply}
-        />
+        {isHidden && (
+          <NestedReplies
+            allReplies={allReplies}
+            replies={children}
+            showResponse={showResponse}
+            isHidden={isHidden}
+            openReply={openReply}
+            session={session}
+          />
+        )}
+
         {openInput && (
           <ReplyForm
             handleSubmit={handleSubmit}

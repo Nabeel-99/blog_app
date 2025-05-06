@@ -29,8 +29,11 @@ type BlogCommentsProps = {
 };
 const BlogComments = ({ session, post }: BlogCommentsProps) => {
   const comments = post.comments;
-  const [hide, setHide] = useState(true);
-  const showComments = () => setHide(!hide);
+  const [hide, setHide] = useState(false);
+  const showComments = () => {
+    comments.length > 2 ? setHide(true) : setHide(false);
+    setHide(!hide);
+  };
   console.log("comments", comments);
   return comments.length > 0 ? (
     <div className="flex flex-col gap-6">

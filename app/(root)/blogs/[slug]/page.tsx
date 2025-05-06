@@ -17,10 +17,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import CommentCard from "@/components/CommentCard";
+import LikeButton from "@/components/LikeButton";
+import { auth } from "@/auth";
 
 const md = markdownit();
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
+  const session = await auth();
   const post = await prisma.post.findUnique({
     where: {
       slug,
@@ -28,6 +31,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     include: {
       author: true,
       categories: true,
+      likes: true,
       comments: {
         include: {
           author: true,
@@ -92,13 +96,18 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             </div>
             <div className="flex sticky bottom-10 bg-white shadow-sm  gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
               <div className="flex items-center gap-4">
-                <button>
-                  {" "}
-                  <FaRegHeart className="size-7 text-[#585858]" />
-                </button>
+                <LikeButton
+                  session={session}
+                  likes={post.likes}
+                  apiRoute={`/api/blogs/posts/${post.id}/like`}
+                />
+
                 <Sheet>
                   <SheetTrigger asChild className="cursor-pointer">
-                    <FaRegCommentDots className="size-7 text-[#585858]" />
+                    <div className="flex items-center gap-1">
+                      <FaRegCommentDots className="size-6 text-[#585858]" />
+                      <span>{post.comments.length}</span>
+                    </div>
                   </SheetTrigger>
                   <SheetContent
                     aria-describedby=""

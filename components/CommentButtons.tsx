@@ -7,6 +7,9 @@ import { toast } from "sonner";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import ReplyForm from "./ReplyForm";
+import { FaRegTrashCan } from "react-icons/fa6";
+import DeleteDialog from "./DeleteDialog";
+import LikeButton from "./LikeButton";
 
 type CommentProps = Prisma.CommentGetPayload<{
   include: {
@@ -38,7 +41,7 @@ const CommentButtons = ({
   const closeReply = () => setOpenInput(false);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log("handle submit", comment);
+
     setLoading(true);
     if (!session) {
       toast.error("You must be logged in to reply");
@@ -68,30 +71,50 @@ const CommentButtons = ({
       setLoading(false);
     }
   };
-
+  console.log(comment);
   return (
     <div className="flex flex-col gap-3 ">
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-1 cursor-pointer">
-          <FaRegHeart className="size-5 " />
-          {comment.likes.length > 0 && <span>{comment.likes.length}</span>}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <LikeButton
+            session={session}
+            likes={comment.likes}
+            apiRoute={`/api/blogs/comment/${comment.id}/like`}
+          />
+
+          <button
+            onClick={showComments}
+            className="flex items-center gap-1 cursor-pointer"
+          >
+            <FaRegCommentDots className="size-5 " />
+            {comment.replies.length > 0 && (
+              <span>
+                {hide ? (
+                  "hide replies"
+                ) : (
+                  <span>
+                    {" "}
+                    {
+                      comment.replies.filter((reply) => reply.parentId === null)
+                        .length
+                    }
+                  </span>
+                )}
+              </span>
+            )}
+          </button>
+          <button onClick={() => openReply(comment)}>Reply</button>
         </div>
-        <button
-          onClick={showComments}
-          className="flex items-center gap-1 cursor-pointer"
-        >
-          <FaRegCommentDots className="size-5 " />
-          {comment.replies.length > 0 && (
-            <span>
-              {
-                comment.replies.filter((reply) => reply.parentId === null)
-                  .length
-              }
-            </span>
-          )}
-        </button>
-        <button onClick={() => openReply(comment)}>Reply</button>
+        {session?.user.role === "ADMIN" && (
+          <DeleteDialog
+            message="Comment deleted successfully"
+            error="Error deleting comment"
+            refresh={true}
+            apiRoute={`/api/blogs/comment/${comment.id}`}
+          />
+        )}
       </div>
+
       {openInput && (
         <ReplyForm
           handleSubmit={handleSubmit}
