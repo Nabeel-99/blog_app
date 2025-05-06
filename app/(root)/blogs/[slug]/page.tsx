@@ -31,21 +31,31 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       comments: {
         include: {
           author: true,
+          likes: true,
+          replies: {
+            include: {
+              author: true,
+              likes: true,
+            },
+            // where: {
+            //   parentId: null,
+            // },
+          },
         },
       },
     },
   });
   if (!post) return notFound();
   const parsedContent = md.render(post?.content || "");
-
+  console.log("post", post);
   return (
     <>
       <div className="bg-[#f6f6f6]">
         <section>
           <div className="px-4 pt-10 lg:px-20 lg:pt-20">
-            <div className="flex flex-col items-center justify-center gap-3 mb-8">
+            <div className="flex flex-col items-center justify-center  gap-3 mb-8">
               {post.categories.length > 0 && (
-                <div className="grid grid-cols-2 md:auto-cols-max items-center gap-3">
+                <div className="flex flex-wrap justify-center  items-center gap-3">
                   {post.categories.map((category) => (
                     <span
                       key={category.id}

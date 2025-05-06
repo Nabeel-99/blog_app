@@ -13,6 +13,13 @@ type PostWithComments = Prisma.PostGetPayload<{
     comments: {
       include: {
         author: true;
+        likes: true;
+        replies: {
+          include: {
+            author: true;
+            likes: true;
+          };
+        };
       };
     };
   };
