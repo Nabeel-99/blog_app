@@ -7,6 +7,7 @@ import { auth } from "@/auth";
 import { Prisma } from "@/lib/generated/prisma";
 import CommentWrapper from "./CommentWrapper";
 import BlogComments from "./BlogComments";
+import prisma from "@/lib/prisma";
 
 type PostWithComments = Prisma.PostGetPayload<{
   include: {
@@ -29,14 +30,22 @@ type CommentCardProps = {
 };
 const CommentCard = async ({ post }: CommentCardProps) => {
   const session = await auth();
+  let user = null;
+  if (session?.user.id) {
+    user = await prisma.user.findUnique({
+      where: {
+        id: session?.user?.id,
+      },
+    });
+  }
   return (
     <div className="flex flex-col  overflow-scroll pb-10 hide-scrollbar gap-2 px-4">
       <div className="flex items-center gap-2">
         <Avatar>
-          <AvatarImage src={session?.user?.image} />
-          <AvatarFallback>{session?.user?.name[0]}</AvatarFallback>
+          <AvatarImage src={user?.image!} />
+          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
         </Avatar>
-        <p>{session?.user?.name}</p>
+        <p>{user?.name}</p>
       </div>
       <CommentWrapper post={post} />
       <Separator className="h-0.5  mt-4 bg-[#dadada]" />

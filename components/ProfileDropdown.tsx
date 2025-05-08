@@ -11,29 +11,22 @@ import Image from "next/image";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
 import { Session } from "next-auth";
-import { signOut } from "@/auth";
 import LogoutButton from "./LogoutButton";
+import { User } from "@/lib/generated/prisma";
+import { AvatarFallback } from "@radix-ui/react-avatar";
 
 type ProfileProps = {
-  session: Session;
+  user: User | null;
 };
-const ProfileDropdown = ({ session }: ProfileProps) => {
+const ProfileDropdown = ({ user }: ProfileProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         {" "}
-        <Image
-          src={session.user?.image!}
-          alt={session.user?.name!}
-          width={35}
-          height={35}
-          sizes=""
-          style={{
-            objectFit: "contain",
-            borderRadius: "50%",
-          }}
-          className="max-sm:size-8"
-        />
+        <Avatar>
+          <AvatarImage src={user?.image!} />
+          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="p-2 w-[200px] bg-white border-[#dadada] border"
@@ -42,9 +35,9 @@ const ProfileDropdown = ({ session }: ProfileProps) => {
       >
         <DropdownMenuLabel className="flex items-center gap-2">
           <Avatar>
-            <AvatarImage src={session.user?.image!} className="" alt="avatar" />
+            <AvatarImage src={user?.image || ""} className="" alt="avatar" />
           </Avatar>
-          {session.user?.name}
+          {user?.name}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>

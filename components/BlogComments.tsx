@@ -49,6 +49,7 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
               name={comment.author.name || ""}
               role={comment.author.role}
               content={comment.content}
+              id={comment.authorId}
             />
 
             <CommentButtons

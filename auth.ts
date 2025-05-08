@@ -37,7 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         let dbUser = null;
-        if (user.email) {
+        if (user?.email) {
           dbUser = await prisma.user.findUnique({
             where: { email: user.email },
           });
@@ -45,6 +45,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (dbUser) {
           token.id = dbUser.id;
           token.role = dbUser.role;
+          token.bio = dbUser.bio || "";
         }
       }
 
@@ -52,7 +53,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async session({ session, token }) {
-      Object.assign(session.user, { id: token.id, role: token.role });
+      Object.assign(session.user, {
+        id: token.id,
+        role: token.role,
+        bio: token.bio,
+      });
       return session;
     },
   },

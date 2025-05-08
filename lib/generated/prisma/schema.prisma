@@ -15,15 +15,17 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(cuid())
-  name     String?
-  email    String?   @unique
-  image    String?
-  role     String    @default("USER") // "ADMIN" for owner
-  posts    Post[]
-  comments Comment[]
-  likes    Like[]
-  replies  Reply[]
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  image         String?
+  role          String    @default("USER") // "ADMIN" for owner
+  bio           String?
+  posts         Post[]
+  comments      Comment[]
+  likes         Like[]
+  replies       Reply[]
+  hasSubscribed Boolean   @default(false)
 }
 
 model Post {

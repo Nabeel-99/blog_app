@@ -51,7 +51,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   });
   if (!post) return notFound();
   const parsedContent = md.render(post?.content || "");
-  console.log("post", post);
+
   return (
     <>
       <div className="bg-[#f6f6f6]">
@@ -106,7 +106,9 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                   <SheetTrigger asChild className="cursor-pointer">
                     <div className="flex items-center gap-1">
                       <FaRegCommentDots className="size-6 text-[#585858]" />
-                      <span>{post.comments.length}</span>
+                      {post.comments.length > 0 && (
+                        <span>{post.comments.length}</span>
+                      )}
                     </div>
                   </SheetTrigger>
                   <SheetContent

@@ -1,15 +1,17 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 type UserCommentProps = {
   image: string;
   name: string;
   role: string;
   content: string;
+  id: string;
 };
-const UserComment = ({ image, name, role, content }: UserCommentProps) => {
+const UserComment = ({ image, name, id, role, content }: UserCommentProps) => {
   return (
     <>
-      <div className="flex items-center gap-2">
+      <Link href={`/profile/${id}`} className="flex items-center gap-2">
         <Avatar>
           <AvatarImage src={image} />
           <AvatarFallback>{name.charAt(0)}</AvatarFallback>
@@ -20,7 +22,7 @@ const UserComment = ({ image, name, role, content }: UserCommentProps) => {
             Author
           </span>
         )}
-      </div>
+      </Link>
       <p>{content}</p>
     </>
   );

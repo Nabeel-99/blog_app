@@ -84,6 +84,7 @@ const CommentButtons = ({
 
           <button
             onClick={showComments}
+            disabled={comment.replies.length === 0}
             className="flex items-center gap-1 cursor-pointer"
           >
             <FaRegCommentDots className="size-5 " />

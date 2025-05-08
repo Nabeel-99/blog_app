@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaRegCommentDots, FaRegHeart, FaRegTrashCan } from "react-icons/fa6";
+import { FaRegCommentDots } from "react-icons/fa6";
 import { Prisma, Reply } from "@/lib/generated/prisma";
 import UserComment from "./UserComment";
 import { Session } from "next-auth";
@@ -27,51 +26,11 @@ const NestedReplies = ({
   replies,
   openReply,
   session,
-  isHidden,
-  showResponse,
 }: NestedRepliesProps) => {
-  //   console.log("nested replies", reply);
-  //   const [openInput, setOpenInput] = useState(false);
-  //   const [userReply, setUserReply] = useState("");
-  //   const [loading, setLoading] = useState(false);
-  //   const router = useRouter();
-  //   const [activeReplyId, setActiveReplyId] = useState<number | null>(null);
-  //   const openReply = (reply: Reply) => {
-  //     setOpenInput(!openInput);
-  //     setActiveReplyId(reply.id);
-  //   };
-
-  //   const closeReply = () => setOpenInput(false);
-  //   const handleSubmit = async (e: React.FormEvent) => {
-  //     e.preventDefault();
-  //     // console.log("handle submit", comment);
-  //     setLoading(true);
-  //     if (!session) {
-  //       toast.error("You must be logged in to reply");
-  //       setLoading(false);
-  //       return;
-  //     }
-  //     if (!reply) {
-  //       setLoading(false);
-  //       return;
-  //     }
-  //     try {
-  //       const response = await axios.post(
-  //         `/api/blogs/replies/${activeReplyId}/reply`,
-  //         { userReply }
-  //       );
-  //       if (response.status === 201) {
-  //         setUserReply("");
-  //         setOpenInput(false);
-  //         toast.success("Reply created successfully");
-  //         router.refresh();
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  const [isNestedHidden, setIsNestedHidden] = useState(false);
+  const showResponse = () => {
+    setIsNestedHidden(!isNestedHidden);
+  };
   return (
     <>
       <div className="flex flex-col gap-2">
@@ -84,6 +43,7 @@ const NestedReplies = ({
                 name={reply.author.name || ""}
                 role={reply.author.role}
                 content={reply.content}
+                id={reply.authorId}
               />
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-6">
@@ -94,10 +54,11 @@ const NestedReplies = ({
                   />
                   <button
                     onClick={showResponse}
+                    disabled={children.length === 0}
                     className="flex items-center gap-1 cursor-pointer"
                   >
                     <FaRegCommentDots className="size-5 " />
-                    {isHidden ? (
+                    {isNestedHidden ? (
                       "hide replies"
                     ) : (
                       <span>
@@ -117,7 +78,7 @@ const NestedReplies = ({
                   />
                 )}
               </div>
-              {isHidden && (
+              {isNestedHidden && (
                 <NestedReplies
                   allReplies={allReplies}
                   replies={children}

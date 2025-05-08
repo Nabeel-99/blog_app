@@ -87,6 +87,7 @@ const CommentReplies = ({
           name={reply.author.name || ""}
           role={reply.author.role}
           content={reply.content}
+          id={reply.authorId}
         />
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -97,6 +98,7 @@ const CommentReplies = ({
             />
             <button
               onClick={showResponse}
+              disabled={children.length === 0}
               className="flex items-center gap-1 cursor-pointer"
             >
               <FaRegCommentDots className="size-5 " />

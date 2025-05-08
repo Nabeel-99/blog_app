@@ -4,7 +4,14 @@ import { getToken } from "next-auth/jwt";
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
-  if (!token || token.role !== "ADMIN") {
+  if (!token) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+  const adminPaths = ["/blogs/create", "/blogs/edit/:id"];
+  const isAdminRoute = adminPaths.some((path) =>
+    req.nextUrl.pathname.startsWith(path)
+  );
+  if (isAdminRoute && token.role !== "admin") {
     return NextResponse.redirect(new URL("/", req.url));
   }
   return NextResponse.next();
