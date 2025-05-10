@@ -5,6 +5,7 @@ import { FaPencil } from "react-icons/fa6";
 import { Button } from "./ui/button";
 import ProfileForm from "./ProfileForm";
 import { User } from "@/lib/generated/prisma";
+import Image from "next/image";
 
 type ProfileCardProps = {
   user: User | null;
@@ -13,10 +14,13 @@ const ProfileCard = ({ user }: ProfileCardProps) => {
   const [openEdit, setOpenEdit] = useState(false);
   const openForm = () => setOpenEdit(!openEdit);
   const closeForm = () => setOpenEdit(false);
+  console.log(user);
   return (
     <div className="flex flex-col lg:flex-row items-start  gap-6">
       <div className="flex gap-6  w-full">
-        <img
+        <Image
+          width={200}
+          height={200}
           src={user?.image!}
           alt="avatar"
           className="h-full max-sm:h-[80px] max-sm:w-[80px] md:h-[200px] md:w-[200px] w-full object-cover rounded-full"

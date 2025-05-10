@@ -13,12 +13,12 @@ import { LuBellRing } from "react-icons/lu";
 
 type SubscribeFormProps = {
   user: User | null;
-  setOpen: (open: boolean) => void;
+  setOpen?: (open: boolean) => void;
 };
-const SubscribeForm = ({ user, setOpen }: SubscribeFormProps) => {
+const SubscribeForm = ({ user }: SubscribeFormProps) => {
   const [email, setEmail] = useState(user?.email || "");
   const [loading, setLoading] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
+  const [subscribed, setSubscribed] = useState(user?.hasSubscribed || false);
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +32,10 @@ const SubscribeForm = ({ user, setOpen }: SubscribeFormProps) => {
         toast.success("Subscribed successfully");
         router.refresh();
         setSubscribed(true);
-        setTimeout(() => {
-          setOpen(false);
-        }, 4000);
+        setTimeout(() => {}, 4000);
       }
     } catch (error) {
+      console.log(error);
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data.error);
       }
@@ -47,11 +46,12 @@ const SubscribeForm = ({ user, setOpen }: SubscribeFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col  max-sm:max-h-[200px] overflow-scroll hide-scrollbar  md:max-h-[300px]  gap-6">
-        <p className="text-sm">
+        <p className="max-sm:text-sm lg:text-4xl">
           Read articles from us directly inside your inbox. Subscribe to the
           newsletter, and don't miss out.
         </p>
         <Input
+          type="email"
           placeholder="Enter email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -59,13 +59,10 @@ const SubscribeForm = ({ user, setOpen }: SubscribeFormProps) => {
 
         <div className="flex justify-end">
           {subscribed ? (
-            <Button
-              type="button"
-              className="bg-white border border-[#cbcbcb] text-black flex items-center gap-1"
-            >
+            <div className="bg-white  p-2 rounded-lg border border-[#cbcbcb] text-black flex items-center gap-1">
               <LuBellRing className="size-5 text-[#7c3ee4]" />
               <span>Subscribed</span>
-            </Button>
+            </div>
           ) : (
             <Button disabled={loading} type="submit" className="bg-btn">
               Subscribe

@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import NewsLetter from "@/components/NewsLetter";
 import RecentPosts from "@/components/RecentPosts";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,15 @@ const Page = async () => {
     include: { categories: { select: { id: true, name: true } } },
   });
   const featuredPost = posts[0];
-
+  const session = await auth();
+  let user = null;
+  if (session?.user.id) {
+    user = await prisma.user.findUnique({
+      where: {
+        id: session?.user?.id,
+      },
+    });
+  }
   return (
     <>
       {/* featured post section */}
@@ -102,7 +111,7 @@ const Page = async () => {
       </section>
       <section>
         <div className="mt-20 lg:mt-40">
-          <NewsLetter />
+          <NewsLetter user={user} />
         </div>
       </section>
     </>

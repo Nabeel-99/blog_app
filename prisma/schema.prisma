@@ -58,10 +58,11 @@ model Comment{
   content String
   post Post @relation(fields: [postId], references: [id])
   postId Int
-  author User @relation(fields: [authorId], references: [id])
-  authorId String
+  author User? @relation(fields: [authorId], references: [id])
+  authorId String?
   replies Reply[]
   likes Like[]
+  isUserDeleted Boolean @default(false)
 }
 
 model Reply {
@@ -73,9 +74,10 @@ model Reply {
   parent Reply? @relation("ReplyToReply", fields: [parentId], references: [id])
   parentId Int?
   children Reply[] @relation("ReplyToReply")
-  author User @relation(fields: [authorId], references: [id])
-  authorId String
+  author User? @relation(fields: [authorId], references: [id])
+  authorId String?
   likes Like[]
+  isUserDeleted Boolean @default(false)
 }
 
 model Like{

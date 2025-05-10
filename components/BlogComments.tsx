@@ -45,11 +45,12 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
         return (
           <div className="flex flex-col gap-4" key={comment.id}>
             <UserComment
-              image={comment.author.image || ""}
-              name={comment.author.name || ""}
-              role={comment.author.role}
+              image={comment?.author?.image || ""}
+              name={comment?.author?.name || ""}
+              role={comment?.author?.role || ""}
               content={comment.content}
-              id={comment.authorId}
+              id={comment?.authorId || ""}
+              isUserDeleted={comment.isUserDeleted}
             />
 
             <CommentButtons

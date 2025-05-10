@@ -5152,6 +5152,7 @@ export namespace Prisma {
     content: string | null
     postId: number | null
     authorId: string | null
+    isUserDeleted: boolean | null
   }
 
   export type CommentMaxAggregateOutputType = {
@@ -5160,6 +5161,7 @@ export namespace Prisma {
     content: string | null
     postId: number | null
     authorId: string | null
+    isUserDeleted: boolean | null
   }
 
   export type CommentCountAggregateOutputType = {
@@ -5168,6 +5170,7 @@ export namespace Prisma {
     content: number
     postId: number
     authorId: number
+    isUserDeleted: number
     _all: number
   }
 
@@ -5188,6 +5191,7 @@ export namespace Prisma {
     content?: true
     postId?: true
     authorId?: true
+    isUserDeleted?: true
   }
 
   export type CommentMaxAggregateInputType = {
@@ -5196,6 +5200,7 @@ export namespace Prisma {
     content?: true
     postId?: true
     authorId?: true
+    isUserDeleted?: true
   }
 
   export type CommentCountAggregateInputType = {
@@ -5204,6 +5209,7 @@ export namespace Prisma {
     content?: true
     postId?: true
     authorId?: true
+    isUserDeleted?: true
     _all?: true
   }
 
@@ -5298,7 +5304,8 @@ export namespace Prisma {
     createdAt: Date
     content: string
     postId: number
-    authorId: string
+    authorId: string | null
+    isUserDeleted: boolean
     _count: CommentCountAggregateOutputType | null
     _avg: CommentAvgAggregateOutputType | null
     _sum: CommentSumAggregateOutputType | null
@@ -5326,8 +5333,9 @@ export namespace Prisma {
     content?: boolean
     postId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
     post?: boolean | PostDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
     replies?: boolean | Comment$repliesArgs<ExtArgs>
     likes?: boolean | Comment$likesArgs<ExtArgs>
     _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
@@ -5339,8 +5347,9 @@ export namespace Prisma {
     content?: boolean
     postId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
     post?: boolean | PostDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5349,8 +5358,9 @@ export namespace Prisma {
     content?: boolean
     postId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
     post?: boolean | PostDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectScalar = {
@@ -5359,30 +5369,31 @@ export namespace Prisma {
     content?: boolean
     postId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "content" | "postId" | "authorId", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "content" | "postId" | "authorId" | "isUserDeleted", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | PostDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
     replies?: boolean | Comment$repliesArgs<ExtArgs>
     likes?: boolean | Comment$likesArgs<ExtArgs>
     _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | PostDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }
   export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | PostDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Comment$authorArgs<ExtArgs>
   }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
       post: Prisma.$PostPayload<ExtArgs>
-      author: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs> | null
       replies: Prisma.$ReplyPayload<ExtArgs>[]
       likes: Prisma.$LikePayload<ExtArgs>[]
     }
@@ -5391,7 +5402,8 @@ export namespace Prisma {
       createdAt: Date
       content: string
       postId: number
-      authorId: string
+      authorId: string | null
+      isUserDeleted: boolean
     }, ExtArgs["result"]["comment"]>
     composites: {}
   }
@@ -5787,7 +5799,7 @@ export namespace Prisma {
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends Comment$authorArgs<ExtArgs> = {}>(args?: Subset<T, Comment$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     replies<T extends Comment$repliesArgs<ExtArgs> = {}>(args?: Subset<T, Comment$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     likes<T extends Comment$likesArgs<ExtArgs> = {}>(args?: Subset<T, Comment$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -5824,6 +5836,7 @@ export namespace Prisma {
     readonly content: FieldRef<"Comment", 'String'>
     readonly postId: FieldRef<"Comment", 'Int'>
     readonly authorId: FieldRef<"Comment", 'String'>
+    readonly isUserDeleted: FieldRef<"Comment", 'Boolean'>
   }
     
 
@@ -6220,6 +6233,25 @@ export namespace Prisma {
   }
 
   /**
+   * Comment.author
+   */
+  export type Comment$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Comment.replies
    */
   export type Comment$repliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6317,6 +6349,7 @@ export namespace Prisma {
     commentId: number | null
     parentId: number | null
     authorId: string | null
+    isUserDeleted: boolean | null
   }
 
   export type ReplyMaxAggregateOutputType = {
@@ -6326,6 +6359,7 @@ export namespace Prisma {
     commentId: number | null
     parentId: number | null
     authorId: string | null
+    isUserDeleted: boolean | null
   }
 
   export type ReplyCountAggregateOutputType = {
@@ -6335,6 +6369,7 @@ export namespace Prisma {
     commentId: number
     parentId: number
     authorId: number
+    isUserDeleted: number
     _all: number
   }
 
@@ -6358,6 +6393,7 @@ export namespace Prisma {
     commentId?: true
     parentId?: true
     authorId?: true
+    isUserDeleted?: true
   }
 
   export type ReplyMaxAggregateInputType = {
@@ -6367,6 +6403,7 @@ export namespace Prisma {
     commentId?: true
     parentId?: true
     authorId?: true
+    isUserDeleted?: true
   }
 
   export type ReplyCountAggregateInputType = {
@@ -6376,6 +6413,7 @@ export namespace Prisma {
     commentId?: true
     parentId?: true
     authorId?: true
+    isUserDeleted?: true
     _all?: true
   }
 
@@ -6471,7 +6509,8 @@ export namespace Prisma {
     content: string
     commentId: number
     parentId: number | null
-    authorId: string
+    authorId: string | null
+    isUserDeleted: boolean
     _count: ReplyCountAggregateOutputType | null
     _avg: ReplyAvgAggregateOutputType | null
     _sum: ReplySumAggregateOutputType | null
@@ -6500,10 +6539,11 @@ export namespace Prisma {
     commentId?: boolean
     parentId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
     comment?: boolean | CommentDefaultArgs<ExtArgs>
     parent?: boolean | Reply$parentArgs<ExtArgs>
     children?: boolean | Reply$childrenArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Reply$authorArgs<ExtArgs>
     likes?: boolean | Reply$likesArgs<ExtArgs>
     _count?: boolean | ReplyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reply"]>
@@ -6515,9 +6555,10 @@ export namespace Prisma {
     commentId?: boolean
     parentId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
     comment?: boolean | CommentDefaultArgs<ExtArgs>
     parent?: boolean | Reply$parentArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Reply$authorArgs<ExtArgs>
   }, ExtArgs["result"]["reply"]>
 
   export type ReplySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6527,9 +6568,10 @@ export namespace Prisma {
     commentId?: boolean
     parentId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
     comment?: boolean | CommentDefaultArgs<ExtArgs>
     parent?: boolean | Reply$parentArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Reply$authorArgs<ExtArgs>
   }, ExtArgs["result"]["reply"]>
 
   export type ReplySelectScalar = {
@@ -6539,26 +6581,27 @@ export namespace Prisma {
     commentId?: boolean
     parentId?: boolean
     authorId?: boolean
+    isUserDeleted?: boolean
   }
 
-  export type ReplyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "content" | "commentId" | "parentId" | "authorId", ExtArgs["result"]["reply"]>
+  export type ReplyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "content" | "commentId" | "parentId" | "authorId" | "isUserDeleted", ExtArgs["result"]["reply"]>
   export type ReplyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comment?: boolean | CommentDefaultArgs<ExtArgs>
     parent?: boolean | Reply$parentArgs<ExtArgs>
     children?: boolean | Reply$childrenArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Reply$authorArgs<ExtArgs>
     likes?: boolean | Reply$likesArgs<ExtArgs>
     _count?: boolean | ReplyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ReplyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comment?: boolean | CommentDefaultArgs<ExtArgs>
     parent?: boolean | Reply$parentArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Reply$authorArgs<ExtArgs>
   }
   export type ReplyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comment?: boolean | CommentDefaultArgs<ExtArgs>
     parent?: boolean | Reply$parentArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Reply$authorArgs<ExtArgs>
   }
 
   export type $ReplyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6567,7 +6610,7 @@ export namespace Prisma {
       comment: Prisma.$CommentPayload<ExtArgs>
       parent: Prisma.$ReplyPayload<ExtArgs> | null
       children: Prisma.$ReplyPayload<ExtArgs>[]
-      author: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs> | null
       likes: Prisma.$LikePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6576,7 +6619,8 @@ export namespace Prisma {
       content: string
       commentId: number
       parentId: number | null
-      authorId: string
+      authorId: string | null
+      isUserDeleted: boolean
     }, ExtArgs["result"]["reply"]>
     composites: {}
   }
@@ -6974,7 +7018,7 @@ export namespace Prisma {
     comment<T extends CommentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CommentDefaultArgs<ExtArgs>>): Prisma__CommentClient<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     parent<T extends Reply$parentArgs<ExtArgs> = {}>(args?: Subset<T, Reply$parentArgs<ExtArgs>>): Prisma__ReplyClient<$Result.GetResult<Prisma.$ReplyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     children<T extends Reply$childrenArgs<ExtArgs> = {}>(args?: Subset<T, Reply$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends Reply$authorArgs<ExtArgs> = {}>(args?: Subset<T, Reply$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     likes<T extends Reply$likesArgs<ExtArgs> = {}>(args?: Subset<T, Reply$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7011,6 +7055,7 @@ export namespace Prisma {
     readonly commentId: FieldRef<"Reply", 'Int'>
     readonly parentId: FieldRef<"Reply", 'Int'>
     readonly authorId: FieldRef<"Reply", 'String'>
+    readonly isUserDeleted: FieldRef<"Reply", 'Boolean'>
   }
     
 
@@ -7447,6 +7492,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReplyScalarFieldEnum | ReplyScalarFieldEnum[]
+  }
+
+  /**
+   * Reply.author
+   */
+  export type Reply$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -9749,7 +9813,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     content: 'content',
     postId: 'postId',
-    authorId: 'authorId'
+    authorId: 'authorId',
+    isUserDeleted: 'isUserDeleted'
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
@@ -9761,7 +9826,8 @@ export namespace Prisma {
     content: 'content',
     commentId: 'commentId',
     parentId: 'parentId',
-    authorId: 'authorId'
+    authorId: 'authorId',
+    isUserDeleted: 'isUserDeleted'
   };
 
   export type ReplyScalarFieldEnum = (typeof ReplyScalarFieldEnum)[keyof typeof ReplyScalarFieldEnum]
@@ -10098,9 +10164,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     content?: StringFilter<"Comment"> | string
     postId?: IntFilter<"Comment"> | number
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: StringNullableFilter<"Comment"> | string | null
+    isUserDeleted?: BoolFilter<"Comment"> | boolean
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     replies?: ReplyListRelationFilter
     likes?: LikeListRelationFilter
   }
@@ -10110,7 +10177,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     content?: SortOrder
     postId?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    isUserDeleted?: SortOrder
     post?: PostOrderByWithRelationInput
     author?: UserOrderByWithRelationInput
     replies?: ReplyOrderByRelationAggregateInput
@@ -10125,9 +10193,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     content?: StringFilter<"Comment"> | string
     postId?: IntFilter<"Comment"> | number
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: StringNullableFilter<"Comment"> | string | null
+    isUserDeleted?: BoolFilter<"Comment"> | boolean
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     replies?: ReplyListRelationFilter
     likes?: LikeListRelationFilter
   }, "id">
@@ -10137,7 +10206,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     content?: SortOrder
     postId?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    isUserDeleted?: SortOrder
     _count?: CommentCountOrderByAggregateInput
     _avg?: CommentAvgOrderByAggregateInput
     _max?: CommentMaxOrderByAggregateInput
@@ -10153,7 +10223,8 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     content?: StringWithAggregatesFilter<"Comment"> | string
     postId?: IntWithAggregatesFilter<"Comment"> | number
-    authorId?: StringWithAggregatesFilter<"Comment"> | string
+    authorId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    isUserDeleted?: BoolWithAggregatesFilter<"Comment"> | boolean
   }
 
   export type ReplyWhereInput = {
@@ -10165,11 +10236,12 @@ export namespace Prisma {
     content?: StringFilter<"Reply"> | string
     commentId?: IntFilter<"Reply"> | number
     parentId?: IntNullableFilter<"Reply"> | number | null
-    authorId?: StringFilter<"Reply"> | string
+    authorId?: StringNullableFilter<"Reply"> | string | null
+    isUserDeleted?: BoolFilter<"Reply"> | boolean
     comment?: XOR<CommentScalarRelationFilter, CommentWhereInput>
     parent?: XOR<ReplyNullableScalarRelationFilter, ReplyWhereInput> | null
     children?: ReplyListRelationFilter
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     likes?: LikeListRelationFilter
   }
 
@@ -10179,7 +10251,8 @@ export namespace Prisma {
     content?: SortOrder
     commentId?: SortOrder
     parentId?: SortOrderInput | SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    isUserDeleted?: SortOrder
     comment?: CommentOrderByWithRelationInput
     parent?: ReplyOrderByWithRelationInput
     children?: ReplyOrderByRelationAggregateInput
@@ -10196,11 +10269,12 @@ export namespace Prisma {
     content?: StringFilter<"Reply"> | string
     commentId?: IntFilter<"Reply"> | number
     parentId?: IntNullableFilter<"Reply"> | number | null
-    authorId?: StringFilter<"Reply"> | string
+    authorId?: StringNullableFilter<"Reply"> | string | null
+    isUserDeleted?: BoolFilter<"Reply"> | boolean
     comment?: XOR<CommentScalarRelationFilter, CommentWhereInput>
     parent?: XOR<ReplyNullableScalarRelationFilter, ReplyWhereInput> | null
     children?: ReplyListRelationFilter
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     likes?: LikeListRelationFilter
   }, "id">
 
@@ -10210,7 +10284,8 @@ export namespace Prisma {
     content?: SortOrder
     commentId?: SortOrder
     parentId?: SortOrderInput | SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    isUserDeleted?: SortOrder
     _count?: ReplyCountOrderByAggregateInput
     _avg?: ReplyAvgOrderByAggregateInput
     _max?: ReplyMaxOrderByAggregateInput
@@ -10227,7 +10302,8 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Reply"> | string
     commentId?: IntWithAggregatesFilter<"Reply"> | number
     parentId?: IntNullableWithAggregatesFilter<"Reply"> | number | null
-    authorId?: StringWithAggregatesFilter<"Reply"> | string
+    authorId?: StringNullableWithAggregatesFilter<"Reply"> | string | null
+    isUserDeleted?: BoolWithAggregatesFilter<"Reply"> | boolean
   }
 
   export type LikeWhereInput = {
@@ -10569,8 +10645,9 @@ export namespace Prisma {
   export type CommentCreateInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     post: PostCreateNestedOneWithoutCommentsInput
-    author: UserCreateNestedOneWithoutCommentsInput
+    author?: UserCreateNestedOneWithoutCommentsInput
     replies?: ReplyCreateNestedManyWithoutCommentInput
     likes?: LikeCreateNestedManyWithoutCommentInput
   }
@@ -10580,7 +10657,8 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     postId: number
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     replies?: ReplyUncheckedCreateNestedManyWithoutCommentInput
     likes?: LikeUncheckedCreateNestedManyWithoutCommentInput
   }
@@ -10588,8 +10666,9 @@ export namespace Prisma {
   export type CommentUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
-    author?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    author?: UserUpdateOneWithoutCommentsNestedInput
     replies?: ReplyUpdateManyWithoutCommentNestedInput
     likes?: LikeUpdateManyWithoutCommentNestedInput
   }
@@ -10599,7 +10678,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     replies?: ReplyUncheckedUpdateManyWithoutCommentNestedInput
     likes?: LikeUncheckedUpdateManyWithoutCommentNestedInput
   }
@@ -10609,12 +10689,14 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     postId: number
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
   }
 
   export type CommentUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CommentUncheckedUpdateManyInput = {
@@ -10622,16 +10704,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ReplyCreateInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     comment: CommentCreateNestedOneWithoutRepliesInput
     parent?: ReplyCreateNestedOneWithoutChildrenInput
     children?: ReplyCreateNestedManyWithoutParentInput
-    author: UserCreateNestedOneWithoutRepliesInput
+    author?: UserCreateNestedOneWithoutRepliesInput
     likes?: LikeCreateNestedManyWithoutReplyInput
   }
 
@@ -10641,7 +10725,8 @@ export namespace Prisma {
     content: string
     commentId: number
     parentId?: number | null
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     children?: ReplyUncheckedCreateNestedManyWithoutParentInput
     likes?: LikeUncheckedCreateNestedManyWithoutReplyInput
   }
@@ -10649,10 +10734,11 @@ export namespace Prisma {
   export type ReplyUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     comment?: CommentUpdateOneRequiredWithoutRepliesNestedInput
     parent?: ReplyUpdateOneWithoutChildrenNestedInput
     children?: ReplyUpdateManyWithoutParentNestedInput
-    author?: UserUpdateOneRequiredWithoutRepliesNestedInput
+    author?: UserUpdateOneWithoutRepliesNestedInput
     likes?: LikeUpdateManyWithoutReplyNestedInput
   }
 
@@ -10662,7 +10748,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     children?: ReplyUncheckedUpdateManyWithoutParentNestedInput
     likes?: LikeUncheckedUpdateManyWithoutReplyNestedInput
   }
@@ -10673,12 +10760,14 @@ export namespace Prisma {
     content: string
     commentId: number
     parentId?: number | null
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
   }
 
   export type ReplyUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ReplyUncheckedUpdateManyInput = {
@@ -10687,7 +10776,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type LikeCreateInput = {
@@ -11110,12 +11200,18 @@ export namespace Prisma {
     isNot?: PostWhereInput
   }
 
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type CommentCountOrderByAggregateInput = {
     id?: SortOrder
     createdAt?: SortOrder
     content?: SortOrder
     postId?: SortOrder
     authorId?: SortOrder
+    isUserDeleted?: SortOrder
   }
 
   export type CommentAvgOrderByAggregateInput = {
@@ -11129,6 +11225,7 @@ export namespace Prisma {
     content?: SortOrder
     postId?: SortOrder
     authorId?: SortOrder
+    isUserDeleted?: SortOrder
   }
 
   export type CommentMinOrderByAggregateInput = {
@@ -11137,6 +11234,7 @@ export namespace Prisma {
     content?: SortOrder
     postId?: SortOrder
     authorId?: SortOrder
+    isUserDeleted?: SortOrder
   }
 
   export type CommentSumOrderByAggregateInput = {
@@ -11161,6 +11259,7 @@ export namespace Prisma {
     commentId?: SortOrder
     parentId?: SortOrder
     authorId?: SortOrder
+    isUserDeleted?: SortOrder
   }
 
   export type ReplyAvgOrderByAggregateInput = {
@@ -11176,6 +11275,7 @@ export namespace Prisma {
     commentId?: SortOrder
     parentId?: SortOrder
     authorId?: SortOrder
+    isUserDeleted?: SortOrder
   }
 
   export type ReplyMinOrderByAggregateInput = {
@@ -11185,6 +11285,7 @@ export namespace Prisma {
     commentId?: SortOrder
     parentId?: SortOrder
     authorId?: SortOrder
+    isUserDeleted?: SortOrder
   }
 
   export type ReplySumOrderByAggregateInput = {
@@ -11692,10 +11793,12 @@ export namespace Prisma {
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutCommentsInput, PostUpdateWithoutCommentsInput>, PostUncheckedUpdateWithoutCommentsInput>
   }
 
-  export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+  export type UserUpdateOneWithoutCommentsNestedInput = {
     create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
     upsert?: UserUpsertWithoutCommentsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
   }
@@ -11834,10 +11937,12 @@ export namespace Prisma {
     deleteMany?: ReplyScalarWhereInput | ReplyScalarWhereInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutRepliesNestedInput = {
+  export type UserUpdateOneWithoutRepliesNestedInput = {
     create?: XOR<UserCreateWithoutRepliesInput, UserUncheckedCreateWithoutRepliesInput>
     connectOrCreate?: UserCreateOrConnectWithoutRepliesInput
     upsert?: UserUpsertWithoutRepliesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRepliesInput, UserUpdateWithoutRepliesInput>, UserUncheckedUpdateWithoutRepliesInput>
   }
@@ -12164,6 +12269,7 @@ export namespace Prisma {
   export type CommentCreateWithoutAuthorInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     post: PostCreateNestedOneWithoutCommentsInput
     replies?: ReplyCreateNestedManyWithoutCommentInput
     likes?: LikeCreateNestedManyWithoutCommentInput
@@ -12174,6 +12280,7 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     postId: number
+    isUserDeleted?: boolean
     replies?: ReplyUncheckedCreateNestedManyWithoutCommentInput
     likes?: LikeUncheckedCreateNestedManyWithoutCommentInput
   }
@@ -12216,6 +12323,7 @@ export namespace Prisma {
   export type ReplyCreateWithoutAuthorInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     comment: CommentCreateNestedOneWithoutRepliesInput
     parent?: ReplyCreateNestedOneWithoutChildrenInput
     children?: ReplyCreateNestedManyWithoutParentInput
@@ -12228,6 +12336,7 @@ export namespace Prisma {
     content: string
     commentId: number
     parentId?: number | null
+    isUserDeleted?: boolean
     children?: ReplyUncheckedCreateNestedManyWithoutParentInput
     likes?: LikeUncheckedCreateNestedManyWithoutReplyInput
   }
@@ -12298,7 +12407,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     content?: StringFilter<"Comment"> | string
     postId?: IntFilter<"Comment"> | number
-    authorId?: StringFilter<"Comment"> | string
+    authorId?: StringNullableFilter<"Comment"> | string | null
+    isUserDeleted?: BoolFilter<"Comment"> | boolean
   }
 
   export type LikeUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -12354,7 +12464,8 @@ export namespace Prisma {
     content?: StringFilter<"Reply"> | string
     commentId?: IntFilter<"Reply"> | number
     parentId?: IntNullableFilter<"Reply"> | number | null
-    authorId?: StringFilter<"Reply"> | string
+    authorId?: StringNullableFilter<"Reply"> | string | null
+    isUserDeleted?: BoolFilter<"Reply"> | boolean
   }
 
   export type CategoryCreateWithoutPostsInput = {
@@ -12430,7 +12541,8 @@ export namespace Prisma {
   export type CommentCreateWithoutPostInput = {
     createdAt?: Date | string
     content: string
-    author: UserCreateNestedOneWithoutCommentsInput
+    isUserDeleted?: boolean
+    author?: UserCreateNestedOneWithoutCommentsInput
     replies?: ReplyCreateNestedManyWithoutCommentInput
     likes?: LikeCreateNestedManyWithoutCommentInput
   }
@@ -12439,7 +12551,8 @@ export namespace Prisma {
     id?: number
     createdAt?: Date | string
     content: string
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     replies?: ReplyUncheckedCreateNestedManyWithoutCommentInput
     likes?: LikeUncheckedCreateNestedManyWithoutCommentInput
   }
@@ -12665,9 +12778,10 @@ export namespace Prisma {
   export type ReplyCreateWithoutCommentInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     parent?: ReplyCreateNestedOneWithoutChildrenInput
     children?: ReplyCreateNestedManyWithoutParentInput
-    author: UserCreateNestedOneWithoutRepliesInput
+    author?: UserCreateNestedOneWithoutRepliesInput
     likes?: LikeCreateNestedManyWithoutReplyInput
   }
 
@@ -12676,7 +12790,8 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     parentId?: number | null
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     children?: ReplyUncheckedCreateNestedManyWithoutParentInput
     likes?: LikeUncheckedCreateNestedManyWithoutReplyInput
   }
@@ -12828,8 +12943,9 @@ export namespace Prisma {
   export type CommentCreateWithoutRepliesInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     post: PostCreateNestedOneWithoutCommentsInput
-    author: UserCreateNestedOneWithoutCommentsInput
+    author?: UserCreateNestedOneWithoutCommentsInput
     likes?: LikeCreateNestedManyWithoutCommentInput
   }
 
@@ -12838,7 +12954,8 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     postId: number
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     likes?: LikeUncheckedCreateNestedManyWithoutCommentInput
   }
 
@@ -12850,9 +12967,10 @@ export namespace Prisma {
   export type ReplyCreateWithoutChildrenInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     comment: CommentCreateNestedOneWithoutRepliesInput
     parent?: ReplyCreateNestedOneWithoutChildrenInput
-    author: UserCreateNestedOneWithoutRepliesInput
+    author?: UserCreateNestedOneWithoutRepliesInput
     likes?: LikeCreateNestedManyWithoutReplyInput
   }
 
@@ -12862,7 +12980,8 @@ export namespace Prisma {
     content: string
     commentId: number
     parentId?: number | null
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     likes?: LikeUncheckedCreateNestedManyWithoutReplyInput
   }
 
@@ -12874,9 +12993,10 @@ export namespace Prisma {
   export type ReplyCreateWithoutParentInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     comment: CommentCreateNestedOneWithoutRepliesInput
     children?: ReplyCreateNestedManyWithoutParentInput
-    author: UserCreateNestedOneWithoutRepliesInput
+    author?: UserCreateNestedOneWithoutRepliesInput
     likes?: LikeCreateNestedManyWithoutReplyInput
   }
 
@@ -12885,7 +13005,8 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     commentId: number
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     children?: ReplyUncheckedCreateNestedManyWithoutParentInput
     likes?: LikeUncheckedCreateNestedManyWithoutReplyInput
   }
@@ -12970,8 +13091,9 @@ export namespace Prisma {
   export type CommentUpdateWithoutRepliesInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
-    author?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    author?: UserUpdateOneWithoutCommentsNestedInput
     likes?: LikeUpdateManyWithoutCommentNestedInput
   }
 
@@ -12980,7 +13102,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     likes?: LikeUncheckedUpdateManyWithoutCommentNestedInput
   }
 
@@ -12998,9 +13121,10 @@ export namespace Prisma {
   export type ReplyUpdateWithoutChildrenInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     comment?: CommentUpdateOneRequiredWithoutRepliesNestedInput
     parent?: ReplyUpdateOneWithoutChildrenNestedInput
-    author?: UserUpdateOneRequiredWithoutRepliesNestedInput
+    author?: UserUpdateOneWithoutRepliesNestedInput
     likes?: LikeUpdateManyWithoutReplyNestedInput
   }
 
@@ -13010,7 +13134,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     likes?: LikeUncheckedUpdateManyWithoutReplyNestedInput
   }
 
@@ -13151,8 +13276,9 @@ export namespace Prisma {
   export type CommentCreateWithoutLikesInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     post: PostCreateNestedOneWithoutCommentsInput
-    author: UserCreateNestedOneWithoutCommentsInput
+    author?: UserCreateNestedOneWithoutCommentsInput
     replies?: ReplyCreateNestedManyWithoutCommentInput
   }
 
@@ -13161,7 +13287,8 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     postId: number
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     replies?: ReplyUncheckedCreateNestedManyWithoutCommentInput
   }
 
@@ -13173,10 +13300,11 @@ export namespace Prisma {
   export type ReplyCreateWithoutLikesInput = {
     createdAt?: Date | string
     content: string
+    isUserDeleted?: boolean
     comment: CommentCreateNestedOneWithoutRepliesInput
     parent?: ReplyCreateNestedOneWithoutChildrenInput
     children?: ReplyCreateNestedManyWithoutParentInput
-    author: UserCreateNestedOneWithoutRepliesInput
+    author?: UserCreateNestedOneWithoutRepliesInput
   }
 
   export type ReplyUncheckedCreateWithoutLikesInput = {
@@ -13185,7 +13313,8 @@ export namespace Prisma {
     content: string
     commentId: number
     parentId?: number | null
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
     children?: ReplyUncheckedCreateNestedManyWithoutParentInput
   }
 
@@ -13285,8 +13414,9 @@ export namespace Prisma {
   export type CommentUpdateWithoutLikesInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
-    author?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    author?: UserUpdateOneWithoutCommentsNestedInput
     replies?: ReplyUpdateManyWithoutCommentNestedInput
   }
 
@@ -13295,7 +13425,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     replies?: ReplyUncheckedUpdateManyWithoutCommentNestedInput
   }
 
@@ -13313,10 +13444,11 @@ export namespace Prisma {
   export type ReplyUpdateWithoutLikesInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     comment?: CommentUpdateOneRequiredWithoutRepliesNestedInput
     parent?: ReplyUpdateOneWithoutChildrenNestedInput
     children?: ReplyUpdateManyWithoutParentNestedInput
-    author?: UserUpdateOneRequiredWithoutRepliesNestedInput
+    author?: UserUpdateOneWithoutRepliesNestedInput
   }
 
   export type ReplyUncheckedUpdateWithoutLikesInput = {
@@ -13325,7 +13457,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     children?: ReplyUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -13346,6 +13479,7 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     postId: number
+    isUserDeleted?: boolean
   }
 
   export type LikeCreateManyAuthorInput = {
@@ -13362,6 +13496,7 @@ export namespace Prisma {
     content: string
     commentId: number
     parentId?: number | null
+    isUserDeleted?: boolean
   }
 
   export type PostUpdateWithoutAuthorInput = {
@@ -13408,6 +13543,7 @@ export namespace Prisma {
   export type CommentUpdateWithoutAuthorInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     post?: PostUpdateOneRequiredWithoutCommentsNestedInput
     replies?: ReplyUpdateManyWithoutCommentNestedInput
     likes?: LikeUpdateManyWithoutCommentNestedInput
@@ -13418,6 +13554,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: IntFieldUpdateOperationsInput | number
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     replies?: ReplyUncheckedUpdateManyWithoutCommentNestedInput
     likes?: LikeUncheckedUpdateManyWithoutCommentNestedInput
   }
@@ -13427,6 +13564,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     postId?: IntFieldUpdateOperationsInput | number
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type LikeUpdateWithoutAuthorInput = {
@@ -13455,6 +13593,7 @@ export namespace Prisma {
   export type ReplyUpdateWithoutAuthorInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     comment?: CommentUpdateOneRequiredWithoutRepliesNestedInput
     parent?: ReplyUpdateOneWithoutChildrenNestedInput
     children?: ReplyUpdateManyWithoutParentNestedInput
@@ -13467,6 +13606,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     children?: ReplyUncheckedUpdateManyWithoutParentNestedInput
     likes?: LikeUncheckedUpdateManyWithoutReplyNestedInput
   }
@@ -13477,6 +13617,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type LikeCreateManyPostInput = {
@@ -13491,7 +13632,8 @@ export namespace Prisma {
     id?: number
     createdAt?: Date | string
     content: string
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
   }
 
   export type CategoryUpdateWithoutPostsInput = {
@@ -13534,7 +13676,8 @@ export namespace Prisma {
   export type CommentUpdateWithoutPostInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
-    author?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
+    author?: UserUpdateOneWithoutCommentsNestedInput
     replies?: ReplyUpdateManyWithoutCommentNestedInput
     likes?: LikeUpdateManyWithoutCommentNestedInput
   }
@@ -13543,7 +13686,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     replies?: ReplyUncheckedUpdateManyWithoutCommentNestedInput
     likes?: LikeUncheckedUpdateManyWithoutCommentNestedInput
   }
@@ -13552,7 +13696,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PostUpdateWithoutCategoriesInput = {
@@ -13602,7 +13747,8 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     parentId?: number | null
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
   }
 
   export type LikeCreateManyCommentInput = {
@@ -13616,9 +13762,10 @@ export namespace Prisma {
   export type ReplyUpdateWithoutCommentInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     parent?: ReplyUpdateOneWithoutChildrenNestedInput
     children?: ReplyUpdateManyWithoutParentNestedInput
-    author?: UserUpdateOneRequiredWithoutRepliesNestedInput
+    author?: UserUpdateOneWithoutRepliesNestedInput
     likes?: LikeUpdateManyWithoutReplyNestedInput
   }
 
@@ -13627,7 +13774,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     children?: ReplyUncheckedUpdateManyWithoutParentNestedInput
     likes?: LikeUncheckedUpdateManyWithoutReplyNestedInput
   }
@@ -13637,7 +13785,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     parentId?: NullableIntFieldUpdateOperationsInput | number | null
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type LikeUpdateWithoutCommentInput = {
@@ -13668,7 +13817,8 @@ export namespace Prisma {
     createdAt?: Date | string
     content: string
     commentId: number
-    authorId: string
+    authorId?: string | null
+    isUserDeleted?: boolean
   }
 
   export type LikeCreateManyReplyInput = {
@@ -13682,9 +13832,10 @@ export namespace Prisma {
   export type ReplyUpdateWithoutParentInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     comment?: CommentUpdateOneRequiredWithoutRepliesNestedInput
     children?: ReplyUpdateManyWithoutParentNestedInput
-    author?: UserUpdateOneRequiredWithoutRepliesNestedInput
+    author?: UserUpdateOneWithoutRepliesNestedInput
     likes?: LikeUpdateManyWithoutReplyNestedInput
   }
 
@@ -13693,7 +13844,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
     children?: ReplyUncheckedUpdateManyWithoutParentNestedInput
     likes?: LikeUncheckedUpdateManyWithoutReplyNestedInput
   }
@@ -13703,7 +13855,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     content?: StringFieldUpdateOperationsInput | string
     commentId?: IntFieldUpdateOperationsInput | number
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    isUserDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type LikeUpdateWithoutReplyInput = {

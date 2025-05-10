@@ -52,29 +52,31 @@ model Category {
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  content   String
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    Int
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
-  replies   Reply[]
-  likes     Like[]
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  content       String
+  post          Post     @relation(fields: [postId], references: [id])
+  postId        Int
+  author        User?    @relation(fields: [authorId], references: [id])
+  authorId      String?
+  replies       Reply[]
+  likes         Like[]
+  isUserDeleted Boolean  @default(false)
 }
 
 model Reply {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  content   String
-  comment   Comment  @relation(fields: [commentId], references: [id])
-  commentId Int
-  parent    Reply?   @relation("ReplyToReply", fields: [parentId], references: [id])
-  parentId  Int?
-  children  Reply[]  @relation("ReplyToReply")
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
-  likes     Like[]
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  content       String
+  comment       Comment  @relation(fields: [commentId], references: [id])
+  commentId     Int
+  parent        Reply?   @relation("ReplyToReply", fields: [parentId], references: [id])
+  parentId      Int?
+  children      Reply[]  @relation("ReplyToReply")
+  author        User?    @relation(fields: [authorId], references: [id])
+  authorId      String?
+  likes         Like[]
+  isUserDeleted Boolean  @default(false)
 }
 
 model Like {

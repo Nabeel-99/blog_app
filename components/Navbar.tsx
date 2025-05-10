@@ -62,11 +62,11 @@ const Navbar = async () => {
             </Button>
           </Link>
         )}
-        {role !== "ADMIN" && (
+        {/* {role !== "ADMIN" && (
           <Button className="bg-btn text-white max-sm:hidden cursor-pointer">
             Subscribe
           </Button>
-        )}
+        )} */}
         <Dialog>
           <DialogTrigger asChild>
             <button title="Search cursor-pointer">

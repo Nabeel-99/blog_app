@@ -19,11 +19,20 @@ import {
 import CommentCard from "@/components/CommentCard";
 import LikeButton from "@/components/LikeButton";
 import { auth } from "@/auth";
+import ScrollTrigger from "@/components/ScrollTrigger";
 
 const md = markdownit();
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const session = await auth();
+  let user = null;
+  if (session?.user.id) {
+    user = await prisma.user.findUnique({
+      where: {
+        id: session?.user?.id,
+      },
+    });
+  }
   const post = await prisma.post.findUnique({
     where: {
       slug,
@@ -93,6 +102,9 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               ) : (
                 <p>No details provided.</p>
               )}
+              <Suspense>
+                <ScrollTrigger user={user} />
+              </Suspense>
             </div>
             <div className="flex sticky bottom-10 bg-white shadow-sm  gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
               <div className="flex items-center gap-4">
@@ -153,7 +165,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </section>
         <section>
           <div className="mt-20 lg:mt-40">
-            <NewsLetter />
+            <NewsLetter user={user} />
           </div>
         </section>
       </div>

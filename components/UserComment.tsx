@@ -7,16 +7,26 @@ type UserCommentProps = {
   role: string;
   content: string;
   id: string;
+  isUserDeleted: boolean;
 };
-const UserComment = ({ image, name, id, role, content }: UserCommentProps) => {
+const UserComment = ({
+  image,
+  name,
+  id,
+  role,
+  content,
+  isUserDeleted,
+}: UserCommentProps) => {
   return (
     <>
       <Link href={`/profile/${id}`} className="flex items-center gap-2">
         <Avatar>
-          <AvatarImage src={image} />
-          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+          <AvatarImage src={isUserDeleted ? "" : image} />
+          <AvatarFallback className="border bg-black rounded-full">
+            {isUserDeleted ? "" : name.charAt(0)}
+          </AvatarFallback>
         </Avatar>
-        <p>{name}</p>
+        <p>{isUserDeleted ? "Deleted User" : name}</p>
         {role === "ADMIN" && (
           <span className="border bg-green-500 text-white px-2 text-sm rounded-xl">
             Author

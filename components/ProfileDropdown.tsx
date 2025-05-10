@@ -25,7 +25,9 @@ const ProfileDropdown = ({ user }: ProfileProps) => {
         {" "}
         <Avatar>
           <AvatarImage src={user?.image!} />
-          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+          <AvatarFallback className="border bg-black w-full rounded-full text-white">
+            {user?.name?.charAt(0)}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent
