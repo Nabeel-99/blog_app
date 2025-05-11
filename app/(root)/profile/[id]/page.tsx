@@ -9,6 +9,7 @@ import React, { Suspense } from "react";
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const session = await auth();
   const { id } = await params;
+
   let user = null;
   if (session?.user.id) {
     user = await prisma.user.findUnique({

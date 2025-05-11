@@ -1,11 +1,16 @@
+"use client";
+
 import { Prisma } from "@/lib/generated/prisma";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { FaPencil } from "react-icons/fa6";
 import DeleteDialog from "./DeleteDialog";
+import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type PostWithCategories = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };
@@ -15,6 +20,24 @@ type UserBlogsProps = {
   post: PostWithCategories;
 };
 const UserBlogs = ({ post }: UserBlogsProps) => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const setFeatured = async (postId: number) => {
+    setLoading(true);
+    try {
+      const response = await axios.put(`/api/blogs/posts//${postId}/featured`);
+      console.log(response);
+      if (response.status === 200) {
+        toast.success("Post is now featured");
+        router.refresh();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error occured");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="flex flex-col border border-[#dadada] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4">
       <Link href={`/blogs/${post.slug}`} className="flex flex-col gap-4">
@@ -50,9 +73,22 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
         <p className=" min-h-[70px] line-clamp-3">{post.description}</p>
       </Link>
       <div className="flex items-center justify-between">
-        <Button className="border border-[#dadada] hover:bg-black hover:text-white transition-all duration-300">
-          Set as Featured Post
-        </Button>
+        {post.isFeatured ? (
+          <span className="border py-2 bg-green-600 text-white px-2 text-sm rounded-lg">
+            Featured Post
+          </span>
+        ) : (
+          <Button
+            disabled={loading}
+            onClick={() => {
+              setFeatured(post.id);
+            }}
+            className="border border-[#dadada] hover:bg-black hover:text-white transition-all duration-300"
+          >
+            Set as Featured Post
+          </Button>
+        )}
+
         <div className="flex items-center gap-2">
           <Link
             href={`/blogs/edit/${post.id}`}

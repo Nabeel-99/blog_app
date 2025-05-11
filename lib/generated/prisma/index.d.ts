@@ -2845,6 +2845,7 @@ export namespace Prisma {
     slug: string | null
     createdAt: Date | null
     authorId: string | null
+    isFeatured: boolean | null
   }
 
   export type PostMaxAggregateOutputType = {
@@ -2858,6 +2859,7 @@ export namespace Prisma {
     slug: string | null
     createdAt: Date | null
     authorId: string | null
+    isFeatured: boolean | null
   }
 
   export type PostCountAggregateOutputType = {
@@ -2871,6 +2873,7 @@ export namespace Prisma {
     slug: number
     createdAt: number
     authorId: number
+    isFeatured: number
     _all: number
   }
 
@@ -2896,6 +2899,7 @@ export namespace Prisma {
     slug?: true
     createdAt?: true
     authorId?: true
+    isFeatured?: true
   }
 
   export type PostMaxAggregateInputType = {
@@ -2909,6 +2913,7 @@ export namespace Prisma {
     slug?: true
     createdAt?: true
     authorId?: true
+    isFeatured?: true
   }
 
   export type PostCountAggregateInputType = {
@@ -2922,6 +2927,7 @@ export namespace Prisma {
     slug?: true
     createdAt?: true
     authorId?: true
+    isFeatured?: true
     _all?: true
   }
 
@@ -3022,6 +3028,7 @@ export namespace Prisma {
     slug: string
     createdAt: Date
     authorId: string
+    isFeatured: boolean
     _count: PostCountAggregateOutputType | null
     _avg: PostAvgAggregateOutputType | null
     _sum: PostSumAggregateOutputType | null
@@ -3054,6 +3061,7 @@ export namespace Prisma {
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
+    isFeatured?: boolean
     categories?: boolean | Post$categoriesArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -3072,6 +3080,7 @@ export namespace Prisma {
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
+    isFeatured?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -3086,6 +3095,7 @@ export namespace Prisma {
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
+    isFeatured?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -3100,9 +3110,10 @@ export namespace Prisma {
     slug?: boolean
     createdAt?: boolean
     authorId?: boolean
+    isFeatured?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "coverImage" | "coverImageId" | "content" | "views" | "slug" | "createdAt" | "authorId", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "coverImage" | "coverImageId" | "content" | "views" | "slug" | "createdAt" | "authorId" | "isFeatured", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categories?: boolean | Post$categoriesArgs<ExtArgs>
     likes?: boolean | Post$likesArgs<ExtArgs>
@@ -3136,6 +3147,7 @@ export namespace Prisma {
       slug: string
       createdAt: Date
       authorId: string
+      isFeatured: boolean
     }, ExtArgs["result"]["post"]>
     composites: {}
   }
@@ -3573,6 +3585,7 @@ export namespace Prisma {
     readonly slug: FieldRef<"Post", 'String'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly authorId: FieldRef<"Post", 'String'>
+    readonly isFeatured: FieldRef<"Post", 'Boolean'>
   }
     
 
@@ -9794,7 +9807,8 @@ export namespace Prisma {
     views: 'views',
     slug: 'slug',
     createdAt: 'createdAt',
-    authorId: 'authorId'
+    authorId: 'authorId',
+    isFeatured: 'isFeatured'
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -10037,6 +10051,7 @@ export namespace Prisma {
     slug?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     authorId?: StringFilter<"Post"> | string
+    isFeatured?: BoolFilter<"Post"> | boolean
     categories?: CategoryListRelationFilter
     likes?: LikeListRelationFilter
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10054,6 +10069,7 @@ export namespace Prisma {
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    isFeatured?: SortOrder
     categories?: CategoryOrderByRelationAggregateInput
     likes?: LikeOrderByRelationAggregateInput
     author?: UserOrderByWithRelationInput
@@ -10074,6 +10090,7 @@ export namespace Prisma {
     views?: IntNullableFilter<"Post"> | number | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     authorId?: StringFilter<"Post"> | string
+    isFeatured?: BoolFilter<"Post"> | boolean
     categories?: CategoryListRelationFilter
     likes?: LikeListRelationFilter
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -10091,6 +10108,7 @@ export namespace Prisma {
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    isFeatured?: SortOrder
     _count?: PostCountOrderByAggregateInput
     _avg?: PostAvgOrderByAggregateInput
     _max?: PostMaxOrderByAggregateInput
@@ -10112,6 +10130,7 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Post"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     authorId?: StringWithAggregatesFilter<"Post"> | string
+    isFeatured?: BoolWithAggregatesFilter<"Post"> | boolean
   }
 
   export type CategoryWhereInput = {
@@ -10516,6 +10535,7 @@ export namespace Prisma {
     views?: number | null
     slug: string
     createdAt?: Date | string
+    isFeatured?: boolean
     categories?: CategoryCreateNestedManyWithoutPostsInput
     likes?: LikeCreateNestedManyWithoutPostInput
     author: UserCreateNestedOneWithoutPostsInput
@@ -10533,6 +10553,7 @@ export namespace Prisma {
     slug: string
     createdAt?: Date | string
     authorId: string
+    isFeatured?: boolean
     categories?: CategoryUncheckedCreateNestedManyWithoutPostsInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
@@ -10547,6 +10568,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUpdateManyWithoutPostsNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -10564,6 +10586,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUncheckedUpdateManyWithoutPostsNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
@@ -10580,6 +10603,7 @@ export namespace Prisma {
     slug: string
     createdAt?: Date | string
     authorId: string
+    isFeatured?: boolean
   }
 
   export type PostUpdateManyMutationInput = {
@@ -10591,6 +10615,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PostUncheckedUpdateManyInput = {
@@ -10604,6 +10629,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CategoryCreateInput = {
@@ -11088,6 +11114,7 @@ export namespace Prisma {
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    isFeatured?: SortOrder
   }
 
   export type PostAvgOrderByAggregateInput = {
@@ -11106,6 +11133,7 @@ export namespace Prisma {
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    isFeatured?: SortOrder
   }
 
   export type PostMinOrderByAggregateInput = {
@@ -11119,6 +11147,7 @@ export namespace Prisma {
     slug?: SortOrder
     createdAt?: SortOrder
     authorId?: SortOrder
+    isFeatured?: SortOrder
   }
 
   export type PostSumOrderByAggregateInput = {
@@ -12236,6 +12265,7 @@ export namespace Prisma {
     views?: number | null
     slug: string
     createdAt?: Date | string
+    isFeatured?: boolean
     categories?: CategoryCreateNestedManyWithoutPostsInput
     likes?: LikeCreateNestedManyWithoutPostInput
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -12251,6 +12281,7 @@ export namespace Prisma {
     views?: number | null
     slug: string
     createdAt?: Date | string
+    isFeatured?: boolean
     categories?: CategoryUncheckedCreateNestedManyWithoutPostsInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
@@ -12381,6 +12412,7 @@ export namespace Prisma {
     slug?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     authorId?: StringFilter<"Post"> | string
+    isFeatured?: BoolFilter<"Post"> | boolean
   }
 
   export type CommentUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -12669,6 +12701,7 @@ export namespace Prisma {
     views?: number | null
     slug: string
     createdAt?: Date | string
+    isFeatured?: boolean
     likes?: LikeCreateNestedManyWithoutPostInput
     author: UserCreateNestedOneWithoutPostsInput
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -12685,6 +12718,7 @@ export namespace Prisma {
     slug: string
     createdAt?: Date | string
     authorId: string
+    isFeatured?: boolean
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
   }
@@ -12719,6 +12753,7 @@ export namespace Prisma {
     views?: number | null
     slug: string
     createdAt?: Date | string
+    isFeatured?: boolean
     categories?: CategoryCreateNestedManyWithoutPostsInput
     likes?: LikeCreateNestedManyWithoutPostInput
     author: UserCreateNestedOneWithoutPostsInput
@@ -12735,6 +12770,7 @@ export namespace Prisma {
     slug: string
     createdAt?: Date | string
     authorId: string
+    isFeatured?: boolean
     categories?: CategoryUncheckedCreateNestedManyWithoutPostsInput
     likes?: LikeUncheckedCreateNestedManyWithoutPostInput
   }
@@ -12851,6 +12887,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUpdateManyWithoutPostsNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -12867,6 +12904,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUncheckedUpdateManyWithoutPostsNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -13248,6 +13286,7 @@ export namespace Prisma {
     views?: number | null
     slug: string
     createdAt?: Date | string
+    isFeatured?: boolean
     categories?: CategoryCreateNestedManyWithoutPostsInput
     author: UserCreateNestedOneWithoutPostsInput
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -13264,6 +13303,7 @@ export namespace Prisma {
     slug: string
     createdAt?: Date | string
     authorId: string
+    isFeatured?: boolean
     categories?: CategoryUncheckedCreateNestedManyWithoutPostsInput
     comments?: CommentUncheckedCreateNestedManyWithoutPostInput
   }
@@ -13380,6 +13420,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUpdateManyWithoutPostsNestedInput
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -13396,6 +13437,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUncheckedUpdateManyWithoutPostsNestedInput
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -13472,6 +13514,7 @@ export namespace Prisma {
     views?: number | null
     slug: string
     createdAt?: Date | string
+    isFeatured?: boolean
   }
 
   export type CommentCreateManyAuthorInput = {
@@ -13508,6 +13551,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUpdateManyWithoutPostsNestedInput
     likes?: LikeUpdateManyWithoutPostNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -13523,6 +13567,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     categories?: CategoryUncheckedUpdateManyWithoutPostsNestedInput
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
@@ -13538,6 +13583,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CommentUpdateWithoutAuthorInput = {
@@ -13709,6 +13755,7 @@ export namespace Prisma {
     views?: NullableIntFieldUpdateOperationsInput | number | null
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     likes?: LikeUpdateManyWithoutPostNestedInput
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -13725,6 +13772,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
     likes?: LikeUncheckedUpdateManyWithoutPostNestedInput
     comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
   }
@@ -13740,6 +13788,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    isFeatured?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ReplyCreateManyCommentInput = {

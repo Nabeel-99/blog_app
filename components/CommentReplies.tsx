@@ -83,11 +83,12 @@ const CommentReplies = ({
     hide && (
       <div className="flex flex-col pl-4 mt-2 gap-4">
         <UserComment
-          image={reply.author.image || ""}
-          name={reply.author.name || ""}
-          role={reply.author.role}
+          image={reply?.author?.image || ""}
+          name={reply?.author?.name || ""}
+          role={reply?.author?.role || ""}
           content={reply.content}
-          id={reply.authorId}
+          id={reply?.authorId || ""}
+          isUserDeleted={reply.isUserDeleted}
         />
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">

@@ -11,9 +11,21 @@ const Page = async () => {
     orderBy: {
       createdAt: "desc",
     },
-    include: { categories: { select: { id: true, name: true } } },
+    include: {
+      categories: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   });
-  const featuredPost = posts[0];
+  const featuredPost =
+    (await prisma.post.findFirst({
+      where: { isFeatured: true },
+      include: { categories: true },
+      orderBy: { createdAt: "desc" },
+    })) ?? posts[0];
   const session = await auth();
   let user = null;
   if (session?.user.id) {

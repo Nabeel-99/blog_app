@@ -1,9 +1,20 @@
+import { auth } from "@/auth";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import Blogs from "@/components/Blogs";
 import NewsLetter from "@/components/NewsLetter";
+import prisma from "@/lib/prisma";
 import React, { Suspense } from "react";
 
 const Page = async () => {
+  const session = await auth();
+  let user = null;
+  if (session?.user.id) {
+    user = await prisma.user.findUnique({
+      where: {
+        id: session?.user?.id,
+      },
+    });
+  }
   return (
     <>
       <div className="bg-[#f6f6f6]">
@@ -29,7 +40,7 @@ const Page = async () => {
         </section>
         <section>
           <div className="mt-20 lg:mt-40">
-            <NewsLetter />
+            <NewsLetter user={user} />
           </div>
         </section>
       </div>
