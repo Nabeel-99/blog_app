@@ -20,6 +20,7 @@ import { notFound } from "next/navigation";
 import SubscribeButton from "./SubscribeForm";
 import SubscribeForm from "./SubscribeForm";
 import SubscribeDialog from "./SubscribeDialog";
+import { FaPlus } from "react-icons/fa";
 const Navbar = async () => {
   const session = await auth();
   let user = null;
@@ -56,17 +57,11 @@ const Navbar = async () => {
           </li>
         </ul>
         {role === "ADMIN" && (
-          <Link className="" href={"/blogs/create"}>
-            <Button className="bg-btn text-white max-sm:hidden cursor-pointer">
-              Create
-            </Button>
+          <Link className=" max-sm:hidden" href={"/blogs/create"}>
+            <Button className="bg-btn text-white cursor-pointer">Create</Button>
           </Link>
         )}
-        {/* {role !== "ADMIN" && (
-          <Button className="bg-btn text-white max-sm:hidden cursor-pointer">
-            Subscribe
-          </Button>
-        )} */}
+
         <Dialog>
           <DialogTrigger asChild>
             <button title="Search cursor-pointer">
@@ -80,7 +75,13 @@ const Navbar = async () => {
             <SearchForm />
           </DialogContent>
         </Dialog>
-
+        {role === "ADMIN" && (
+          <Link className="sm:hidden" href={"/blogs/create"}>
+            <Button className="bg-btn text-white   cursor-pointer">
+              <FaPlus />
+            </Button>
+          </Link>
+        )}
         {session && session.user ? (
           <ProfileDropdown user={user} />
         ) : (

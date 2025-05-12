@@ -15,17 +15,16 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  image         String?
-  role          String    @default("USER") // "ADMIN" for owner
-  bio           String?
-  posts         Post[]
-  comments      Comment[]
-  likes         Like[]
-  replies       Reply[]
-  hasSubscribed Boolean   @default(false)
+  id       String    @id @default(cuid())
+  name     String?
+  email    String?   @unique
+  image    String?
+  role     String    @default("USER") // "ADMIN" for owner
+  bio      String?
+  posts    Post[]
+  comments Comment[]
+  likes    Like[]
+  replies  Reply[]
 }
 
 model Post {
@@ -94,7 +93,8 @@ model Like {
 }
 
 model subscription {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  createdAt DateTime @default(now())
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  hasSubscribed Boolean  @default(false)
+  createdAt     DateTime @default(now())
 }

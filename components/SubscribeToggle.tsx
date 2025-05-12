@@ -8,13 +8,12 @@ import axios from "axios";
 import { toast } from "sonner";
 
 type Props = {
-  user: User | null;
+  isSubscribed?: boolean;
 };
-const SubscribeToggle = ({ user }: Props) => {
-  const [subscribed, setSubscribed] = useState(user?.hasSubscribed || false);
+const SubscribeToggle = ({ isSubscribed }: Props) => {
+  const [subscribed, setSubscribed] = useState(isSubscribed || false);
   const [isPending, startTransition] = useTransition();
-  console.log("uscribed", subscribed);
-  console.log("user", user);
+
   const handleToggle = () => {
     setSubscribed(!subscribed);
     startTransition(async () => {

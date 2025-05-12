@@ -6,8 +6,9 @@ import { User } from "@/lib/generated/prisma";
 
 type Props = {
   user: User | null;
+  isSubscribed?: boolean;
 };
-const ScrollTrigger = ({ user }: Props) => {
+const ScrollTrigger = ({ user, isSubscribed }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [hasBeenShown, setHasBeenShown] = useState(
@@ -15,7 +16,7 @@ const ScrollTrigger = ({ user }: Props) => {
       sessionStorage.getItem("subscribeDialogShown") === "true"
   );
   useEffect(() => {
-    if (user?.hasSubscribed || user?.role === "ADMIN") return;
+    if (isSubscribed || user?.role === "ADMIN") return;
     if (hasBeenShown) return;
 
     const observer = new IntersectionObserver(
@@ -50,6 +51,7 @@ const ScrollTrigger = ({ user }: Props) => {
       <div ref={containerRef} className="h-1" />
       <SubscribeDialog
         user={user}
+        isSubscribed={isSubscribed}
         open={isDialogOpen}
         setOpen={setIsDialogOpen}
       />

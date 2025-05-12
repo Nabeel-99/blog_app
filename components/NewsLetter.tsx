@@ -12,12 +12,12 @@ import { DialogClose } from "./ui/dialog";
 import { LuBellRing } from "react-icons/lu";
 
 type Props = {
-  user: User | null;
+  isSubscribed?: boolean;
 };
-const NewsLetter = ({ user }: Props) => {
+const NewsLetter = ({ isSubscribed }: Props) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [subscribed, setSubscribed] = useState(user?.hasSubscribed || false);
+  const [subscribed, setSubscribed] = useState(isSubscribed || false);
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

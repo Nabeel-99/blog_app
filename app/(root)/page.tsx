@@ -35,6 +35,15 @@ const Page = async () => {
       },
     });
   }
+  const subscription = await prisma.subscription.findUnique({
+    where: {
+      email: user?.email || "",
+    },
+    select: {
+      hasSubscribed: true,
+    },
+  });
+  const isSubscribed = subscription?.hasSubscribed;
   return (
     <>
       {/* featured post section */}
@@ -123,7 +132,7 @@ const Page = async () => {
       </section>
       <section>
         <div className="mt-20 lg:mt-40">
-          <NewsLetter user={user} />
+          <NewsLetter isSubscribed={isSubscribed} />
         </div>
       </section>
     </>

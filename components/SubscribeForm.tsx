@@ -14,11 +14,12 @@ import { LuBellRing } from "react-icons/lu";
 type SubscribeFormProps = {
   user: User | null;
   setOpen?: (open: boolean) => void;
+  isSubscribed?: boolean | null;
 };
-const SubscribeForm = ({ user }: SubscribeFormProps) => {
+const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
   const [email, setEmail] = useState(user?.email || "");
   const [loading, setLoading] = useState(false);
-  const [subscribed, setSubscribed] = useState(user?.hasSubscribed || false);
+  const [subscribed, setSubscribed] = useState(isSubscribed || false);
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const SubscribeForm = ({ user }: SubscribeFormProps) => {
         email,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success("Subscribed successfully");
         router.refresh();
         setSubscribed(true);

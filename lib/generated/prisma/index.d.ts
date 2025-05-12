@@ -1649,7 +1649,6 @@ export namespace Prisma {
     image: string | null
     role: string | null
     bio: string | null
-    hasSubscribed: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1659,7 +1658,6 @@ export namespace Prisma {
     image: string | null
     role: string | null
     bio: string | null
-    hasSubscribed: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1669,7 +1667,6 @@ export namespace Prisma {
     image: number
     role: number
     bio: number
-    hasSubscribed: number
     _all: number
   }
 
@@ -1681,7 +1678,6 @@ export namespace Prisma {
     image?: true
     role?: true
     bio?: true
-    hasSubscribed?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1691,7 +1687,6 @@ export namespace Prisma {
     image?: true
     role?: true
     bio?: true
-    hasSubscribed?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1701,7 +1696,6 @@ export namespace Prisma {
     image?: true
     role?: true
     bio?: true
-    hasSubscribed?: true
     _all?: true
   }
 
@@ -1784,7 +1778,6 @@ export namespace Prisma {
     image: string | null
     role: string
     bio: string | null
-    hasSubscribed: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1811,7 +1804,6 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     bio?: boolean
-    hasSubscribed?: boolean
     posts?: boolean | User$postsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
     likes?: boolean | User$likesArgs<ExtArgs>
@@ -1826,7 +1818,6 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     bio?: boolean
-    hasSubscribed?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1836,7 +1827,6 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     bio?: boolean
-    hasSubscribed?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1846,10 +1836,9 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     bio?: boolean
-    hasSubscribed?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "bio" | "hasSubscribed", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "bio", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | User$postsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
@@ -1875,7 +1864,6 @@ export namespace Prisma {
       image: string | null
       role: string
       bio: string | null
-      hasSubscribed: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2309,7 +2297,6 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
-    readonly hasSubscribed: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -8790,18 +8777,21 @@ export namespace Prisma {
   export type SubscriptionMinAggregateOutputType = {
     id: number | null
     email: string | null
+    hasSubscribed: boolean | null
     createdAt: Date | null
   }
 
   export type SubscriptionMaxAggregateOutputType = {
     id: number | null
     email: string | null
+    hasSubscribed: boolean | null
     createdAt: Date | null
   }
 
   export type SubscriptionCountAggregateOutputType = {
     id: number
     email: number
+    hasSubscribed: number
     createdAt: number
     _all: number
   }
@@ -8818,18 +8808,21 @@ export namespace Prisma {
   export type SubscriptionMinAggregateInputType = {
     id?: true
     email?: true
+    hasSubscribed?: true
     createdAt?: true
   }
 
   export type SubscriptionMaxAggregateInputType = {
     id?: true
     email?: true
+    hasSubscribed?: true
     createdAt?: true
   }
 
   export type SubscriptionCountAggregateInputType = {
     id?: true
     email?: true
+    hasSubscribed?: true
     createdAt?: true
     _all?: true
   }
@@ -8923,6 +8916,7 @@ export namespace Prisma {
   export type SubscriptionGroupByOutputType = {
     id: number
     email: string
+    hasSubscribed: boolean
     createdAt: Date
     _count: SubscriptionCountAggregateOutputType | null
     _avg: SubscriptionAvgAggregateOutputType | null
@@ -8948,28 +8942,32 @@ export namespace Prisma {
   export type subscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    hasSubscribed?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["subscription"]>
 
   export type subscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    hasSubscribed?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["subscription"]>
 
   export type subscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    hasSubscribed?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["subscription"]>
 
   export type subscriptionSelectScalar = {
     id?: boolean
     email?: boolean
+    hasSubscribed?: boolean
     createdAt?: boolean
   }
 
-  export type subscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "createdAt", ExtArgs["result"]["subscription"]>
+  export type subscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "hasSubscribed" | "createdAt", ExtArgs["result"]["subscription"]>
 
   export type $subscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "subscription"
@@ -8977,6 +8975,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       email: string
+      hasSubscribed: boolean
       createdAt: Date
     }, ExtArgs["result"]["subscription"]>
     composites: {}
@@ -9403,6 +9402,7 @@ export namespace Prisma {
   interface subscriptionFieldRefs {
     readonly id: FieldRef<"subscription", 'Int'>
     readonly email: FieldRef<"subscription", 'String'>
+    readonly hasSubscribed: FieldRef<"subscription", 'Boolean'>
     readonly createdAt: FieldRef<"subscription", 'DateTime'>
   }
     
@@ -9790,8 +9790,7 @@ export namespace Prisma {
     email: 'email',
     image: 'image',
     role: 'role',
-    bio: 'bio',
-    hasSubscribed: 'hasSubscribed'
+    bio: 'bio'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -9862,6 +9861,7 @@ export namespace Prisma {
   export const SubscriptionScalarFieldEnum: {
     id: 'id',
     email: 'email',
+    hasSubscribed: 'hasSubscribed',
     createdAt: 'createdAt'
   };
 
@@ -9912,13 +9912,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -9943,6 +9936,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -9973,7 +9973,6 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
     bio?: StringNullableFilter<"User"> | string | null
-    hasSubscribed?: BoolFilter<"User"> | boolean
     posts?: PostListRelationFilter
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
@@ -9987,7 +9986,6 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     bio?: SortOrderInput | SortOrder
-    hasSubscribed?: SortOrder
     posts?: PostOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
     likes?: LikeOrderByRelationAggregateInput
@@ -10004,7 +10002,6 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
     bio?: StringNullableFilter<"User"> | string | null
-    hasSubscribed?: BoolFilter<"User"> | boolean
     posts?: PostListRelationFilter
     comments?: CommentListRelationFilter
     likes?: LikeListRelationFilter
@@ -10018,7 +10015,6 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     bio?: SortOrderInput | SortOrder
-    hasSubscribed?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -10034,7 +10030,6 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: StringWithAggregatesFilter<"User"> | string
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
-    hasSubscribed?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type PostWhereInput = {
@@ -10402,12 +10397,14 @@ export namespace Prisma {
     NOT?: subscriptionWhereInput | subscriptionWhereInput[]
     id?: IntFilter<"subscription"> | number
     email?: StringFilter<"subscription"> | string
+    hasSubscribed?: BoolFilter<"subscription"> | boolean
     createdAt?: DateTimeFilter<"subscription"> | Date | string
   }
 
   export type subscriptionOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
+    hasSubscribed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10417,12 +10414,14 @@ export namespace Prisma {
     AND?: subscriptionWhereInput | subscriptionWhereInput[]
     OR?: subscriptionWhereInput[]
     NOT?: subscriptionWhereInput | subscriptionWhereInput[]
+    hasSubscribed?: BoolFilter<"subscription"> | boolean
     createdAt?: DateTimeFilter<"subscription"> | Date | string
   }, "id" | "email">
 
   export type subscriptionOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
+    hasSubscribed?: SortOrder
     createdAt?: SortOrder
     _count?: subscriptionCountOrderByAggregateInput
     _avg?: subscriptionAvgOrderByAggregateInput
@@ -10437,6 +10436,7 @@ export namespace Prisma {
     NOT?: subscriptionScalarWhereWithAggregatesInput | subscriptionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"subscription"> | number
     email?: StringWithAggregatesFilter<"subscription"> | string
+    hasSubscribed?: BoolWithAggregatesFilter<"subscription"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"subscription"> | Date | string
   }
 
@@ -10447,7 +10447,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     likes?: LikeCreateNestedManyWithoutAuthorInput
@@ -10461,7 +10460,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     likes?: LikeUncheckedCreateNestedManyWithoutAuthorInput
@@ -10475,7 +10473,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     likes?: LikeUpdateManyWithoutAuthorNestedInput
@@ -10489,7 +10486,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     likes?: LikeUncheckedUpdateManyWithoutAuthorNestedInput
@@ -10503,7 +10499,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -10513,7 +10508,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -10523,7 +10517,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PostCreateInput = {
@@ -10864,40 +10857,47 @@ export namespace Prisma {
 
   export type subscriptionCreateInput = {
     email: string
+    hasSubscribed?: boolean
     createdAt?: Date | string
   }
 
   export type subscriptionUncheckedCreateInput = {
     id?: number
     email: string
+    hasSubscribed?: boolean
     createdAt?: Date | string
   }
 
   export type subscriptionUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
+    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type subscriptionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
+    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type subscriptionCreateManyInput = {
     id?: number
     email: string
+    hasSubscribed?: boolean
     createdAt?: Date | string
   }
 
   export type subscriptionUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
+    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type subscriptionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
+    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10929,11 +10929,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type PostListRelationFilter = {
@@ -10988,7 +10983,6 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     bio?: SortOrder
-    hasSubscribed?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -10998,7 +10992,6 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     bio?: SortOrder
-    hasSubscribed?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -11008,7 +11001,6 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     bio?: SortOrder
-    hasSubscribed?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -11047,14 +11039,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11086,6 +11070,11 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type CategoryListRelationFilter = {
@@ -11199,6 +11188,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -11377,6 +11374,7 @@ export namespace Prisma {
   export type subscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    hasSubscribed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11387,12 +11385,14 @@ export namespace Prisma {
   export type subscriptionMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    hasSubscribed?: SortOrder
     createdAt?: SortOrder
   }
 
   export type subscriptionMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    hasSubscribed?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11462,10 +11462,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type PostUpdateManyWithoutAuthorNestedInput = {
@@ -11636,6 +11632,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type CategoryUpdateManyWithoutPostsNestedInput = {
@@ -12108,11 +12108,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12169,14 +12164,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12186,6 +12173,11 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -12254,6 +12246,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type PostCreateWithoutAuthorInput = {
@@ -12546,7 +12546,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     comments?: CommentCreateNestedManyWithoutAuthorInput
     likes?: LikeCreateNestedManyWithoutAuthorInput
     replies?: ReplyCreateNestedManyWithoutAuthorInput
@@ -12559,7 +12558,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     likes?: LikeUncheckedCreateNestedManyWithoutAuthorInput
     replies?: ReplyUncheckedCreateNestedManyWithoutAuthorInput
@@ -12657,7 +12655,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     likes?: LikeUpdateManyWithoutAuthorNestedInput
     replies?: ReplyUpdateManyWithoutAuthorNestedInput
@@ -12670,7 +12667,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     likes?: LikeUncheckedUpdateManyWithoutAuthorNestedInput
     replies?: ReplyUncheckedUpdateManyWithoutAuthorNestedInput
@@ -12787,7 +12783,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostCreateNestedManyWithoutAuthorInput
     likes?: LikeCreateNestedManyWithoutAuthorInput
     replies?: ReplyCreateNestedManyWithoutAuthorInput
@@ -12800,7 +12795,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     likes?: LikeUncheckedCreateNestedManyWithoutAuthorInput
     replies?: ReplyUncheckedCreateNestedManyWithoutAuthorInput
@@ -12927,7 +12921,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUpdateManyWithoutAuthorNestedInput
     likes?: LikeUpdateManyWithoutAuthorNestedInput
     replies?: ReplyUpdateManyWithoutAuthorNestedInput
@@ -12940,7 +12933,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     likes?: LikeUncheckedUpdateManyWithoutAuthorNestedInput
     replies?: ReplyUncheckedUpdateManyWithoutAuthorNestedInput
@@ -13066,7 +13058,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     likes?: LikeCreateNestedManyWithoutAuthorInput
@@ -13079,7 +13070,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     likes?: LikeUncheckedCreateNestedManyWithoutAuthorInput
@@ -13211,7 +13201,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     likes?: LikeUpdateManyWithoutAuthorNestedInput
@@ -13224,7 +13213,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     likes?: LikeUncheckedUpdateManyWithoutAuthorNestedInput
@@ -13253,7 +13241,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutAuthorInput
     replies?: ReplyCreateNestedManyWithoutAuthorInput
@@ -13266,7 +13253,6 @@ export namespace Prisma {
     image?: string | null
     role?: string
     bio?: string | null
-    hasSubscribed?: boolean
     posts?: PostUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     replies?: ReplyUncheckedCreateNestedManyWithoutAuthorInput
@@ -13381,7 +13367,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutAuthorNestedInput
     replies?: ReplyUpdateManyWithoutAuthorNestedInput
@@ -13394,7 +13379,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    hasSubscribed?: BoolFieldUpdateOperationsInput | boolean
     posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     replies?: ReplyUncheckedUpdateManyWithoutAuthorNestedInput

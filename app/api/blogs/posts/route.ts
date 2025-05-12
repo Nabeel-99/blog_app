@@ -3,12 +3,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import slugify from "slugify";
 import { getToken } from "next-auth/jwt";
+import { generateNewsLetterHTML } from "@/lib/email";
+import nodemailer from "nodemailer";
+
 // cloudinary config
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+const transport = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL,
+    pass: process.env.GMAIL_PASSWORD,
+  },
+});
+
 export async function POST(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
   if (!token || token.role !== "ADMIN") {
@@ -80,6 +91,46 @@ export async function POST(req: NextRequest) {
         authorId: token.id,
       },
     });
+
+    const subscribedUsers = await prisma.subscription.findMany({
+      where: {
+        hasSubscribed: true,
+      },
+      select: {
+        email: true,
+      },
+    });
+
+    if (subscribedUsers.length > 0) {
+      const emailPromises = subscribedUsers.map((user) => {
+        new Promise((resolve, reject) => {
+          const { html, text } = generateNewsLetterHTML(
+            title,
+            description,
+            user.email,
+            slug
+          );
+          transport.sendMail(
+            {
+              from: process.env.GMAIL,
+              to: user.email,
+              subject: `New Blog Post: ${title}`,
+              html,
+              text,
+            },
+            (err, info) => {
+              if (err) {
+                console.log("error", err);
+                reject(err);
+              } else {
+                resolve(info);
+              }
+            }
+          );
+        });
+      });
+      await Promise.allSettled(emailPromises);
+    }
     return NextResponse.json(post, { status: 201 });
   } catch (error) {
     console.log(error);

@@ -20,6 +20,8 @@ import CommentCard from "@/components/CommentCard";
 import LikeButton from "@/components/LikeButton";
 import { auth } from "@/auth";
 import ScrollTrigger from "@/components/ScrollTrigger";
+import { Skeleton } from "@/components/ui/skeleton";
+import Views from "@/components/Views";
 
 const md = markdownit();
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -33,6 +35,15 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       },
     });
   }
+  const subscription = await prisma.subscription.findUnique({
+    where: {
+      email: user?.email || "",
+    },
+    select: {
+      hasSubscribed: true,
+    },
+  });
+  const isSubscribed = subscription?.hasSubscribed;
   const post = await prisma.post.findUnique({
     where: {
       slug,
@@ -50,9 +61,6 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               author: true,
               likes: true,
             },
-            // where: {
-            //   parentId: null,
-            // },
           },
         },
       },
@@ -103,10 +111,10 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 <p>No details provided.</p>
               )}
               <Suspense>
-                <ScrollTrigger user={user} />
+                <ScrollTrigger user={user} isSubscribed={isSubscribed} />
               </Suspense>
             </div>
-            <div className="flex sticky bottom-10 bg-white shadow-sm  gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
+            <div className="flex sticky bottom-10 bg-white shadow-sm  z-50 gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
               <div className="flex items-center gap-4">
                 <LikeButton
                   session={session}
@@ -137,15 +145,9 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 </Sheet>
               </div>
             </div>
-            {/* <div className="flex  justify-end lg:sticky  lg:bottom-10 lg:right-10  gap-4 w-full    rounded-full p-3">
-              <Suspense
-                fallback={
-                  <Skeleton className="rounded-xl h-10 w-20 bg-[#6e6e6e]" />
-                }
-              >
-                <Views slug={slug} />
-              </Suspense>
-            </div> */}
+            <div className="flex  justify-end lg:sticky  lg:bottom-10 lg:right-10  gap-4 w-full    rounded-full p-3">
+              <Views slug={slug} />
+            </div>
           </div>
         </section>
         <section>
@@ -165,7 +167,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </section>
         <section>
           <div className="mt-20 lg:mt-40">
-            <NewsLetter user={user} />
+            <NewsLetter isSubscribed={isSubscribed} />
           </div>
         </section>
       </div>

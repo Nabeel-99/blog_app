@@ -9,12 +9,13 @@ import Image from "next/image";
 
 type ProfileCardProps = {
   user: User | null;
+  subscribers?: number;
 };
-const ProfileCard = ({ user }: ProfileCardProps) => {
+const ProfileCard = ({ user, subscribers }: ProfileCardProps) => {
   const [openEdit, setOpenEdit] = useState(false);
   const openForm = () => setOpenEdit(!openEdit);
   const closeForm = () => setOpenEdit(false);
-  console.log(user);
+
   return (
     <div className="flex flex-col lg:flex-row items-start  gap-6">
       <div className="flex gap-6  w-full">
@@ -33,7 +34,8 @@ const ProfileCard = ({ user }: ProfileCardProps) => {
               <div className="flex flex-col gap-2">
                 <p className="text-xl lg:text-3xl font-bold">{user?.name}</p>
                 <p className="text-[#636363] font-bold">
-                  Newsletter Subscribers: <span className="text-black">24</span>
+                  Newsletter Subscribers:{" "}
+                  <span className="text-black">{subscribers}</span>
                 </p>
               </div>
             )}

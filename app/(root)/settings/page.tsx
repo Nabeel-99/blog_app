@@ -20,6 +20,16 @@ const Page = async () => {
       },
     });
   }
+  const subscription = await prisma.subscription.findUnique({
+    where: {
+      email: user?.email || "",
+    },
+    select: {
+      hasSubscribed: true,
+    },
+  });
+  const isSubscribed = subscription?.hasSubscribed;
+  console.log(isSubscribed);
   return (
     <div className="px-4 lg:px-20 2xl:container 2xl:w-full 2xl:mx-auto mt-10">
       <div className="flex flex-col gap-3">
@@ -27,7 +37,7 @@ const Page = async () => {
         <div className="flex flex-col border rounded-xl border-[#dadada] p-4 lg:p-20  gap-10">
           <div className="flex flex-col iems-center gap-6">
             <p className="text-xl">NewsLetter Subscription</p>
-            <SubscribeToggle user={user} />
+            <SubscribeToggle isSubscribed={isSubscribed} />
           </div>
           <div className="flex items-center gap-6">
             <p className="text-xl">Theme</p>

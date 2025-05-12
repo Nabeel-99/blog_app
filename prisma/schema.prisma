@@ -25,7 +25,7 @@ model User {
   comments Comment[]
   likes Like[]
   replies Reply[]
-  hasSubscribed Boolean @default(false)
+
 }
 
 model Post {
@@ -97,5 +97,6 @@ model Like{
 model subscription {
   id Int @id @default(autoincrement())
   email String @unique
+  hasSubscribed Boolean @default(false)
   createdAt DateTime @default(now())
 }
