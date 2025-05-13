@@ -28,7 +28,9 @@ const UserComment = ({
               {isUserDeleted ? "" : name.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <p>{isUserDeleted ? "Deleted User" : name}</p>
+          <p className={`${isUserDeleted && "italic"}`}>
+            {isUserDeleted ? "Deleted User" : name}
+          </p>
           {role === "ADMIN" && (
             <span className="border bg-green-500 text-white px-2 text-sm rounded-xl">
               Author

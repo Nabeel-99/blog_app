@@ -39,7 +39,7 @@ const Page = async () => {
             <p className="text-xl">NewsLetter Subscription</p>
             <SubscribeToggle isSubscribed={isSubscribed} />
           </div>
-          <div className="flex items-center gap-6">
+          {/* <div className="flex items-center gap-6">
             <p className="text-xl">Theme</p>
             <div className="flex items-center gap-5 border border-[#cbcbcb] rounded-full p-2">
               <div className="flex  rounded-full p-1 flex-col items-center gap-1">
@@ -52,7 +52,7 @@ const Page = async () => {
                 <IoMoonSharp className="size-5" />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="flex flex-col gap-3">
             <p className="text-xl">Delete Account</p>
             <span className="text-sm">
