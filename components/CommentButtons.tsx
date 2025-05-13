@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { FaRegCommentDots, FaRegHeart } from "react-icons/fa";
+import { FaRegCommentDots } from "react-icons/fa";
 import { Comment, Prisma } from "@/lib/generated/prisma";
 import { Session } from "next-auth";
 import { toast } from "sonner";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import ReplyForm from "./ReplyForm";
-import { FaRegTrashCan } from "react-icons/fa6";
 import DeleteDialog from "./DeleteDialog";
 import LikeButton from "./LikeButton";
 
@@ -71,7 +70,7 @@ const CommentButtons = ({
       setLoading(false);
     }
   };
-  console.log(comment);
+
   return (
     <div className="flex flex-col gap-3 ">
       <div className="flex items-center justify-between">

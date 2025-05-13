@@ -28,7 +28,7 @@ const LikeButton = ({ apiRoute, session, likes }: LikeButtonProps) => {
     setLikeCount(prevLiked ? prevCount - 1 : prevCount + 1);
     try {
       const response = await axios.post(apiRoute || "");
-      console.log(response);
+
       if (response.status !== 200 && response.status !== 201) {
         toast.error("Failed to like");
       }

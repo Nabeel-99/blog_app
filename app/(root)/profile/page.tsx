@@ -3,7 +3,6 @@ import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import ProfileCard from "@/components/ProfileCard";
 import UserBlogsList from "@/components/UserBlogsList";
 import prisma from "@/lib/prisma";
-import { notFound } from "next/navigation";
 import React, { Suspense } from "react";
 
 const Page = async () => {

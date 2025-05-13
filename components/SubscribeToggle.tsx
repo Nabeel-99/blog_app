@@ -3,7 +3,7 @@
 import React, { useState, useTransition } from "react";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
-import { User } from "@/lib/generated/prisma";
+
 import axios from "axios";
 import { toast } from "sonner";
 

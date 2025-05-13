@@ -1,15 +1,12 @@
 "use client";
+
 import React, { useState } from "react";
 
 import { Input } from "./ui/input";
 
-import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { User } from "@/lib/generated/prisma";
-import { DialogClose } from "./ui/dialog";
-import { LuBellRing } from "react-icons/lu";
 
 type Props = {
   isSubscribed?: boolean;

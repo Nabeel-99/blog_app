@@ -26,7 +26,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
     setLoading(true);
     try {
       const response = await axios.put(`/api/blogs/posts//${postId}/featured`);
-      console.log(response);
+
       if (response.status === 200) {
         toast.success("Post is now featured");
         router.refresh();

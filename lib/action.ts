@@ -28,7 +28,7 @@ export async function incrementPostViews(slug: string) {
         views: true,
       },
     });
-    console.log("views", post.views);
+
     return { views: post.views };
   } catch (error) {
     console.log(error);
@@ -49,7 +49,7 @@ export async function getPostViews(slug: string) {
     if (!post) {
       throw new Error("Post not found");
     }
-    console.log("views", post.views);
+
     return { views: post.views };
   } catch (error) {
     console.log(error);

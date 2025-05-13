@@ -7,10 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Image from "next/image";
+
 import { Avatar, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import { Session } from "next-auth";
+
 import LogoutButton from "./LogoutButton";
 import { User } from "@/lib/generated/prisma";
 import { AvatarFallback } from "@radix-ui/react-avatar";

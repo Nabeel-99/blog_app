@@ -27,7 +27,7 @@ const ProfileForm = ({ closeForm, user }: ProfileFormProps) => {
         name,
         bio,
       });
-      console.log(response);
+
       if (response.status === 200) {
         toast.success("Profile updated successfully");
         router.refresh();

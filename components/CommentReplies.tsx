@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaRegCommentDots, FaRegHeart, FaRegTrashCan } from "react-icons/fa6";
+import { FaRegCommentDots } from "react-icons/fa6";
 import { Prisma, Reply } from "@/lib/generated/prisma";
 import { toast } from "sonner";
 import axios from "axios";

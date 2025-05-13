@@ -1,14 +1,8 @@
-import React, { Suspense } from "react";
-import { TbDeviceDesktop } from "react-icons/tb";
-import { CiBrightnessDown } from "react-icons/ci";
-import { IoMoonSharp } from "react-icons/io5";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import React from "react";
+
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import SubscribeToggle from "@/components/SubscribeToggle";
-import DeleteDialog from "@/components/DeleteDialog";
 import DeleteAccountBtn from "@/components/DeleteAccountBtn";
 const Page = async () => {
   const session = await auth();
@@ -29,7 +23,7 @@ const Page = async () => {
     },
   });
   const isSubscribed = subscription?.hasSubscribed;
-  console.log(isSubscribed);
+
   return (
     <div className="px-4 lg:px-20 2xl:container 2xl:w-full 2xl:mx-auto mt-10">
       <div className="flex flex-col gap-3">

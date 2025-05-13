@@ -13,7 +13,10 @@ type BlogCardProps = {
 };
 const BlogCard = ({ post }: BlogCardProps) => {
   return (
-    <div className="flex flex-col border border-[#dadada] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4">
+    <Link
+      href={`/blogs/${post.slug}`}
+      className="flex flex-col border border-[#dadada] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4"
+    >
       <img
         src={post.coverImage}
         alt="AI"
@@ -44,10 +47,8 @@ const BlogCard = ({ post }: BlogCardProps) => {
       </div>
       <h1 className="text-xl font-bold line-clamp-1">{post.title}</h1>
       <p className=" min-h-[70px] line-clamp-3">{post.description}</p>
-      <Link href={`/blogs/${post.slug}`} className="text-[#7c4ee4] underline">
-        Read More...
-      </Link>
-    </div>
+      <span className="text-[#7c4ee4] underline">Read More...</span>
+    </Link>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { Suspense } from "react";
 import markdownit from "markdown-it";
 import NewsLetter from "@/components/NewsLetter";
-import { FaRegCommentDots, FaRegHeart } from "react-icons/fa6";
+import { FaRegCommentDots } from "react-icons/fa6";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
-import RecentPosts from "@/components/RecentPosts";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
@@ -20,7 +19,6 @@ import CommentCard from "@/components/CommentCard";
 import LikeButton from "@/components/LikeButton";
 import { auth } from "@/auth";
 import ScrollTrigger from "@/components/ScrollTrigger";
-import { Skeleton } from "@/components/ui/skeleton";
 import Views from "@/components/Views";
 import SimilarBlogs from "@/components/SimilarBlogs";
 
@@ -157,7 +155,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               <p className="text-lg lg:text-2xl font-bold">Similar Blogs</p>
               <Link href={"/blogs"}>
                 <Button className="bg-btn py-6 px-6 text-white">
-                  View All
+                  View All Blogs
                 </Button>
               </Link>
             </div>

@@ -16,10 +16,7 @@ import {
 import SearchForm from "./SearchForm";
 import ProfileDropdown from "./ProfileDropdown";
 import prisma from "@/lib/prisma";
-import { notFound } from "next/navigation";
-import SubscribeButton from "./SubscribeForm";
-import SubscribeForm from "./SubscribeForm";
-import SubscribeDialog from "./SubscribeDialog";
+
 import { FaPlus } from "react-icons/fa";
 const Navbar = async () => {
   const session = await auth();
@@ -34,7 +31,6 @@ const Navbar = async () => {
     });
     role = user?.role || null;
   }
-  console.log("user", user);
 
   return (
     <div className="flex  2xl:container 2xl:w-full 2xl:mx-auto  items-center px-4 lg:px-20 text-lg pt-4 pb-3 justify-between">

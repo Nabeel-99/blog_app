@@ -17,7 +17,6 @@ const UserComment = ({
   content,
   isUserDeleted,
 }: UserCommentProps) => {
-  console.log("id", id);
   return (
     <>
       {isUserDeleted ? (

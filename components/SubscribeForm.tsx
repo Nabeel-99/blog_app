@@ -8,7 +8,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/generated/prisma";
-import { DialogClose } from "./ui/dialog";
+
 import { LuBellRing } from "react-icons/lu";
 
 type SubscribeFormProps = {

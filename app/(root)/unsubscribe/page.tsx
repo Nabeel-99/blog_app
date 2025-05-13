@@ -1,12 +1,19 @@
 import Link from "next/link";
 import React from "react";
 
-interface UnsubscribeProps {
-  searchParams: { success?: string; error?: string };
-}
-const Page = ({ searchParams }: UnsubscribeProps) => {
-  const success = searchParams.success;
-  const error = searchParams.error;
+type SearchParams = {
+  success?: string;
+  error?: string;
+};
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) => {
+  const params = await searchParams;
+
+  const success = params.success ? decodeURIComponent(params.success) : null;
+  const error = params.error ? decodeURIComponent(params.error) : null;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center">

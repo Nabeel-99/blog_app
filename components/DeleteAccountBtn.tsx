@@ -11,12 +11,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { FaTrash } from "react-icons/fa";
+
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+
 import axios from "axios";
 import { toast } from "sonner";
-import { signOut } from "next-auth/react";
+
 import { signOutAction } from "@/lib/action";
 
 const DeleteAccountBtn = () => {

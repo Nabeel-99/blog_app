@@ -34,14 +34,14 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
     comments.length > 2 ? setHide(true) : setHide(false);
     setHide(!hide);
   };
-  console.log("comments", comments);
+
   return comments.length > 0 ? (
     <div className="flex flex-col gap-6">
       {comments.map((comment) => {
         const topLevelReplies = comment.replies.filter(
           (reply) => reply.parentId === null
         );
-        console.log("top level replies", topLevelReplies);
+
         return (
           <div className="flex flex-col gap-4" key={comment.id}>
             <UserComment

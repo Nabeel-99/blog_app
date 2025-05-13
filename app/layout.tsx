@@ -40,6 +40,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body
+        suppressHydrationWarning={true}
         className={`${roboto.variable} ${raleway.variable} h-screen antialiased`}
       >
         {children}

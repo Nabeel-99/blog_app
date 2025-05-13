@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { User } from "@/lib/generated/prisma";
-import { Button } from "./ui/button";
+
 import SubscribeForm from "./SubscribeForm";
-import { LuBellRing } from "react-icons/lu";
+
 type Props = {
   user: User | null;
   open?: boolean;
