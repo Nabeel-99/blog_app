@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
-import { Raleway, Roboto } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 
-const roboto = Roboto({
+const workSans = Work_Sans({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-roboto",
-});
-
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-raleway",
+  weight: ["400", "600", "700"],
+  variable: "--font-work-sans",
 });
 
 export const metadata: Metadata = {
@@ -41,7 +35,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning={true}
-        className={`${roboto.variable} ${raleway.variable} h-screen antialiased`}
+        className={`${workSans.variable} font-sans h-screen antialiased`}
       >
         {children}
         <Toaster

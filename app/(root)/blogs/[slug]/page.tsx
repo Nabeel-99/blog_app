@@ -79,7 +79,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                   {post.categories.map((category) => (
                     <span
                       key={category.id}
-                      className="text-white text-center px-2 py-1 rounded-xl bg-background"
+                      className="text-white text-center px-2 py-1 rounded-xl bg-[#C71585] "
                     >
                       {category.name}
                     </span>
@@ -91,7 +91,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               </span>
             </div>
             <div className="flex flex-col items-center gap-10">
-              <h1 className="text-3xl max-w-5xl lg:text-5xl text-center  font-bold">
+              <h1 className="text-3xl max-w-5xl lg:text-5xl text-center leading-relaxed font-bold">
                 {post.title}
               </h1>
               <img
@@ -103,7 +103,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             <div className="flex flex-col gap-3 max-w-5xl mt-20 text-xl pb-10 mx-auto w-full">
               {parsedContent ? (
                 <article
-                  className="markdown prose  prose-lg hide-scrollbar prose-headings:font-bold prose-headings:text-black overflow-scroll  prose-p:text-gray-800 prose-ul:list-disc prose-strong:text-black prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 break-words"
+                  className="markdown prose prose-pink prose-lg hide-scrollbar leading-relaxed prose-headings:font-bold prose-headings:text-black overflow-scroll  prose-p:text-gray-800 prose-ul:list-disc prose-strong:text-black prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 break-words"
                   dangerouslySetInnerHTML={{ __html: parsedContent }}
                 />
               ) : (
@@ -113,7 +113,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 <ScrollTrigger user={user} isSubscribed={isSubscribed} />
               </Suspense>
             </div>
-            <div className="flex sticky bottom-10 bg-white shadow-sm  z-50 gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
+            <div className="flex sticky bottom-10 bg-white shadow-sm z-10  gap-4  items-center justify-around w-[120px] max-w-[300px] mx-auto   border border-[#dadada]  rounded-full p-3">
               <div className="flex items-center gap-4">
                 <LikeButton
                   session={session}

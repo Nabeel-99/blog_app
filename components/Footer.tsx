@@ -19,7 +19,7 @@ const Footer = () => {
         <FaYoutube className="size-6" />
         <FaInstagram className="size-6" />
       </div>
-      <div className="h-0.5 w-full bg-[#7c3ee4]"></div>
+      <div className="h-0.5 w-full bg-[#ffd1dc]"></div>
       <p className="text-center text-sm">
         &copy; copyright 2025 Blog App. All Right Reserved
       </p>

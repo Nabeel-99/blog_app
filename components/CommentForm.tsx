@@ -8,6 +8,7 @@ import { Post } from "@/lib/generated/prisma";
 import { Session } from "next-auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { ImSpinner } from "react-icons/im";
 
 type CommentFormProps = {
   post: Post;
@@ -60,12 +61,14 @@ const CommentForm = ({ post, session }: CommentFormProps) => {
             disabled={loading}
             type="submit"
             className={`${
-              loading
-                ? "cursor-not-allowed bg-[#7c4ee4] text-white"
-                : "bg-btn text-white"
-            } `}
+              loading ? "cursor-not-allowed " : " "
+            } text-white bg-btn `}
           >
-            Comment
+            {loading ? (
+              <ImSpinner className="animate-spin" />
+            ) : (
+              <span> Comment</span>
+            )}
           </Button>
         </div>
       </form>

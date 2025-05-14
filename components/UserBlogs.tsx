@@ -11,6 +11,7 @@ import DeleteDialog from "./DeleteDialog";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { ImSpinner } from "react-icons/im";
 
 type PostWithCategories = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };
@@ -50,12 +51,12 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
           {" "}
           {post.categories.length > 0 && (
             <div className="flex items-center text-sm">
-              <span className="text-white text-center px-2 py-1 rounded-xl bg-background">
+              <span className=" px-2 py-1 rounded-xl text-white text-center bg-[#C71585]">
                 {post.categories[0].name}
               </span>
 
               {post.categories.length > 1 && (
-                <span className="px-2 py-1 rounded-full border bg-background text-white border-[#dadada] flex items-center justify-center">
+                <span className="px-2 py-1 rounded-full border  text-center bg-[#C71585] text-white border-[#dadada] flex items-center justify-center">
                   +{post.categories.length - 1}
                 </span>
               )}
@@ -74,7 +75,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
       </Link>
       <div className="flex items-center justify-between">
         {post.isFeatured ? (
-          <span className="border py-2 bg-green-600 text-white px-2 text-sm rounded-lg">
+          <span className="border border-[#dadada] py-2 bg-[#ffd1dc] text-[#1A2A44] px-2 text-sm rounded-lg">
             Featured Post
           </span>
         ) : (
@@ -85,7 +86,11 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
             }}
             className="border border-[#dadada] hover:bg-black hover:text-white transition-all duration-300"
           >
-            Set as Featured Post
+            {loading ? (
+              <ImSpinner className="animate-spin" />
+            ) : (
+              <span> Set as Featured Post</span>
+            )}
           </Button>
         )}
 

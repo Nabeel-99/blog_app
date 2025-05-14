@@ -33,10 +33,12 @@ const ProfileCard = ({ user, subscribers }: ProfileCardProps) => {
             ) : (
               <div className="flex flex-col gap-2">
                 <p className="text-xl lg:text-3xl font-bold">{user?.name}</p>
-                <p className="text-[#636363] font-bold">
-                  Newsletter Subscribers:{" "}
-                  <span className="text-black">{subscribers}</span>
-                </p>
+                {user?.role === "ADMIN" && (
+                  <p className="text-[#636363] font-bold">
+                    Newsletter Subscribers:{" "}
+                    <span className="text-black">{subscribers}</span>
+                  </p>
+                )}
               </div>
             )}
 

@@ -21,6 +21,8 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { FaXmark } from "react-icons/fa6";
+import { ImSpinner } from "react-icons/im";
+import { Label } from "./ui/label";
 
 type BlogFormProps = {
   post?: {
@@ -86,6 +88,7 @@ const BlogForm = ({ post }: BlogFormProps) => {
         toast.success(
           post ? "Blog updated successfully" : "Blog created successfully"
         );
+
         router.push(`/blogs/${response.data.slug}`);
       }
     } catch (error) {
@@ -184,7 +187,13 @@ const BlogForm = ({ post }: BlogFormProps) => {
             <FormItem>
               <FormLabel className=" text-md">Cover Image</FormLabel>
               <FormControl>
-                <div className="flex items-center">
+                <div className="flex items-center justify-between">
+                  <Label
+                    htmlFor="coverImage"
+                    className="border cursor-pointer px-3 py-3 bg-[#C71585] rounded-lg  bg-btn"
+                  >
+                    Upload Image
+                  </Label>
                   <Input
                     type="file"
                     id="coverImage"
@@ -194,7 +203,7 @@ const BlogForm = ({ post }: BlogFormProps) => {
                       if (file) onChange(file);
                     }}
                     ref={ref}
-                    className=""
+                    className="hidden"
                   />
                   {(form.watch("coverImage") || post?.coverImage) && (
                     <img
@@ -252,10 +261,16 @@ const BlogForm = ({ post }: BlogFormProps) => {
           type="submit"
           disabled={loading}
           className={`${
-            loading ? "cursor-not-allowed bg-[#7c4ee4] text-white" : "bg-btn"
-          }  py-6`}
+            loading ? "cursor-not-allowed  text-white" : ""
+          } bg-btn py-6`}
         >
-          {post ? "Update" : "Submit"}
+          {loading ? (
+            <ImSpinner className="animate-spin" />
+          ) : post ? (
+            "Update"
+          ) : (
+            "Submit"
+          )}
         </Button>
       </form>
     </Form>

@@ -16,6 +16,7 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
+import { ImSpinner } from "react-icons/im";
 
 type DeleteDialogProps = {
   message?: string;
@@ -32,8 +33,10 @@ const DeleteDialog = ({
   apiRoute,
 }: DeleteDialogProps) => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleDelete = async () => {
+    setLoading(true);
     try {
       const response = await axios.delete(apiRoute || "");
       if (response.status === 200) {
@@ -44,6 +47,8 @@ const DeleteDialog = ({
     } catch (err) {
       console.log(err);
       toast.error(error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -66,14 +71,22 @@ const DeleteDialog = ({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel className="bg-black text-white hover:bg-black/90">
+          <AlertDialogCancel
+            disabled={loading}
+            className="bg-black text-white hover:bg-black/90"
+          >
             No
           </AlertDialogCancel>
           <Button
             onClick={handleDelete}
+            disabled={loading}
             className="border border-[#dadada] hover:bg-[#f0f0f0] px-4 py-2 rounded-md"
           >
-            Yes
+            {loading ? (
+              <ImSpinner className="animate-spin" />
+            ) : (
+              <span>Yes</span>
+            )}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

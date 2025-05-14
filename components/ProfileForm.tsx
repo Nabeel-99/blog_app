@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/generated/prisma";
+import { ImSpinner } from "react-icons/im";
 
 type ProfileFormProps = {
   user: User | null;
@@ -66,7 +67,11 @@ const ProfileForm = ({ closeForm, user }: ProfileFormProps) => {
           type="submit"
           className="border border-[#dadada] hover:bg-[#f0f0f0] px-4 py-2 rounded-md"
         >
-          Save
+          {loading ? (
+            <ImSpinner className="animate-spin" />
+          ) : (
+            <span> Save</span>
+          )}
         </Button>
       </div>
     </form>

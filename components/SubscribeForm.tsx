@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { User } from "@/lib/generated/prisma";
 
 import { LuBellRing } from "react-icons/lu";
+import { ImSpinner } from "react-icons/im";
 
 type SubscribeFormProps = {
   user: User | null;
@@ -66,7 +67,11 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
             </div>
           ) : (
             <Button disabled={loading} type="submit" className="bg-btn">
-              Subscribe
+              {loading ? (
+                <ImSpinner className="animate-spin" />
+              ) : (
+                <span>Subscribe</span>
+              )}
             </Button>
           )}
         </div>

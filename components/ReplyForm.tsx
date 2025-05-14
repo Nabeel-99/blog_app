@@ -1,6 +1,7 @@
 import React from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
+import { ImSpinner } from "react-icons/im";
 
 type ReplyFormProps = {
   handleSubmit: (e: React.FormEvent) => void;
@@ -28,6 +29,7 @@ const ReplyForm = ({
       <div className="flex items-center gap-2 justify-end mt-2">
         <Button
           onClick={closeReply}
+          disabled={loading}
           type="button"
           className={"bg-btn text-white"}
         >
@@ -37,12 +39,14 @@ const ReplyForm = ({
           disabled={loading}
           type="submit"
           className={`${
-            loading
-              ? "cursor-not-allowed bg-[#7c4ee4] text-white"
-              : "bg-btn text-white"
-          } `}
+            loading ? "cursor-not-allowed " : " "
+          }  bg-btn text-white`}
         >
-          Reply
+          {loading ? (
+            <ImSpinner className="animate-spin" />
+          ) : (
+            <span> Reply</span>
+          )}
         </Button>
       </div>
     </form>

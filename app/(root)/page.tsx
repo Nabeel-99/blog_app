@@ -64,16 +64,16 @@ const Page = async () => {
             />
           </div>
           <div className="flex flex-col gap-6 justify-between lg:w-1/2  xl:w-xl">
-            <div className="flex flex-col">
-              <h1 className="text-xl mt-10 ">Featured Post</h1>
-              <p className="text-3xl lg:text-5xl lg:leading-14 lg:mt-10 font-bold">
+            <div className="flex text-[#1A2A44] flex-col">
+              <h1 className="text-xl font-black mt-10 ">Featured Post</h1>
+              <p className="text-3xl mt-4 lg:text-5xl lg:leading-14 lg:mt-10 font-bold">
                 {featuredPost?.title}
               </p>
               <p className="text-lg mt-4">{featuredPost?.description}</p>
             </div>
 
             <Link href={`/blogs/${featuredPost?.slug}`}>
-              <Button className="bg-white hover:bg-white/90 py-6 w-32 text-black">
+              <Button className="bg-[#1A2A44] hover:bg-[#2B3A55] py-6 w-32 text-white">
                 Read More
               </Button>
             </Link>

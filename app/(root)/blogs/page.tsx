@@ -26,7 +26,7 @@ const Page = async () => {
   const isSubscribed = subscription?.hasSubscribed;
   return (
     <>
-      <div className="bg-[#f6f6f6]">
+      <div className="bg-[#ffffff]">
         <section>
           <div className="flex flex-col max-w-2xl mx-auto text-center pt-10 px-4 lg:px-0 lg:pt-20 gap-4 items-center">
             <h1 className="uppercase text-lg lg:text-2xl">My Blogs</h1>

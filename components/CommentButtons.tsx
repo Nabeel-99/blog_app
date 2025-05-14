@@ -19,13 +19,13 @@ type CommentProps = Prisma.CommentGetPayload<{
 type CommentButtonsProps = {
   comment: CommentProps;
   session: Session | null;
-  showComments: () => void;
+  showReplies: () => void;
   hide: boolean;
 };
 const CommentButtons = ({
   comment,
   session,
-  showComments,
+  showReplies,
   hide,
 }: CommentButtonsProps) => {
   const [openInput, setOpenInput] = useState(false);
@@ -82,8 +82,10 @@ const CommentButtons = ({
           />
 
           <button
-            onClick={showComments}
-            disabled={comment.replies.length === 0}
+            onClick={() => {
+              comment.replies.length > 0 ? showReplies() : openReply(comment);
+            }}
+            // disabled={comment.replies.length === 0}
             className="flex items-center gap-1 cursor-pointer"
           >
             <FaRegCommentDots className="size-5 " />

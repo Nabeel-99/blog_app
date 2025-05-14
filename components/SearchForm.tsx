@@ -76,7 +76,7 @@ const SearchForm = () => {
                   <span className="">
                     {post.categories.length > 0 && (
                       <div className="flex items-center text-sm">
-                        <span className="text-white text-center px-2 py-1 rounded-xl bg-background">
+                        <span className="text-white text-center px-2 py-1 rounded-xl bg-[#C71585]  ">
                           {query
                             ? post.categories.find((c) =>
                                 c.name
@@ -87,7 +87,7 @@ const SearchForm = () => {
                         </span>
 
                         {post.categories.length > 1 && (
-                          <span className="px-2 py-1 rounded-full border bg-background text-white border-[#dadada] flex items-center justify-center">
+                          <span className="px-2 py-1 rounded-full border bg-[#C71585]  text-white border-[#dadada] flex items-center justify-center">
                             +{post.categories.length - 1}
                           </span>
                         )}

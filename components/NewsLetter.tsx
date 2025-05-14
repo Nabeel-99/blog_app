@@ -40,7 +40,7 @@ const NewsLetter = ({ isSubscribed }: Props) => {
     }
   };
   return (
-    <div className="lg:px-20 bg-background max-sm:h-[380px] md:h-[430px] lg:h-[560px] p-4 lg:p-26 overflow-hidden relative border text-white flex flex-col items-center justify-center gap-10 ">
+    <div className="lg:px-20 bg-background max-sm:h-[380px] md:h-[430px] lg:h-[560px] p-4 lg:p-26 overflow-hidden relative  text-[#1A2A44] flex flex-col items-center justify-center gap-10 ">
       <div className="absolute max-sm:hidden -top-24 left-0">
         <img
           src={"/mark.svg"}
@@ -55,7 +55,7 @@ const NewsLetter = ({ isSubscribed }: Props) => {
           className="w-full -z-10 opacity-5 rotate-180 "
         />
       </div>
-      <div className=" md:max-w-xl lg:max-w-3xl text-center mx-auto">
+      <div className=" md:max-w-xl lg:max-w-2xl 2xl:max-w-5xl text-center mx-auto">
         <h1 className="text-xl md:text-2xl lg:text-4xl xl:text-6xl font-bold">
           Subscribe to our newsletter
         </h1>
@@ -72,13 +72,13 @@ const NewsLetter = ({ isSubscribed }: Props) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="mt-10 w-full lg:w-lg bg-white py-6 text-black"
+            className="mt-10 w-full lg:w-lg border-[#dadada] bg-white py-6 text-black"
           />
 
           <button
             disabled={loading}
             type="submit"
-            className="border border-[#dadada] hover:bg-[#efefef] hover:text-black mt-10 h-full py-3 px-6 rounded-xl "
+            className="border border-[#1A2A44] bg-[#1A2A44] hover:bg-[#2B3A55] text-white mt-10 h-full py-3 px-6 rounded-xl "
           >
             Subscribe
           </button>

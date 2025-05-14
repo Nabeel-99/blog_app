@@ -38,7 +38,8 @@ const CommentReplies = ({
   const [activeReplyId, setActiveReplyId] = useState<number | null>(null);
   const [isHidden, setIsHidden] = useState(false);
   const children = allReplies.filter((child) => child.parentId === reply.id);
-
+  console.log("children", children);
+  console.log("reply", reply);
   const showResponse = () => {
     setIsHidden(!isHidden);
   };
@@ -98,8 +99,10 @@ const CommentReplies = ({
               likes={reply.likes}
             />
             <button
-              onClick={showResponse}
-              disabled={children.length === 0}
+              onClick={() => {
+                children.length > 0 ? showResponse() : openReply(reply);
+              }}
+              // disabled={children.length === 0}
               className="flex items-center gap-1 cursor-pointer"
             >
               <FaRegCommentDots className="size-5 " />
