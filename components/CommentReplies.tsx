@@ -22,14 +22,14 @@ type RepliesWithAuthor = Prisma.ReplyGetPayload<{
 type CommentRepliesProps = {
   reply: RepliesWithAuthor;
   session: Session | null;
-  hide: boolean;
+  showReplies: boolean;
   allReplies: RepliesWithAuthor[];
 };
 const CommentReplies = ({
   reply,
   session,
-  hide,
   allReplies,
+  showReplies,
 }: CommentRepliesProps) => {
   const [openInput, setOpenInput] = useState(false);
   const [userReply, setUserReply] = useState("");
@@ -81,7 +81,7 @@ const CommentReplies = ({
   };
 
   return (
-    hide && (
+    showReplies && (
       <div className="flex flex-col pl-4 mt-2 gap-4">
         <UserComment
           image={reply?.author?.image || ""}

@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import React from "react";
 import BlogCard from "./BlogCard";
 
+export const experimental_ppr = true;
 const SimilarBlogs = async ({ slug }: { slug: string }) => {
   const currentPost = await prisma.post.findUnique({
     where: {

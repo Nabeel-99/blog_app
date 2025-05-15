@@ -29,14 +29,14 @@ type BlogCommentsProps = {
 };
 const BlogComments = ({ session, post }: BlogCommentsProps) => {
   const comments = post.comments;
-  const commentReplies = comments.flatMap((comment) =>
-    comment.replies.filter((reply) => reply.parentId === null)
-  );
-  const [hide, setHide] = useState(commentReplies.length <= 2);
-  console.log("commentReplies", commentReplies.length);
-  console.log("hide", hide);
-  const showReplies = () => {
-    setHide(!hide);
+  const [repliesVisibility, setRepliesVisibility] = useState<
+    Record<string, boolean>
+  >({});
+  const toggleReplies = (commentId: number) => {
+    setRepliesVisibility((prev) => ({
+      ...prev,
+      [commentId]: !prev[commentId],
+    }));
   };
   console.log("comment", comments);
   return comments.length > 0 ? (
@@ -45,7 +45,8 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
         const topLevelReplies = comment.replies.filter(
           (reply) => reply.parentId === null
         );
-
+        const showReplies =
+          repliesVisibility[comment.id] ?? topLevelReplies.length <= 2;
         return (
           <div className="flex flex-col gap-4" key={comment.id}>
             <UserComment
@@ -58,15 +59,15 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
             />
 
             <CommentButtons
-              showReplies={showReplies}
-              hide={hide}
+              toggleReplies={() => toggleReplies(comment.id)}
               comment={comment}
               session={session}
+              showReplies={showReplies}
             />
             {/* comment response */}
             {topLevelReplies.map((reply) => (
               <CommentReplies
-                hide={hide}
+                showReplies={showReplies}
                 reply={reply}
                 session={session}
                 allReplies={comment.replies}

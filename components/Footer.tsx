@@ -1,11 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6";
-
+import Logo from "../public/logo.png";
 const Footer = () => {
   return (
     <footer className="flex flex-col pb-10 items-center gap-10 mt-20 lg:px-20">
-      <h1 className="text-4xl">Logo</h1>
+      <Image
+        src={Logo}
+        alt="logo"
+        width={50}
+        height={50}
+        className=" w-[50px] h-[50px] bg-background rounded-full object-cover"
+      />
       <ul className="flex iteme-center  gap-10">
         <li>
           <Link href={"/"}>Home</Link>

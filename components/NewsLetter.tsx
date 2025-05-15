@@ -7,6 +7,7 @@ import { Input } from "./ui/input";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 type Props = {
   isSubscribed?: boolean;
@@ -41,21 +42,21 @@ const NewsLetter = ({ isSubscribed }: Props) => {
   };
   return (
     <div className="lg:px-20 bg-background max-sm:h-[380px] md:h-[430px] lg:h-[560px] p-4 lg:p-26 overflow-hidden relative  text-[#1A2A44] flex flex-col items-center justify-center gap-10 ">
-      <div className="absolute max-sm:hidden -top-24 left-0">
+      <div className="absolute max-sm:hidden  -top-24 left-0">
         <img
           src={"/mark.svg"}
           alt="Spirals"
-          className="w-full -z-10 opacity-5 "
+          className="w-full fill-black -z-10 opacity-30 "
         />
       </div>
-      <div className="absolute max-sm:hidden -bottom-24 -z-0 -right-20">
+      <div className="absolute max-sm:hidden -bottom-24   -right-20">
         <img
           src={"/mark.svg"}
           alt="Spirals"
-          className="w-full -z-10 opacity-5 rotate-180 "
+          className="w-full -z-10  opacity-30 rotate-180 "
         />
       </div>
-      <div className=" md:max-w-xl lg:max-w-2xl 2xl:max-w-5xl text-center mx-auto">
+      <div className=" md:max-w-xl z-30  lg:max-w-2xl 2xl:max-w-5xl text-center mx-auto">
         <h1 className="text-xl md:text-2xl lg:text-4xl xl:text-6xl font-bold">
           Subscribe to our newsletter
         </h1>
@@ -65,23 +66,23 @@ const NewsLetter = ({ isSubscribed }: Props) => {
         </p>
         <form
           onSubmit={handleSubmit}
-          className="flex items-center justify-center gap-4"
+          className="flex  items-center mt-10 z-50 justify-center  gap-4"
         >
           <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="mt-10 w-full lg:w-lg border-[#dadada] bg-white py-6 text-black"
+            className=" w-full lg:w-lg border-[#dadada] bg-white py-6 text-black"
           />
 
-          <button
+          <Button
             disabled={loading}
             type="submit"
-            className="border border-[#1A2A44] bg-[#1A2A44] hover:bg-[#2B3A55] text-white mt-10 h-full py-3 px-6 rounded-xl "
+            className="border cursor-pointer border-[#1A2A44] bg-[#1A2A44] hover:bg-[#2B3A55] text-white h-full py-3 px-6 rounded-xl "
           >
             Subscribe
-          </button>
+          </Button>
         </form>
       </div>
     </div>

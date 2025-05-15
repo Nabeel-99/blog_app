@@ -43,7 +43,7 @@ const SearchForm = () => {
     fetchResult();
   }, [debouncedQuery]);
   return (
-    <div className="flex flex-col max-sm:max-h-[200px] overflow-scroll hide-scrollbar  md:max-h-[300px]  gap-2">
+    <div className="flex flex-col  overflow-scroll hide-scrollbar  md:max-h-[300px]  gap-2">
       <div className="flex items-center border border-[#dadada] rounded-xl">
         <Input
           placeholder="Search by title or category..."

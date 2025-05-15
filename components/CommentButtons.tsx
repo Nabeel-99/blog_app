@@ -19,25 +19,27 @@ type CommentProps = Prisma.CommentGetPayload<{
 type CommentButtonsProps = {
   comment: CommentProps;
   session: Session | null;
-  showReplies: () => void;
-  hide: boolean;
+  toggleReplies: () => void;
+  showReplies: boolean;
 };
 const CommentButtons = ({
   comment,
   session,
+  toggleReplies,
   showReplies,
-  hide,
 }: CommentButtonsProps) => {
   const [openInput, setOpenInput] = useState(false);
   const [reply, setReply] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const [activeCommentId, setActiveCommentId] = useState<number | null>(null);
   const openReply = (comment: Comment) => {
     setOpenInput(!openInput);
     setActiveCommentId(comment.id);
   };
   const closeReply = () => setOpenInput(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -71,6 +73,9 @@ const CommentButtons = ({
     }
   };
 
+  const topLevelReplies = comment.replies.filter(
+    (reply) => reply.parentId === null
+  );
   return (
     <div className="flex flex-col gap-3 ">
       <div className="flex items-center justify-between">
@@ -83,7 +88,7 @@ const CommentButtons = ({
 
           <button
             onClick={() => {
-              comment.replies.length > 0 ? showReplies() : openReply(comment);
+              topLevelReplies.length > 0 ? toggleReplies() : openReply(comment);
             }}
             // disabled={comment.replies.length === 0}
             className="flex items-center gap-1 cursor-pointer"
@@ -91,16 +96,10 @@ const CommentButtons = ({
             <FaRegCommentDots className="size-5 " />
             {comment.replies.length > 0 && (
               <span>
-                {hide ? (
+                {showReplies ? (
                   "hide replies"
                 ) : (
-                  <span>
-                    {" "}
-                    {
-                      comment.replies.filter((reply) => reply.parentId === null)
-                        .length
-                    }
-                  </span>
+                  <span> {topLevelReplies.length}</span>
                 )}
               </span>
             )}
