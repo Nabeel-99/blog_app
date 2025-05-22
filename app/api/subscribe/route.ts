@@ -8,15 +8,20 @@ export async function POST(req: NextRequest) {
     if (!email) {
       return NextResponse.json({ error: "email is required" }, { status: 400 });
     }
-
-    await prisma.subscription.upsert({
+    const existingEmail = await prisma.subscription.findUnique({
       where: {
         email,
       },
-      update: {
-        hasSubscribed: true,
-      },
-      create: {
+    });
+    if (existingEmail) {
+      return NextResponse.json(
+        { error: "Email already exists" },
+        { status: 400 }
+      );
+    }
+
+    await prisma.subscription.create({
+      data: {
         email,
         hasSubscribed: true,
       },

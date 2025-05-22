@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
-import BlogCardSkeleton from "@/components/BlogCardSkeleton";
-import ProfileCard from "@/components/ProfileCard";
+import BlogCardSkeleton from "@/components/cards/BlogCardSkeleton";
+
+import ProfileCard from "@/components/cards/ProfileCard";
 import UserBlogsList from "@/components/UserBlogsList";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";

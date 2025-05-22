@@ -1,4 +1,4 @@
-import BlogForm from "@/components/BlogForm";
+import BlogForm from "@/components/forms/BlogForm";
 import React from "react";
 
 const Page = () => {

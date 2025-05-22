@@ -22,12 +22,12 @@ const NewsLetter = () => {
         email,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success("Subscribed successfully");
         router.refresh();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data.error);
       }
@@ -41,20 +41,22 @@ const NewsLetter = () => {
         <Image
           src={"/mark.svg"}
           width={500}
-          height={500}
+          height={300}
           alt="Spirals"
           priority={false}
           className=" -z-10 opacity-30 "
+          style={{ width: "100% " }}
         />
       </div>
       <div className="absolute max-sm:hidden -bottom-24   -right-20">
         <Image
           src={"/mark.svg"}
           width={500}
-          height={500}
+          height={300}
           alt="Spirals"
           priority={false}
           className="-z-10 opacity-30 rotate-180 "
+          style={{ width: "100% " }}
         />
       </div>
       <div className=" md:max-w-xl z-30  lg:max-w-2xl 2xl:max-w-5xl text-center mx-auto">
@@ -67,7 +69,7 @@ const NewsLetter = () => {
         </p>
         <form
           onSubmit={handleSubmit}
-          className="flex  items-center mt-10 z-50 justify-center  gap-4"
+          className="flex  items-center mt-10  justify-center  gap-4"
         >
           <Input
             type="email"

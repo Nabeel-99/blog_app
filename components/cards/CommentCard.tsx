@@ -5,9 +5,10 @@ import { Separator } from "@radix-ui/react-dropdown-menu";
 import { auth } from "@/auth";
 
 import { Prisma } from "@/lib/generated/prisma";
-import CommentWrapper from "./CommentWrapper";
-import BlogComments from "./BlogComments";
+
 import prisma from "@/lib/prisma";
+import CommentWrapper from "../CommentWrapper";
+import BlogComments from "../BlogComments";
 
 type PostWithComments = Prisma.PostGetPayload<{
   include: {

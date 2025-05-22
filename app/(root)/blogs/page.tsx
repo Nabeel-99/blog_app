@@ -1,7 +1,7 @@
-import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import Blogs from "@/components/Blogs";
-import { BlurIn } from "@/components/BlurIn";
-import { FadeIn } from "@/components/FadeIn";
+import { BlurIn } from "@/components/animations/BlurIn";
+import BlogCardSkeleton from "@/components/cards/BlogCardSkeleton";
+import { FadeIn } from "@/components/animations/FadeIn";
 import NewsLetter from "@/components/NewsLetter";
 import React, { Suspense } from "react";
 

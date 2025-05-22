@@ -1,7 +1,8 @@
 import React from "react";
-import CommentForm from "./CommentForm";
+
 import { Post } from "@/lib/generated/prisma";
 import { auth } from "@/auth";
+import CommentForm from "./forms/CommentForm";
 
 type CommentWrapperProps = {
   post: Post;

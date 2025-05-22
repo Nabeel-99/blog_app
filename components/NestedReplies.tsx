@@ -45,6 +45,7 @@ const NestedReplies = ({
                 content={reply.content}
                 id={reply?.authorId || ""}
                 isUserDeleted={reply.isUserDeleted}
+                createdAt={reply.createdAt}
               />
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-6">

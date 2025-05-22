@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import { FaPencil } from "react-icons/fa6";
-import { Button } from "./ui/button";
-import ProfileForm from "./ProfileForm";
+import { Button } from "../ui/button";
+
 import { User } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
+import ProfileForm from "../forms/ProfileForm";
 
 type ProfileCardProps = {
   user: User | null;

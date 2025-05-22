@@ -5,6 +5,7 @@ import slugify from "slugify";
 import { getToken } from "next-auth/jwt";
 import { generateNewsLetterHTML } from "@/lib/email";
 import nodemailer from "nodemailer";
+import { revalidatePath } from "next/cache";
 
 // cloudinary config
 cloudinary.config({
@@ -131,6 +132,8 @@ export async function POST(req: NextRequest) {
       });
       await Promise.allSettled(emailPromises);
     }
+
+    revalidatePath("/");
     return NextResponse.json(post, { status: 201 });
   } catch (error) {
     console.log(error);

@@ -1,6 +1,6 @@
 import React from "react";
-import { Textarea } from "./ui/textarea";
-import { Button } from "./ui/button";
+import { Textarea } from "../ui/textarea";
+import { Button } from "../ui/button";
 import { ImSpinner } from "react-icons/im";
 
 type ReplyFormProps = {

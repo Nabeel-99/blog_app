@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Input } from "./ui/input";
 
-import { Button } from "./ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -11,6 +9,8 @@ import { User } from "@/lib/generated/prisma";
 
 import { LuBellRing } from "react-icons/lu";
 import { ImSpinner } from "react-icons/im";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 type SubscribeFormProps = {
   user: User | null;
@@ -24,6 +24,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(email);
     setLoading(true);
     try {
       const response = await axios.post("/api/subscribe", {
@@ -37,7 +38,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
         setTimeout(() => {}, 4000);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data.error);
       }
@@ -48,7 +49,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col  max-sm:max-h-[200px] overflow-scroll hide-scrollbar  md:max-h-[300px]  gap-6">
-        <p className="max-sm:text-sm lg:text-4xl">
+        <p className="max-sm:text-sm lg:text-3xl">
           Read articles from us directly inside your inbox. Subscribe to the
           newsletter, and don't miss out.
         </p>

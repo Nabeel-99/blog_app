@@ -1,4 +1,4 @@
-import BlogForm from "@/components/BlogForm";
+import BlogForm from "@/components/forms/BlogForm";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import React from "react";

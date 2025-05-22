@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
-import Logo from "../public/logo.png";
+import Logo from "../public/logo.webp";
 import {
   Dialog,
   DialogContent,
@@ -13,11 +13,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import SearchForm from "./SearchForm";
 import ProfileDropdown from "./ProfileDropdown";
 import prisma from "@/lib/prisma";
 
 import { FaPlus } from "react-icons/fa";
+import SearchForm from "./forms/SearchForm";
 const Navbar = async () => {
   const session = await auth();
   let user = null;
@@ -36,6 +36,7 @@ const Navbar = async () => {
     <div className="flex  2xl:container 2xl:w-full 2xl:mx-auto  items-center px-4 lg:px-20 text-lg pt-4 pb-3 justify-between">
       <Link href={"/"}>
         <Image
+          priority
           src={Logo}
           alt="logo"
           width={50}

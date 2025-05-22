@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Textarea } from "./ui/textarea";
-import { Button } from "./ui/button";
+import { Textarea } from "../ui/textarea";
+import { Button } from "../ui/button";
 import axios from "axios";
 import { Post } from "@/lib/generated/prisma";
 import { Session } from "next-auth";

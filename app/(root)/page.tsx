@@ -1,6 +1,5 @@
-import { auth } from "@/auth";
-import { BlurIn } from "@/components/BlurIn";
-import { FadeIn } from "@/components/FadeIn";
+import { BlurIn } from "@/components/animations/BlurIn";
+import { FadeIn } from "@/components/animations/FadeIn";
 import NewsLetter from "@/components/NewsLetter";
 import RecentPosts from "@/components/RecentPosts";
 import { Button } from "@/components/ui/button";
@@ -43,6 +42,7 @@ const Page = async () => {
               height={500}
               alt="Spirals"
               priority={false}
+              style={{ width: "100% " }}
               className=" -z-10 opacity-30 "
             />
           </div>
@@ -53,11 +53,12 @@ const Page = async () => {
               height={500}
               alt="Spirals"
               priority={false}
+              style={{ width: "100% " }}
               className="-z-10 opacity-30 rotate-180 "
             />
           </div>
           <BlurIn className="2xl:container  h-full 2xl:w-full 2xl:mx-auto lg:px-20 p-4 lg:p-26  text-white flex flex-col lg:flex-row gap-10 lg:justify-between">
-            <div className="flex   flex-col gap-6 justify-between  h-full lg:w-1/2  xl:w-xl">
+            <div className="flex  flex-col gap-6 justify-between xl:min-h-[576px]  lg:w-1/2  xl:w-xl">
               <div className="flex text-[#1A2A44] flex-col">
                 <h1 className="text-xl font-black mt-10 ">Featured Post</h1>
                 <p className="text-3xl mt-4 lg:text-5xl lg:leading-14 lg:mt-10 font-bold">
@@ -83,6 +84,8 @@ const Page = async () => {
               src={`${featuredPost?.coverImage}?f_auto,q_auto`}
               width={608}
               height={576}
+              priority
+              sizes="(max-width:767px) 350px, 608px"
               alt={featuredPost?.title || "Featured blog post"}
               className="object-cover w-full max-md:h-[350px] lg:my-auto  md:h-[576px] z-10 xl:w-[608px] rounded-2xl"
             />

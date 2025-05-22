@@ -7,11 +7,12 @@ import { toast } from "sonner";
 import axios from "axios";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
-import ReplyForm from "./ReplyForm";
+
 import NestedReplies from "./NestedReplies";
 import UserComment from "./UserComment";
 import DeleteDialog from "./DeleteDialog";
 import LikeButton from "./LikeButton";
+import ReplyForm from "./forms/ReplyForm";
 
 type RepliesWithAuthor = Prisma.ReplyGetPayload<{
   include: {
@@ -89,6 +90,7 @@ const CommentReplies = ({
           content={reply.content}
           id={reply?.authorId || ""}
           isUserDeleted={reply.isUserDeleted}
+          createdAt={reply.createdAt}
         />
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -101,7 +103,6 @@ const CommentReplies = ({
               onClick={() => {
                 children.length > 0 ? showResponse() : openReply(reply);
               }}
-              // disabled={children.length === 0}
               className="flex items-center gap-1 cursor-pointer"
             >
               <FaRegCommentDots className="size-5 " />

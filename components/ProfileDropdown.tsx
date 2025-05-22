@@ -33,7 +33,6 @@ const ProfileDropdown = ({ user }: ProfileProps) => {
       <DropdownMenuContent
         className="p-2 w-[200px] bg-white border-[#dadada] border"
         align="end"
-        // style={{ width: "200px" }}
       >
         <DropdownMenuLabel className="flex items-center gap-2">
           <Avatar>

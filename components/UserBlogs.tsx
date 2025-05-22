@@ -49,6 +49,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
           src={`${post.coverImage}?f_auto,q_auto`}
           alt={`${post.title} || 'Cover Image'`}
           className="rounded-2xl h-[120px] lg:h-[200px] w-full object-contain"
+          style={{ width: "100%" }}
         />
         <div className="flex items-center justify-between ">
           {" "}
@@ -113,9 +114,6 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
           />
         </div>
       </div>
-      {/* <Link href={`/blogs/${post.slug}`} className="text-[#7c4ee4] underline">
-        Read More...
-      </Link> */}
     </div>
   );
 };

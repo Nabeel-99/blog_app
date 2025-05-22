@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
 import { Prisma } from "@/lib/generated/prisma";
 import Link from "next/link";
-import { DialogClose } from "./ui/dialog";
+import { DialogClose } from "../ui/dialog";
 
 type BlogSearchProps = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };

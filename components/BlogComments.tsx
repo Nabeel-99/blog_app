@@ -39,6 +39,8 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
     }));
   };
 
+  console.log("comments", comments);
+
   return comments.length > 0 ? (
     <div className="flex flex-col gap-6">
       {comments.map((comment) => {
@@ -56,6 +58,7 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
               content={comment.content}
               id={comment?.authorId || ""}
               isUserDeleted={comment.isUserDeleted}
+              createdAt={comment.createdAt}
             />
 
             <CommentButtons

@@ -3,8 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams.get("query") || "";
-  // const normalizedQuery = query?.toLowerCase();
-  // const capitalizedQuery = query.charAt(0).toUpperCase() + query.slice(1);
   if (!query || query.trim() === "") {
     return NextResponse.json([]);
   }

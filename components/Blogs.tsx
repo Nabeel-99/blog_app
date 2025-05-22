@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import React from "react";
-import BlogCard from "./BlogCard";
+import BlogCard from "./cards/BlogCard";
 
 export const experimental_ppr = true;
 const Blogs = async () => {

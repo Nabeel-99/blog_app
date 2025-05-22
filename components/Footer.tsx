@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaXTwitter } from "react-icons/fa6";
-import Logo from "../public/logo.png";
+import Logo from "../public/logo.webp";
 const Footer = () => {
   return (
     <footer className="flex flex-col pb-10 items-center gap-10 mt-20 lg:px-20">

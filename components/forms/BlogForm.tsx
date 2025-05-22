@@ -8,21 +8,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Input } from "./ui/input";
+} from "../ui/form";
+import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { blogPostSchema } from "@/lib/validation";
 import { z } from "zod";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "../ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { FaXmark } from "react-icons/fa6";
 import { ImSpinner } from "react-icons/im";
-import { Label } from "./ui/label";
+import { Label } from "../ui/label";
 
 type BlogFormProps = {
   post?: {
@@ -202,7 +202,7 @@ const BlogForm = ({ post }: BlogFormProps) => {
                       const file = e.target.files?.[0];
                       if (file) onChange(file);
                     }}
-                    ref={ref}
+                    ref={ref as React.Ref<HTMLInputElement>}
                     className="hidden"
                   />
                   {(form.watch("coverImage") || post?.coverImage) && (

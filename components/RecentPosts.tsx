@@ -1,7 +1,7 @@
 import React from "react";
-import BlogCard from "./BlogCard";
-import prisma from "@/lib/prisma";
-import { Post, Prisma } from "@/lib/generated/prisma";
+import BlogCard from "./cards/BlogCard";
+
+import { Prisma } from "@/lib/generated/prisma";
 
 type RecentPostProps = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };

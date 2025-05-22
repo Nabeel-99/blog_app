@@ -6,9 +6,9 @@ import { Session } from "next-auth";
 import { toast } from "sonner";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import ReplyForm from "./ReplyForm";
 import DeleteDialog from "./DeleteDialog";
 import LikeButton from "./LikeButton";
+import ReplyForm from "./forms/ReplyForm";
 
 type CommentProps = Prisma.CommentGetPayload<{
   include: {
@@ -90,7 +90,6 @@ const CommentButtons = ({
             onClick={() => {
               topLevelReplies.length > 0 ? toggleReplies() : openReply(comment);
             }}
-            // disabled={comment.replies.length === 0}
             className="flex items-center gap-1 cursor-pointer"
           >
             <FaRegCommentDots className="size-5 " />

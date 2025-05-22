@@ -17,7 +17,7 @@ const UserBlogsList = async () => {
       },
     },
   });
-  console.log("posts", posts);
+
   return (
     <>
       <p>

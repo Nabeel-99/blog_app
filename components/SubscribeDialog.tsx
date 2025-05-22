@@ -8,8 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { User } from "@/lib/generated/prisma";
-
-import SubscribeForm from "./SubscribeForm";
+import SubscribeForm from "./forms/SubscribeForm";
 
 type Props = {
   user: User | null;

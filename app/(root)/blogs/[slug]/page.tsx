@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import {
   Sheet,
   SheetContent,
@@ -15,14 +14,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import CommentCard from "@/components/CommentCard";
 import LikeButton from "@/components/LikeButton";
 import { auth } from "@/auth";
 import ScrollTrigger from "@/components/ScrollTrigger";
 import Views from "@/components/Views";
 import SimilarBlogs from "@/components/SimilarBlogs";
-import { BlurIn } from "@/components/BlurIn";
+import { BlurIn } from "@/components/animations/BlurIn";
 import Image from "next/image";
+import CommentCard from "@/components/cards/CommentCard";
+import BlogCardSkeleton from "@/components/cards/BlogCardSkeleton";
 
 const md = markdownit();
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {

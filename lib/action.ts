@@ -3,6 +3,7 @@
 import { signIn, signOut } from "@/auth";
 import prisma from "./prisma";
 
+// auth
 export async function signOutAction() {
   await signOut();
 }
@@ -13,6 +14,7 @@ export async function signInWithLinkedIn() {
   await signIn("linkedin");
 }
 
+// post views
 export async function incrementPostViews(slug: string) {
   try {
     const post = await prisma.post.update({

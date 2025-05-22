@@ -1,6 +1,8 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { getShortRelativeTime } from "@/lib/utils";
+
 type UserCommentProps = {
   image: string;
   name: string;
@@ -8,6 +10,7 @@ type UserCommentProps = {
   content: string;
   id: string;
   isUserDeleted: boolean;
+  createdAt: Date;
 };
 const UserComment = ({
   image,
@@ -16,6 +19,7 @@ const UserComment = ({
   role,
   content,
   isUserDeleted,
+  createdAt,
 }: UserCommentProps) => {
   return (
     <>
@@ -56,7 +60,11 @@ const UserComment = ({
           )}
         </Link>
       )}
-      <p>{content}</p>
+
+      <p>
+        {content}
+        <span className="ml-4">{getShortRelativeTime(createdAt)}</span>
+      </p>
     </>
   );
 };
