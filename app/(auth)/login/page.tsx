@@ -12,19 +12,7 @@ const page = async () => {
 
   if (session) redirect("/");
   return (
-    <div className="flex relative items-center px-6 overflow-hidden bg-[#eeeded] justify-center h-full">
-      <div className="absolute bottom-0 -right-20">
-        <Image
-          src={"/logo.webp"}
-          alt="logo"
-          width={1050}
-          height={510}
-          style={{
-            opacity: 0.2,
-          }}
-          className="bg-background  -z-10 rounded-full"
-        />
-      </div>
+    <div className="flex  items-center px-6 overflow-hidden bg-[#eeeded] justify-center h-full">
       <div className="border z-20 border-[#cbcbcb] bg-[#f0efef]  p-10  xl:w-xl  shadow-md rounded-2xl flex flex-col items-center  lg:p-6">
         <div className="flex flex-col items-center gap-2">
           <Image
