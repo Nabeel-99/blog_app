@@ -1,5 +1,6 @@
 import { Prisma } from "@/lib/generated/prisma";
 import { formatDate } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaEye } from "react-icons/fa";
@@ -17,9 +18,12 @@ const BlogCard = ({ post }: BlogCardProps) => {
       href={`/blogs/${post.slug}`}
       className="flex flex-col border border-[#ffd1dc] bg-[#ffd1dc] hover:bg-[#ff94b4] transition-all duration-300 ease-in-out text-[#1A2A44] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4"
     >
-      <img
-        src={post.coverImage}
-        alt="AI"
+      <Image
+        src={`${post.coverImage}?f_auto,q_auto`}
+        width={260}
+        height={260}
+        sizes="(max-width:1024px) 100vw, 260px"
+        alt={`${post.title} || 'Cover Image'`}
         className="rounded-2xl h-[260px]  lg:h-[200px] w-full object-cover border border-[#ffd1dc]"
       />
       <div className="flex items-center justify-between ">

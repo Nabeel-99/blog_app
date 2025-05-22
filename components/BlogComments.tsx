@@ -38,7 +38,7 @@ const BlogComments = ({ session, post }: BlogCommentsProps) => {
       [commentId]: !prev[commentId],
     }));
   };
-  console.log("comment", comments);
+
   return comments.length > 0 ? (
     <div className="flex flex-col gap-6">
       {comments.map((comment) => {

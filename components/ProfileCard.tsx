@@ -6,6 +6,8 @@ import { Button } from "./ui/button";
 import ProfileForm from "./ProfileForm";
 import { User } from "@/lib/generated/prisma";
 import Image from "next/image";
+import { FaXTwitter } from "react-icons/fa6";
+import Link from "next/link";
 
 type ProfileCardProps = {
   user: User | null;
@@ -32,7 +34,21 @@ const ProfileCard = ({ user, subscribers }: ProfileCardProps) => {
               <span className="text-xl font-bold">Edit profile</span>
             ) : (
               <div className="flex flex-col gap-2">
-                <p className="text-xl lg:text-3xl font-bold">{user?.name}</p>
+                <div className="flex items-center gap-6">
+                  <p className="text-xl lg:text-3xl font-bold">{user?.name}</p>
+                  {user?.role === "ADMIN" && (
+                    <Link
+                      href={"https://x.com/idiawrites"}
+                      target={"_blank"}
+                      aria-label="twitter"
+                      rel="noreferrer noopener"
+                      className="hover:scale-105 transition-all duration-300 ease-in-out"
+                    >
+                      <FaXTwitter className="size-6" />
+                    </Link>
+                  )}
+                </div>
+
                 {user?.role === "ADMIN" && (
                   <p className="text-[#636363] font-bold">
                     Newsletter Subscribers:{" "}

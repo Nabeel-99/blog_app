@@ -22,6 +22,7 @@ import ScrollTrigger from "@/components/ScrollTrigger";
 import Views from "@/components/Views";
 import SimilarBlogs from "@/components/SimilarBlogs";
 import { BlurIn } from "@/components/BlurIn";
+import Image from "next/image";
 
 const md = markdownit();
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
@@ -96,9 +97,12 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 <h1 className="text-3xl max-w-5xl lg:text-5xl text-center leading-relaxed font-bold">
                   {post.title}
                 </h1>
-                <img
-                  src={post.coverImage}
-                  alt="AI"
+                <Image
+                  src={`${post.coverImage}?f_auto,q_auto`}
+                  width={500}
+                  height={500}
+                  sizes="(max-width:1024px) 100vw, 500px"
+                  alt={`${post.title} || 'Cover Image'`}
                   className="w-full lg:w-4xl max-h-[600px] rounded-2xl object-cover"
                 />
               </div>
@@ -172,7 +176,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </section>
         <section>
           <div className="mt-20 lg:mt-40">
-            <NewsLetter isSubscribed={isSubscribed} />
+            <NewsLetter />
           </div>
         </section>
       </div>

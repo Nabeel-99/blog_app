@@ -12,6 +12,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ImSpinner } from "react-icons/im";
+import Image from "next/image";
 
 type PostWithCategories = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };
@@ -42,9 +43,11 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
   return (
     <div className="flex flex-col border border-[#dadada] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4">
       <Link href={`/blogs/${post.slug}`} className="flex flex-col gap-4">
-        <img
-          src={post.coverImage}
-          alt="AI"
+        <Image
+          width={200}
+          height={200}
+          src={`${post.coverImage}?f_auto,q_auto`}
+          alt={`${post.title} || 'Cover Image'`}
           className="rounded-2xl h-[120px] lg:h-[200px] w-full object-contain"
         />
         <div className="flex items-center justify-between ">

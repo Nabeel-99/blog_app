@@ -54,13 +54,18 @@ const Navbar = async () => {
         </ul>
         {role === "ADMIN" && (
           <Link className=" max-sm:hidden" href={"/blogs/create"}>
-            <Button className="bg-btn text-white cursor-pointer">Create</Button>
+            <Button
+              aria-label="Create"
+              className="bg-btn text-white cursor-pointer"
+            >
+              Create
+            </Button>
           </Link>
         )}
 
         <Dialog>
           <DialogTrigger asChild>
-            <button title="Search cursor-pointer">
+            <button aria-label="Search" title="Search cursor-pointer">
               <CiSearch className="cursor-pointer text-[#5d5d5d] max-sm:size-8 size-6" />
             </button>
           </DialogTrigger>
@@ -73,7 +78,10 @@ const Navbar = async () => {
         </Dialog>
         {role === "ADMIN" && (
           <Link className="sm:hidden" href={"/blogs/create"}>
-            <Button className="bg-btn text-white   cursor-pointer">
+            <Button
+              aria-label="Create"
+              className="bg-btn text-white   cursor-pointer"
+            >
               <FaPlus />
             </Button>
           </Link>
@@ -82,7 +90,10 @@ const Navbar = async () => {
           <ProfileDropdown user={user} />
         ) : (
           <Link href="/login">
-            <Button className="bg-secondary border border-[#c9c8cc] cursor-pointer">
+            <Button
+              aria-label="Login"
+              className="bg-secondary border border-[#c9c8cc] cursor-pointer"
+            >
               Login
             </Button>
           </Link>

@@ -24,7 +24,11 @@ const BurgerMenu = () => {
   }, [isOpen]);
   return (
     <>
-      <Button onClick={openMenu} className="bg-white border border-[#dadada]">
+      <Button
+        aria-label="Toggle Menu"
+        onClick={openMenu}
+        className="bg-white border border-[#dadada]"
+      >
         {isOpen ? (
           <FaXmark className="size-6" />
         ) : (

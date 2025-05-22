@@ -1,32 +1,11 @@
-import { auth } from "@/auth";
 import BlogCardSkeleton from "@/components/BlogCardSkeleton";
 import Blogs from "@/components/Blogs";
 import { BlurIn } from "@/components/BlurIn";
 import { FadeIn } from "@/components/FadeIn";
 import NewsLetter from "@/components/NewsLetter";
-import WordsPullUp from "@/components/WordsPullUp";
-import prisma from "@/lib/prisma";
 import React, { Suspense } from "react";
 
 const Page = async () => {
-  const session = await auth();
-  let user = null;
-  if (session?.user.id) {
-    user = await prisma.user.findUnique({
-      where: {
-        id: session?.user?.id,
-      },
-    });
-  }
-  const subscription = await prisma.subscription.findUnique({
-    where: {
-      email: user?.email || "",
-    },
-    select: {
-      hasSubscribed: true,
-    },
-  });
-  const isSubscribed = subscription?.hasSubscribed;
   return (
     <>
       <div className="bg-[#ffffff]">
@@ -56,7 +35,7 @@ const Page = async () => {
         </section>
         <section>
           <div className="mt-20 lg:mt-40">
-            <NewsLetter isSubscribed={isSubscribed} />
+            <NewsLetter />
           </div>
         </section>
       </div>

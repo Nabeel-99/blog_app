@@ -38,8 +38,7 @@ const CommentReplies = ({
   const [activeReplyId, setActiveReplyId] = useState<number | null>(null);
   const [isHidden, setIsHidden] = useState(false);
   const children = allReplies.filter((child) => child.parentId === reply.id);
-  console.log("children", children);
-  console.log("reply", reply);
+
   const showResponse = () => {
     setIsHidden(!isHidden);
   };

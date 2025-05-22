@@ -8,14 +8,11 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
-type Props = {
-  isSubscribed?: boolean;
-};
-const NewsLetter = ({ isSubscribed }: Props) => {
+const NewsLetter = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [subscribed, setSubscribed] = useState(isSubscribed || false);
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,8 +25,6 @@ const NewsLetter = ({ isSubscribed }: Props) => {
       if (response.status === 200) {
         toast.success("Subscribed successfully");
         router.refresh();
-        setSubscribed(true);
-        setTimeout(() => {}, 4000);
       }
     } catch (error) {
       console.log(error);
@@ -43,17 +38,23 @@ const NewsLetter = ({ isSubscribed }: Props) => {
   return (
     <div className="lg:px-20 bg-background max-sm:h-[380px] md:h-[430px] lg:h-[560px] p-4 lg:p-26 overflow-hidden relative  text-[#1A2A44] flex flex-col items-center justify-center gap-10 ">
       <div className="absolute max-sm:hidden  -top-24 left-0">
-        <img
+        <Image
           src={"/mark.svg"}
+          width={500}
+          height={500}
           alt="Spirals"
-          className="w-full fill-black -z-10 opacity-30 "
+          priority={false}
+          className=" -z-10 opacity-30 "
         />
       </div>
       <div className="absolute max-sm:hidden -bottom-24   -right-20">
-        <img
+        <Image
           src={"/mark.svg"}
+          width={500}
+          height={500}
           alt="Spirals"
-          className="w-full -z-10  opacity-30 rotate-180 "
+          priority={false}
+          className="-z-10 opacity-30 rotate-180 "
         />
       </div>
       <div className=" md:max-w-xl z-30  lg:max-w-2xl 2xl:max-w-5xl text-center mx-auto">

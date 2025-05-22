@@ -37,7 +37,11 @@ const UserComment = ({
           )}
         </div>
       ) : (
-        <Link href={`/profile/${id}`} className="flex items-center gap-2">
+        <Link
+          aria-label="Profile"
+          href={`/profile/${id}`}
+          className="flex items-center gap-2"
+        >
           <Avatar>
             <AvatarImage src={isUserDeleted ? "" : image} />
             <AvatarFallback className="border bg-black rounded-full">

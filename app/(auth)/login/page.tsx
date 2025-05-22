@@ -46,7 +46,11 @@ const page = async () => {
             </Button>
           </form>
         </div>
-        <Link href={"/"} className="mt-10 text-blue-800 hover:underline">
+        <Link
+          aria-label="Back to home"
+          href={"/"}
+          className="mt-10 text-blue-800 hover:underline"
+        >
           Back to home
         </Link>
       </div>
