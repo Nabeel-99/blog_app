@@ -4,7 +4,7 @@ export function generateNewsLetterHTML(
   email: string,
   slug: string
 ) {
-  const baseUrl = process.env.NEXTAUTH_URL;
+  const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
   const blogUrl = `${baseUrl}/blogs/${slug}`;
   const unsubscribeUrl = `${baseUrl}/api/unsubscribe?email=${encodeURIComponent(
     email
