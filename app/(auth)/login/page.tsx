@@ -25,7 +25,9 @@ const page = async () => {
           <h1 className="text-2xl font-extrabold">IdiaWrites</h1>
         </div>
 
-        <p className="font-bold text-2xl mt-16">Choose a sign-in method</p>
+        <p className="font-bold text-2xl text-center mt-16">
+          Choose a sign-in method
+        </p>
         <div className="flex flex-col gap-6 mt-10">
           <form action={signInWithGoogle} className="">
             <Button className="flex py-6 gap-0 hover:bg-[#e8e8e8]  rounded-full text-lg px-3 w-full lg:w-sm border border-[#dadada] items-center ">
