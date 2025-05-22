@@ -6,6 +6,7 @@ export async function middleware(req: NextRequest) {
   if (!token) {
     return NextResponse.redirect(new URL("/", req.url));
   }
+  console.log("token", token);
   const adminPaths = ["/blogs/create", "/blogs/edit/:id"];
   const isAdminRoute = adminPaths.some((path) =>
     req.nextUrl.pathname.startsWith(path)
