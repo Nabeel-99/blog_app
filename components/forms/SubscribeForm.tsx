@@ -28,7 +28,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
     console.log(email);
     setLoading(true);
     try {
-      const response = await api.post("/api/subscribe", {
+      const response = await api.post("/subscribe", {
         email,
       });
 

@@ -18,7 +18,7 @@ const SubscribeToggle = ({ isSubscribed }: Props) => {
     setSubscribed((prev) => !prev);
     startTransition(async () => {
       try {
-        await api.put("/api/subscribe", { hasSubscribed: !subscribed });
+        await api.put("/subscribe", { hasSubscribed: !subscribed });
         toast.success(
           !subscribed ? "Subscribed successfully" : "Unsubscribed successfully"
         );

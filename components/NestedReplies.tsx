@@ -51,7 +51,7 @@ const NestedReplies = ({
                 <div className="flex items-center gap-6">
                   <LikeButton
                     session={session}
-                    apiRoute={`/api/blogs/replies/${reply.id}/like`}
+                    apiRoute={`/blogs/replies/${reply.id}/like`}
                     likes={reply.likes}
                   />
                   <button
@@ -75,7 +75,7 @@ const NestedReplies = ({
                   <DeleteDialog
                     message="Response deleted successfully"
                     error="Error deleting response"
-                    apiRoute={`/api/blogs/replies/${reply.id}`}
+                    apiRoute={`/blogs/replies/${reply.id}`}
                     refresh={true}
                   />
                 )}

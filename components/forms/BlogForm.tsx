@@ -82,8 +82,8 @@ const BlogForm = ({ post }: BlogFormProps) => {
     setLoading(true);
     try {
       const response = post
-        ? await api.put(`/api/blogs/posts/${post.id}`, formData)
-        : await api.post("/api/blogs/posts", formData);
+        ? await api.put(`/blogs/posts/${post.id}`, formData)
+        : await api.post("/blogs/posts", formData);
       if (response.status === 201 || response.status === 200) {
         form.reset();
         toast.success(

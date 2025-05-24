@@ -32,7 +32,7 @@ const CommentForm = ({ post, session }: CommentFormProps) => {
       return;
     }
     try {
-      const response = await api.post("/api/blogs/comment", {
+      const response = await api.post("/blogs/comment", {
         comment,
         postId: post.id,
       });

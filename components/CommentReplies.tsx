@@ -64,10 +64,9 @@ const CommentReplies = ({
       return;
     }
     try {
-      const response = await api.post(
-        `/api/blogs/replies/${activeReplyId}/reply`,
-        { userReply }
-      );
+      const response = await api.post(`/blogs/replies/${activeReplyId}/reply`, {
+        userReply,
+      });
       if (response.status === 201) {
         setUserReply("");
         setOpenInput(false);
@@ -97,7 +96,7 @@ const CommentReplies = ({
           <div className="flex items-center gap-6">
             <LikeButton
               session={session}
-              apiRoute={`/api/blogs/replies/${reply.id}/like`}
+              apiRoute={`/blogs/replies/${reply.id}/like`}
               likes={reply.likes}
             />
             <button
@@ -123,7 +122,7 @@ const CommentReplies = ({
               message="Response deleted successfully"
               error="Error deleting response"
               refresh={true}
-              apiRoute={`/api/blogs/replies/${reply.id}`}
+              apiRoute={`/blogs/replies/${reply.id}`}
             />
           )}
         </div>

@@ -24,7 +24,7 @@ const ProfileForm = ({ closeForm, user }: ProfileFormProps) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.put("/api/profile", {
+      const response = await api.put("/profile", {
         name,
         bio,
       });

@@ -128,7 +128,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 <LikeButton
                   session={session}
                   likes={post.likes}
-                  apiRoute={`/api/blogs/posts/${post.id}/like`}
+                  apiRoute={`/blogs/posts/${post.id}/like`}
                 />
 
                 <Sheet>

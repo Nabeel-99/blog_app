@@ -28,7 +28,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
   const setFeatured = async (postId: number) => {
     setLoading(true);
     try {
-      const response = await api.put(`/api/blogs/posts//${postId}/featured`);
+      const response = await api.put(`/blogs/posts//${postId}/featured`);
 
       if (response.status === 200) {
         toast.success("Post is now featured");
@@ -111,7 +111,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
           <DeleteDialog
             message="Blog deleted Successfully"
             error="Error deleting blog"
-            apiRoute={`/api/blogs/posts/${post.id}`}
+            apiRoute={`/blogs/posts/${post.id}`}
           />
         </div>
       </div>

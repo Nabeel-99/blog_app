@@ -32,7 +32,7 @@ const SearchForm = () => {
       }
       setLoading(true);
       try {
-        const response = await api.get(`/api/search?query=${debouncedQuery}`);
+        const response = await api.get(`/search?query=${debouncedQuery}`);
         setResults(response.data);
       } catch (error) {
         console.log(error);

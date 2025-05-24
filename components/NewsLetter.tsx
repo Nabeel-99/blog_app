@@ -19,7 +19,7 @@ const NewsLetter = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.post("/api/subscribe", {
+      const response = await api.post("/subscribe", {
         email,
       });
 
