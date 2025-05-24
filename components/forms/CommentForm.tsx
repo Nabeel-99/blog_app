@@ -38,8 +38,8 @@ const CommentForm = ({ post, session }: CommentFormProps) => {
         {
           comment,
           postId: post.id,
-        },
-        { withCredentials: true }
+        }
+        // { withCredentials: true }
       );
       if (response.status === 201) {
         setComment("");
