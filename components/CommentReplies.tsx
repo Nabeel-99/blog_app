@@ -42,7 +42,7 @@ const CommentReplies = ({
   const children = allReplies.filter((child) => child.parentId === reply.id);
 
   const showResponse = () => {
-    setIsHidden(!isHidden);
+    setIsHidden((prev) => !prev);
   };
   const openReply = (reply: Reply) => {
     setOpenInput(!openInput);

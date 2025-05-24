@@ -5,6 +5,7 @@ import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 
 import { toast } from "sonner";
+import api from "@/lib/axios";
 
 type Props = {
   isSubscribed?: boolean;
@@ -14,7 +15,7 @@ const SubscribeToggle = ({ isSubscribed }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = () => {
-    setSubscribed(!subscribed);
+    setSubscribed((prev) => !prev);
     startTransition(async () => {
       try {
         await api.put("/api/subscribe", { hasSubscribed: !subscribed });

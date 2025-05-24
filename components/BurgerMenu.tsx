@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const openMenu = () => setIsOpen(!isOpen);
+  const openMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
 
   useEffect(() => {

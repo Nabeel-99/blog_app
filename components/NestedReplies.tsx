@@ -29,7 +29,7 @@ const NestedReplies = ({
 }: NestedRepliesProps) => {
   const [isNestedHidden, setIsNestedHidden] = useState(false);
   const showResponse = () => {
-    setIsNestedHidden(!isNestedHidden);
+    setIsNestedHidden((prev) => !prev);
   };
   return (
     <>

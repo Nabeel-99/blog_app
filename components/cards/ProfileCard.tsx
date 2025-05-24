@@ -16,7 +16,7 @@ type ProfileCardProps = {
 };
 const ProfileCard = ({ user, subscribers }: ProfileCardProps) => {
   const [openEdit, setOpenEdit] = useState(false);
-  const openForm = () => setOpenEdit(!openEdit);
+  const openForm = () => setOpenEdit((prev) => !prev);
   const closeForm = () => setOpenEdit(false);
 
   return (

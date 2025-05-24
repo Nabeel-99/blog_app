@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ImSpinner } from "react-icons/im";
 import Image from "next/image";
+import api from "@/lib/axios";
 
 type PostWithCategories = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };
