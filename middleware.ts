@@ -7,8 +7,8 @@ export async function middleware(req: NextRequest) {
     req,
     secret: process.env.AUTH_SECRET,
     cookieName: isProduction
-      ? "__Secure-next-auth.session-token"
-      : "next-auth.session-token",
+      ? "__Secure-authjs.session-token"
+      : "authjs.session-token",
   });
   if (!token) {
     return NextResponse.redirect(new URL("/", req.url));
