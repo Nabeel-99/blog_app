@@ -4,7 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   console.log("Headers", req.headers.get("cookie"));
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const token = await getToken({
+    req,
+    secret: process.env.AUTH_SECRET,
+    secureCookie: true,
+  });
   console.log("TOKEN", token);
   if (!token) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
