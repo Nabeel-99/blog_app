@@ -4,10 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   console.log("Headers", req.headers.get("cookie"));
+  const isProduction = process.env.NODE_ENV === "production";
   const token = await getToken({
     req,
     secret: process.env.AUTH_SECRET,
-    secureCookie: true,
+    secureCookie: isProduction,
   });
   console.log("TOKEN", token);
   if (!token) {
