@@ -14,9 +14,10 @@ import {
 import { FaTrash } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+
 import { toast } from "sonner";
 import { ImSpinner } from "react-icons/im";
+import api from "@/lib/axios";
 
 type DeleteDialogProps = {
   message?: string;
@@ -38,7 +39,7 @@ const DeleteDialog = ({
   const handleDelete = async () => {
     setLoading(true);
     try {
-      const response = await axios.delete(apiRoute || "");
+      const response = await api.delete(apiRoute || "");
       if (response.status === 200) {
         toast.success(message);
         refresh ? router.refresh() : router.push("/profile");

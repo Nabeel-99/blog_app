@@ -3,10 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { CiSearch } from "react-icons/ci";
-import axios from "axios";
+
 import { Prisma } from "@/lib/generated/prisma";
 import Link from "next/link";
 import { DialogClose } from "../ui/dialog";
+import api from "@/lib/axios";
 
 type BlogSearchProps = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };
@@ -31,7 +32,7 @@ const SearchForm = () => {
       }
       setLoading(true);
       try {
-        const response = await axios.get(`/api/search?query=${debouncedQuery}`);
+        const response = await api.get(`/api/search?query=${debouncedQuery}`);
         setResults(response.data);
       } catch (error) {
         console.log(error);

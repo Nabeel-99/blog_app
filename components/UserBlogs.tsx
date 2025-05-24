@@ -8,7 +8,7 @@ import { FaEye } from "react-icons/fa";
 import { Button } from "./ui/button";
 import { FaPencil } from "react-icons/fa6";
 import DeleteDialog from "./DeleteDialog";
-import axios from "axios";
+
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ImSpinner } from "react-icons/im";
@@ -27,7 +27,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
   const setFeatured = async (postId: number) => {
     setLoading(true);
     try {
-      const response = await axios.put(`/api/blogs/posts//${postId}/featured`);
+      const response = await api.put(`/api/blogs/posts//${postId}/featured`);
 
       if (response.status === 200) {
         toast.success("Post is now featured");

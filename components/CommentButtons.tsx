@@ -4,11 +4,11 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { Comment, Prisma } from "@/lib/generated/prisma";
 import { Session } from "next-auth";
 import { toast } from "sonner";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import DeleteDialog from "./DeleteDialog";
 import LikeButton from "./LikeButton";
 import ReplyForm from "./forms/ReplyForm";
+import api from "@/lib/axios";
 
 type CommentProps = Prisma.CommentGetPayload<{
   include: {
@@ -54,7 +54,7 @@ const CommentButtons = ({
       return;
     }
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `/api/blogs/comment/${activeCommentId}/replies`,
         {
           reply,

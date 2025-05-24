@@ -3,12 +3,13 @@
 import React, { useState } from "react";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import axios from "axios";
+
 import { Post } from "@/lib/generated/prisma";
 import { Session } from "next-auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ImSpinner } from "react-icons/im";
+import api from "@/lib/axios";
 
 type CommentFormProps = {
   post: Post;
@@ -31,7 +32,7 @@ const CommentForm = ({ post, session }: CommentFormProps) => {
       return;
     }
     try {
-      const response = await axios.post("/api/blogs/comment", {
+      const response = await api.post("/api/blogs/comment", {
         comment,
         postId: post.id,
       });

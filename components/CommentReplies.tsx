@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FaRegCommentDots } from "react-icons/fa6";
 import { Prisma, Reply } from "@/lib/generated/prisma";
 import { toast } from "sonner";
-import axios from "axios";
+
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 
@@ -13,6 +13,7 @@ import UserComment from "./UserComment";
 import DeleteDialog from "./DeleteDialog";
 import LikeButton from "./LikeButton";
 import ReplyForm from "./forms/ReplyForm";
+import api from "@/lib/axios";
 
 type RepliesWithAuthor = Prisma.ReplyGetPayload<{
   include: {
@@ -63,7 +64,7 @@ const CommentReplies = ({
       return;
     }
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `/api/blogs/replies/${activeReplyId}/reply`,
         { userReply }
       );

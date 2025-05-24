@@ -1,7 +1,8 @@
 "use client";
 
+import api from "@/lib/axios";
 import { Like } from "@/lib/generated/prisma";
-import axios from "axios";
+
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -27,7 +28,7 @@ const LikeButton = ({ apiRoute, session, likes }: LikeButtonProps) => {
     setIsLiked(!prevLiked);
     setLikeCount(prevLiked ? prevCount - 1 : prevCount + 1);
     try {
-      const response = await axios.post(apiRoute || "");
+      const response = await api.post(apiRoute || "");
 
       if (response.status !== 200 && response.status !== 201) {
         toast.error("Failed to like");

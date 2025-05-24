@@ -4,11 +4,12 @@ import React, { useState } from "react";
 
 import { Input } from "./ui/input";
 
-import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import api from "@/lib/axios";
+import axios from "axios";
 
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const NewsLetter = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("/api/subscribe", {
+      const response = await api.post("/api/subscribe", {
         email,
       });
 

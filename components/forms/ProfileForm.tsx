@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import axios from "axios";
 
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/generated/prisma";
 import { ImSpinner } from "react-icons/im";
+import api from "@/lib/axios";
 
 type ProfileFormProps = {
   user: User | null;
@@ -24,7 +24,7 @@ const ProfileForm = ({ closeForm, user }: ProfileFormProps) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.put("/api/profile", {
+      const response = await api.put("/api/profile", {
         name,
         bio,
       });

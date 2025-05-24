@@ -17,12 +17,13 @@ import { z } from "zod";
 import { Textarea } from "../ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "../ui/button";
-import axios from "axios";
+
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { FaXmark } from "react-icons/fa6";
 import { ImSpinner } from "react-icons/im";
 import { Label } from "../ui/label";
+import api from "@/lib/axios";
 
 type BlogFormProps = {
   post?: {
@@ -81,8 +82,8 @@ const BlogForm = ({ post }: BlogFormProps) => {
     setLoading(true);
     try {
       const response = post
-        ? await axios.put(`/api/blogs/posts/${post.id}`, formData)
-        : await axios.post("/api/blogs/posts", formData);
+        ? await api.put(`/api/blogs/posts/${post.id}`, formData)
+        : await api.post("/api/blogs/posts", formData);
       if (response.status === 201 || response.status === 200) {
         form.reset();
         toast.success(

@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 
-import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/generated/prisma";
@@ -11,6 +10,8 @@ import { LuBellRing } from "react-icons/lu";
 import { ImSpinner } from "react-icons/im";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import api from "@/lib/axios";
+import axios from "axios";
 
 type SubscribeFormProps = {
   user: User | null;
@@ -27,7 +28,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
     console.log(email);
     setLoading(true);
     try {
-      const response = await axios.post("/api/subscribe", {
+      const response = await api.post("/api/subscribe", {
         email,
       });
 

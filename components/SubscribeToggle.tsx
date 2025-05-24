@@ -4,7 +4,6 @@ import React, { useState, useTransition } from "react";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 
-import axios from "axios";
 import { toast } from "sonner";
 
 type Props = {
@@ -18,7 +17,7 @@ const SubscribeToggle = ({ isSubscribed }: Props) => {
     setSubscribed(!subscribed);
     startTransition(async () => {
       try {
-        await axios.put("/api/subscribe", { hasSubscribed: !subscribed });
+        await api.put("/api/subscribe", { hasSubscribed: !subscribed });
         toast.success(
           !subscribed ? "Subscribed successfully" : "Unsubscribed successfully"
         );
