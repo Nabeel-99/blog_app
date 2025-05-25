@@ -24,7 +24,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(email);
+
     setLoading(true);
     try {
       const response = await axios.post("/subscribe", {
