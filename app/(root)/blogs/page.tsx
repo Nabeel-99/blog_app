@@ -1,9 +1,9 @@
-import Blogs from "@/components/api/blogs";
 import { BlurIn } from "@/components/animations/BlurIn";
 import BlogCardSkeleton from "@/components/cards/BlogCardSkeleton";
 import { FadeIn } from "@/components/animations/FadeIn";
 import NewsLetter from "@/components/NewsLetter";
 import React, { Suspense } from "react";
+import Blogs from "@/components/Blogs";
 
 const Page = async () => {
   return (
