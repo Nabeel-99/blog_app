@@ -5,7 +5,7 @@ export function generateNewsLetterHTML(
   slug: string
 ) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const blogUrl = `${baseUrl}/api/blogs/${slug}`;
+  const blogUrl = `${baseUrl}/blogs/${slug}`;
   const unsubscribeUrl = `${baseUrl}/api/unsubscribe?email=${encodeURIComponent(
     email
   )}`;

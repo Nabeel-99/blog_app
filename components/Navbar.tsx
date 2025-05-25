@@ -50,11 +50,11 @@ const Navbar = async () => {
             <Link href={"/"}>Home</Link>
           </li>
           <li>
-            <Link href={"/api/blogs"}>Blogs</Link>
+            <Link href={"/blogs"}>Blogs</Link>
           </li>
         </ul>
         {role === "ADMIN" && (
-          <Link className=" max-sm:hidden" href={"/api/blogs/create"}>
+          <Link className=" max-sm:hidden" href={"/blogs/create"}>
             <Button
               aria-label="Create"
               className="bg-btn text-white cursor-pointer"
@@ -78,7 +78,7 @@ const Navbar = async () => {
           </DialogContent>
         </Dialog>
         {role === "ADMIN" && (
-          <Link className="sm:hidden" href={"/api/blogs/create"}>
+          <Link className="sm:hidden" href={"/blogs/create"}>
             <Button
               aria-label="Create"
               className="bg-btn text-white   cursor-pointer"

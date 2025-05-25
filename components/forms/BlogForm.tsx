@@ -90,7 +90,7 @@ const BlogForm = ({ post }: BlogFormProps) => {
           post ? "Blog updated successfully" : "Blog created successfully"
         );
 
-        router.push(`/api/blogs/${response.data.slug}`);
+        router.push(`/blogs/${response.data.slug}`);
       }
     } catch (error) {
       console.log(error);

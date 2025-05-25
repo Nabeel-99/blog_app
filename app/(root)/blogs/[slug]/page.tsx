@@ -163,7 +163,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <div className="lg:px-20 flex flex-col gap-10 px-4 mt-10 2xl:container 2xl:w-full 2xl:mx-auto lg:mt-50">
             <div className="flex items-center justify-between">
               <p className="text-lg lg:text-2xl font-bold">Similar Blogs</p>
-              <Link href={"/api/blogs"}>
+              <Link href={"/blogs"}>
                 <Button className="bg-btn py-6 px-6 text-white">
                   View All Blogs
                 </Button>

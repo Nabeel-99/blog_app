@@ -70,7 +70,7 @@ const SearchForm = () => {
             >
               <DialogClose asChild>
                 <Link
-                  href={`/api/blogs/${post.slug}`}
+                  href={`/blogs/${post.slug}`}
                   className="flex items-center justify-between gap-2"
                 >
                   <span className="line-clamp-1"> {post.title}</span>
