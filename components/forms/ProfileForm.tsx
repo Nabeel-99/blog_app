@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { User } from "@/lib/generated/prisma";
 import { ImSpinner } from "react-icons/im";
-import api from "@/lib/axios";
+import axios from "axios";
 
 type ProfileFormProps = {
   user: User | null;
@@ -24,7 +24,7 @@ const ProfileForm = ({ closeForm, user }: ProfileFormProps) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.put("/profile", {
+      const response = await axios.put("/profile", {
         name,
         bio,
       });

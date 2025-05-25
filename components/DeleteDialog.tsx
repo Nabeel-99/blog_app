@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
 import { ImSpinner } from "react-icons/im";
-import api from "@/lib/axios";
+import axios from "axios";
 
 type DeleteDialogProps = {
   message?: string;
@@ -39,7 +39,7 @@ const DeleteDialog = ({
   const handleDelete = async () => {
     setLoading(true);
     try {
-      const response = await api.delete(apiRoute || "");
+      const response = await axios.delete(apiRoute || "");
       if (response.status === 200) {
         toast.success(message);
         refresh ? router.refresh() : router.push("/profile");

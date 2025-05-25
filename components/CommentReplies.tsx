@@ -13,7 +13,7 @@ import UserComment from "./UserComment";
 import DeleteDialog from "./DeleteDialog";
 import LikeButton from "./LikeButton";
 import ReplyForm from "./forms/ReplyForm";
-import api from "@/lib/axios";
+import axios from "axios";
 
 type RepliesWithAuthor = Prisma.ReplyGetPayload<{
   include: {
@@ -64,9 +64,12 @@ const CommentReplies = ({
       return;
     }
     try {
-      const response = await api.post(`/blogs/replies/${activeReplyId}/reply`, {
-        userReply,
-      });
+      const response = await axios.post(
+        `/blogs/replies/${activeReplyId}/reply`,
+        {
+          userReply,
+        }
+      );
       if (response.status === 201) {
         setUserReply("");
         setOpenInput(false);

@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ImSpinner } from "react-icons/im";
 import Image from "next/image";
-import api from "@/lib/axios";
+import axios from "axios";
 
 type PostWithCategories = Prisma.PostGetPayload<{
   include: { categories: { select: { id: true; name: true } } };
@@ -28,7 +28,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
   const setFeatured = async (postId: number) => {
     setLoading(true);
     try {
-      const response = await api.put(`/blogs/posts//${postId}/featured`);
+      const response = await axios.put(`/blogs/posts//${postId}/featured`);
 
       if (response.status === 200) {
         toast.success("Post is now featured");

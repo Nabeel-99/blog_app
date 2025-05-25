@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import DeleteDialog from "./DeleteDialog";
 import LikeButton from "./LikeButton";
 import ReplyForm from "./forms/ReplyForm";
-import api from "@/lib/axios";
+import axios from "axios";
 
 type CommentProps = Prisma.CommentGetPayload<{
   include: {
@@ -54,7 +54,7 @@ const CommentButtons = ({
       return;
     }
     try {
-      const response = await api.post(
+      const response = await axios.post(
         `/blogs/comment/${activeCommentId}/replies`,
         {
           reply,

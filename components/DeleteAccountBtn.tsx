@@ -17,13 +17,13 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 
 import { signOutAction } from "@/lib/action";
-import api from "@/lib/axios";
+import axios from "axios";
 
 const DeleteAccountBtn = () => {
   const [open, setOpen] = useState(false);
   const handleDelete = async () => {
     try {
-      const response = await api.delete("/profile");
+      const response = await axios.delete("/profile");
       if (response.status === 200) {
         toast.success("Account deleted successfully");
 

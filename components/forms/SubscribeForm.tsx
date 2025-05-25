@@ -10,7 +10,6 @@ import { LuBellRing } from "react-icons/lu";
 import { ImSpinner } from "react-icons/im";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import api from "@/lib/axios";
 import axios from "axios";
 
 type SubscribeFormProps = {
@@ -28,7 +27,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
     console.log(email);
     setLoading(true);
     try {
-      const response = await api.post("/subscribe", {
+      const response = await axios.post("/subscribe", {
         email,
       });
 

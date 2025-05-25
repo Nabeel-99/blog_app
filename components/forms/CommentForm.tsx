@@ -9,7 +9,6 @@ import { Session } from "next-auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ImSpinner } from "react-icons/im";
-import api from "@/lib/axios";
 import axios from "axios";
 
 type CommentFormProps = {
@@ -33,14 +32,10 @@ const CommentForm = ({ post, session }: CommentFormProps) => {
       return;
     }
     try {
-      const response = await axios.post(
-        "/api/blogs/comment",
-        {
-          comment,
-          postId: post.id,
-        }
-        // { withCredentials: true }
-      );
+      const response = await axios.post("/api/blogs/comment", {
+        comment,
+        postId: post.id,
+      });
       if (response.status === 201) {
         setComment("");
         toast.success("Comment created successfully");
