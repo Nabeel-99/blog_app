@@ -38,7 +38,12 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const isProduction = process.env.NODE_ENV === "production";
+  const token = await getToken({
+    req,
+    secret: process.env.AUTH_SECRET,
+    secureCookie: isProduction,
+  });
   if (!token || !token.email) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

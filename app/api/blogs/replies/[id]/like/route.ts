@@ -5,7 +5,12 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const isProduction = process.env.NODE_ENV === "production";
+  const token = await getToken({
+    req,
+    secret: process.env.AUTH_SECRET,
+    secureCookie: isProduction,
+  });
   if (!token) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

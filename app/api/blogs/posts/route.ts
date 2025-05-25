@@ -22,7 +22,12 @@ const transport = nodemailer.createTransport({
 });
 
 export async function POST(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const isProduction = process.env.NODE_ENV === "production";
+  const token = await getToken({
+    req,
+    secret: process.env.AUTH_SECRET,
+    secureCookie: isProduction,
+  });
   if (!token || token.role !== "ADMIN") {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

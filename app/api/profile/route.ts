@@ -3,7 +3,12 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const isProduction = process.env.NODE_ENV === "production";
+  const token = await getToken({
+    req,
+    secret: process.env.AUTH_SECRET,
+    secureCookie: isProduction,
+  });
   if (!token) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
@@ -29,7 +34,12 @@ export async function PUT(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const isProduction = process.env.NODE_ENV === "production";
+  const token = await getToken({
+    req,
+    secret: process.env.AUTH_SECRET,
+    secureCookie: isProduction,
+  });
   if (!token) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
