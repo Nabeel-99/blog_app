@@ -28,7 +28,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
   const setFeatured = async (postId: number) => {
     setLoading(true);
     try {
-      const response = await axios.put(`/blogs/posts//${postId}/featured`);
+      const response = await axios.put(`/api/blogs/posts//${postId}/featured`);
 
       if (response.status === 200) {
         toast.success("Post is now featured");
@@ -43,7 +43,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
   };
   return (
     <div className="flex flex-col border border-[#dadada] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4">
-      <Link href={`/blogs/${post.slug}`} className="flex flex-col gap-4">
+      <Link href={`/api/blogs/${post.slug}`} className="flex flex-col gap-4">
         <Image
           width={200}
           height={200}
@@ -101,7 +101,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
 
         <div className="flex items-center gap-2">
           <Link
-            href={`/blogs/edit/${post.id}`}
+            href={`/api/blogs/edit/${post.id}`}
             className="border rounded-lg px-2 py-2 text-gray-500
  border-[#dadada] hover:bg-black hover:text-white transition-all duration-300"
           >
@@ -111,7 +111,7 @@ const UserBlogs = ({ post }: UserBlogsProps) => {
           <DeleteDialog
             message="Blog deleted Successfully"
             error="Error deleting blog"
-            apiRoute={`/blogs/posts/${post.id}`}
+            apiRoute={`/api/blogs/posts/${post.id}`}
           />
         </div>
       </div>

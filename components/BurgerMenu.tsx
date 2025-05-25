@@ -45,7 +45,7 @@ const BurgerMenu = () => {
                 </Link>
               </li>
               <li>
-                <Link onClick={closeMenu} href={"/blogs"}>
+                <Link onClick={closeMenu} href={"/api/blogs"}>
                   Blogs
                 </Link>
               </li>

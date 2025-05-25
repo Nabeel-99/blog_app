@@ -82,15 +82,15 @@ const BlogForm = ({ post }: BlogFormProps) => {
     setLoading(true);
     try {
       const response = post
-        ? await axios.put(`/blogs/posts/${post.id}`, formData)
-        : await axios.post("/blogs/posts", formData);
+        ? await axios.put(`/api/blogs/posts/${post.id}`, formData)
+        : await axios.post("/api/blogs/posts", formData);
       if (response.status === 201 || response.status === 200) {
         form.reset();
         toast.success(
           post ? "Blog updated successfully" : "Blog created successfully"
         );
 
-        router.push(`/blogs/${response.data.slug}`);
+        router.push(`/api/blogs/${response.data.slug}`);
       }
     } catch (error) {
       console.log(error);

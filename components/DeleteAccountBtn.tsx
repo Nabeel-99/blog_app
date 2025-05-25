@@ -23,7 +23,7 @@ const DeleteAccountBtn = () => {
   const [open, setOpen] = useState(false);
   const handleDelete = async () => {
     try {
-      const response = await axios.delete("/profile");
+      const response = await axios.delete("/api/profile");
       if (response.status === 200) {
         toast.success("Account deleted successfully");
 

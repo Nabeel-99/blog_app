@@ -32,7 +32,7 @@ const SearchForm = () => {
       }
       setLoading(true);
       try {
-        const response = await axios.get(`/search?query=${debouncedQuery}`);
+        const response = await axios.get(`/api/search?query=${debouncedQuery}`);
         setResults(response.data);
       } catch (error) {
         console.log(error);
@@ -70,7 +70,7 @@ const SearchForm = () => {
             >
               <DialogClose asChild>
                 <Link
-                  href={`/blogs/${post.slug}`}
+                  href={`/api/blogs/${post.slug}`}
                   className="flex items-center justify-between gap-2"
                 >
                   <span className="line-clamp-1"> {post.title}</span>

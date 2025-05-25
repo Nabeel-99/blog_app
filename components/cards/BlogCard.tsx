@@ -15,7 +15,7 @@ type BlogCardProps = {
 const BlogCard = ({ post }: BlogCardProps) => {
   return (
     <Link
-      href={`/blogs/${post.slug}`}
+      href={`/api/blogs/${post.slug}`}
       className="flex flex-col border border-[#ffd1dc] bg-[#ffd1dc] hover:bg-[#ff94b4] transition-all duration-300 ease-in-out text-[#1A2A44] shadow-sm rounded-2xl p-6 max-sm:px-3 gap-4"
     >
       <Image

@@ -12,7 +12,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  const adminPaths = ["/blogs/create", "/blogs/edit/"];
+  const adminPaths = ["/api/blogs/create", "/api/blogs/edit/"];
   const isAdminRoute = adminPaths.some((path) =>
     req.nextUrl.pathname.startsWith(path)
   );
@@ -22,5 +22,5 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 export const config = {
-  matcher: ["/blogs/create", "/blogs/edit/", "/profile", "/settings"],
+  matcher: ["/api/blogs/create", "/api/blogs/edit/", "/profile", "/settings"],
 };

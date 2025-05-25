@@ -69,7 +69,7 @@ const Page = async () => {
 
               <Link
                 aria-label="Read More"
-                href={`/blogs/${featuredPost?.slug}`}
+                href={`/api/blogs/${featuredPost?.slug}`}
               >
                 <Button
                   aria-label="Read More"
@@ -99,7 +99,7 @@ const Page = async () => {
           <div className="lg:px-20 flex flex-col gap-10 px-4 mt-10 2xl:container 2xl:w-full 2xl:mx-auto lg:mt-50">
             <div className="flex items-center justify-between">
               <p className="text-lg lg:text-2xl font-bold">Recent Posts</p>
-              <Link href={"/blogs"} aria-label="View All">
+              <Link href={"/api/blogs"} aria-label="View All">
                 <Button className="bg-btn py-6 px-6 text-white">
                   View All
                 </Button>

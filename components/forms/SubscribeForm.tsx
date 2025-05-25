@@ -27,7 +27,7 @@ const SubscribeForm = ({ user, isSubscribed }: SubscribeFormProps) => {
 
     setLoading(true);
     try {
-      const response = await axios.post("/subscribe", {
+      const response = await axios.post("/api/subscribe", {
         email,
       });
 

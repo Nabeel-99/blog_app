@@ -55,7 +55,7 @@ const CommentButtons = ({
     }
     try {
       const response = await axios.post(
-        `/blogs/comment/${activeCommentId}/replies`,
+        `/api/blogs/comment/${activeCommentId}/replies`,
         {
           reply,
         }
@@ -83,7 +83,7 @@ const CommentButtons = ({
           <LikeButton
             session={session}
             likes={comment.likes}
-            apiRoute={`/blogs/comment/${comment.id}/like`}
+            apiRoute={`/api/blogs/comment/${comment.id}/like`}
           />
 
           <button
@@ -110,7 +110,7 @@ const CommentButtons = ({
             message="Comment deleted successfully"
             error="Error deleting comment"
             refresh={true}
-            apiRoute={`/blogs/comment/${comment.id}`}
+            apiRoute={`/api/blogs/comment/${comment.id}`}
           />
         )}
       </div>
