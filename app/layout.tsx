@@ -14,6 +14,9 @@ const workSans = Work_Sans({
 export const metadata: Metadata = {
   title: "IdiaWrites",
   description: "Blog by Idia Writes",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
